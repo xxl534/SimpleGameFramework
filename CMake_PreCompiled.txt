@@ -18,7 +18,7 @@ MACRO(ADD_MSVC_PRECOMPILED_HEADER
   IF(MSVC)
 	GET_FILENAME_COMPONENT(PrecompiledBasename ${PrecompiledHeader} NAME_WE)
 	SET(PrecompiledBinary
-	  "${CMAKE_CURRENT_BINARY_DIR}/${PrecompiledBasename}.pch")
+	  "$(IntDir)$(TargetName).pch")
 
 	# 筛选出.cpp文件
 	foreach(item ${${SourcesVar}})
@@ -30,7 +30,7 @@ MACRO(ADD_MSVC_PRECOMPILED_HEADER
 	# 使用预编译头
 	SET_SOURCE_FILES_PROPERTIES(${Sources}
 	  PROPERTIES COMPILE_FLAGS
-	  "/Yu\"${PrecompiledBinary}\" /FI\"${PrecompiledBinary}\" /Fp\"${PrecompiledBinary}\""
+	  "/Yu\"${PrecompiledHeader}\" /FI\"${PrecompiledHeader}\" /Fp\"${PrecompiledBinary}\""
 	  OBJECT_DEPENDS "${PrecompiledBinary}")
 	# 创建预编译头
 	SET_SOURCE_FILES_PROPERTIES(
