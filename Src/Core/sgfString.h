@@ -196,6 +196,10 @@ public:
 		static TStringBase<T>	ms_emptyString;
 	};
 
+	typedef TStringBase<char>	CString;
+	typedef TStringBase<wchar>	WString;
+
+	typedef CString				String;
 }
 
 #include "sgfString.inl"

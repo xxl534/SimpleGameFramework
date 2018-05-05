@@ -10,11 +10,14 @@
 	purpose:
 *************************************/
 
+#define WINDOW_CLASS "Win32 Application"
+
 namespace sgf
 {
 	class Win32App
 	{
 	public:
-		Win32App();
+		Win32App( const String& a_szAppName = WINDOW_CLASS, WNDPROC a_proc = NULL, int32 a_nVersion = 0, int32 a_nOffsetX = 200, int32 a_nOffsetY = 200 );
+
 	};
 }
