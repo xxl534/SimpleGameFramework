@@ -12,3 +12,7 @@
 *********************************************************************/
 
 #include "../Core/sgfCoreHeader.h"
+
+#include "Application/sgfApplication.h"
+
+#include "Game/sgfGameWorld.h"
