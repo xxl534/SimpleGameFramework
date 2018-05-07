@@ -8,5 +8,8 @@ INCLUDE_DIRECTORIES(
 ../Engine;
 )
 
-ADD_STATIC( win32App "${INC}" "${SRC}")
+ADD_STATIC( Win32App "${INC}" "${SRC}")
 ADD_PRECOMPILED_HEADER( Win32App "sgfWin32AppPCH.h" "./sgfWin32AppPCH.cpp" SRC)
+
+ADD_DEPENDENCIES( Win32App Engine )
+TARGET_LINK_LIBRARIES( Win32App Engine )

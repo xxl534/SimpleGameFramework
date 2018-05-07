@@ -3,6 +3,8 @@
 #include <DbgHelp.h>
 #include <time.h>
 
+#pragma comment(lib, "DbgHelp.lib")
+
 int g_nVersion = 0;
 namespace sgf
 {
@@ -10,6 +12,7 @@ namespace sgf
 	{
 		switch (message)
 		{
+
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
 			break;
@@ -111,7 +114,8 @@ namespace sgf
 
 	void Win32App::_LoadGameWorld(int argc, char** argv, GameWorld* a_pWorld, int a_nWidth, int a_nHeight)
 	{
-
+		m_nWidth = a_nWidth;
+		m_nHeight = a_nHeight;
 	}
 
 }

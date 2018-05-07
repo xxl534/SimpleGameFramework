@@ -269,7 +269,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	template<typename T> INLINE const T* 
-		TStringBase<T>::c_str()
+		TStringBase<T>::c_str() const
 	{
 		return m_string;
 	}

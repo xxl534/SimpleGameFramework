@@ -87,7 +87,7 @@ namespace sgf
 			int			m_nCapacity;
 			int			m_nReference;
 		};
-public:
+	public:
 		TStringBase();
 		TStringBase(const T* a_str);
 		TStringBase(const T* a_str, int a_nLen);
@@ -103,7 +103,7 @@ public:
 		void			clear();
 		bool			empty();
 		void			printf(const T* a_szFormat, ...);
-		const T*		c_str();
+		const T*		c_str() const;
 		void			resize(int a_nLen);
 		void			reserve(int a_nLen);
 

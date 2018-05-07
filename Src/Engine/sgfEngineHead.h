@@ -16,3 +16,5 @@
 #include "Application/sgfApplication.h"
 
 #include "Game/sgfGameWorld.h"
+
+#include "Render/sgfRenderWindow.h"
