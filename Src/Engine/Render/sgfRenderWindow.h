@@ -15,9 +15,15 @@ namespace sgf
 {
 	class RenderWindow
 	{
+	public:
+				RenderWindow();
+		virtual ~RenderWindow();
 	protected:
 		int32		m_nWidth;
 		int32		m_nHeight;
 		bool		m_bValid;
+
+		//static
+
 	};
 }

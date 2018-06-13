@@ -24,7 +24,7 @@ typedef unsigned long long uint64;
 
 #define MIN_STRING_CAPACITY 32
 #define INVALID_INDEX -1
-
+#define ALIGNMENT_DEFAULT 8
 
 template<typename T> void
 sgfSwap(T& lhs, T& rhs)

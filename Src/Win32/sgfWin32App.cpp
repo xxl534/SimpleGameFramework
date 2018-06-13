@@ -99,7 +99,10 @@ namespace sgf
 
 	void Win32App::Run()
 	{
-		
+		if (m_pGameWorld)
+		{
+
+		}
 	}
 
 	void Win32App::Destroy()
