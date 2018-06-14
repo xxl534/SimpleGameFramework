@@ -33,7 +33,7 @@ namespace sgf
 
 	RenderWindow* SceneCamera::GetRenderWindow() const
 	{
-
+		return NULL;
 	}
 
 }

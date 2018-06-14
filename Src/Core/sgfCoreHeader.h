@@ -15,3 +15,4 @@
 #include "sgfCoreType.h"
 
 #include "sgfString.h"
+#include "sgfArray.h"

@@ -1,4 +1,4 @@
-#pragma one
+#pragma once
 
 /********************************************************************
 	created:	2018/06/13
@@ -30,14 +30,14 @@ namespace sgf
 		~TArray();
 
 		T&			operator[](int a_nIdx);
-		const T&	operator[](int a_nIdx);
+		const T&	operator[](int a_nIdx) const;
 		void		operator=(const TArray<T, NeedCtor, NeedDtor, alignment>& a_rhs);
-		bool		operator==(const TArray<T, NeedCtor, NeedDtor, alignment>& a_rhs);
-		bool		operator!=(const TArray<T, NeedCtor, NeedDtor, alignment>& a_rhs);
+		bool		operator==(const TArray<T, NeedCtor, NeedDtor, alignment>& a_rhs) const;
+		bool		operator!=(const TArray<T, NeedCtor, NeedDtor, alignment>& a_rhs) const;
 
 		int			size() const;
 		void		resize(int a_nSize);
-		void		resize(int size, const T& a_Default);
+		void		resize(int a_nSize, const T& a_Default);
 		int			capacity() const;
 		int			get_reserve() const;
 		void		reserve(int a_nReserveSize);
@@ -64,7 +64,7 @@ namespace sgf
 		void		insert(iterator a_itor, const TArray<T, NeedCtor, NeedDtor, alignment>& a_arr);
 		void		insert(int a_nIdx, const T* a_arr, int a_nLen);
 		void		insert(iterator a_itor, const T* a_arr, int a_nLen);
-		void		erase(int a_nIdx, int a_nCount = -1);
+		void		erase(int a_nIdx, int a_nCount = 1);
 		void		erase(iterator a_where);
 		void		erase(iterator a_itorStart, iterator a_itorEnd);
 
@@ -79,5 +79,20 @@ namespace sgf
 		const T&	back() const;
 
 		void		to_array(T** out_pArray) const;
+	private:
+		void		_copy(const TArray<T, NeedCtor, NeedDtor, alignment>& a_rhs);
+		void		_cleanup();
+		void		_realloc(int a_nCapacity);
+		void		_set_capacity(int a_nCapacity);
+		void		_grow(int a_nMinSize = -1);
+		void		_move(int a_nFrom, int a_nTo);
+	private:
+		int			m_nSize;
+		int			m_nCapacity;
+		T*			m_pData;
 	};
+
 }
+#define ALIGN_MALLOC(a,b) malloc(a)
+#define	ALIGN_FREE(a) free(a)
+#include "sgfArray.inl"
