@@ -25,23 +25,89 @@ namespace sgf
 			INLINE Pair(const K& a_k, const V& a_v) :first(a_k), second(a_v) {}
 			K				first;
 			V				second;
-			int				m_hashNext;
+			int				m_nHashNext;
 		};
 
 		class iterator
 		{
-
+		public:
+			INLINE iterator(TArray<Pair>& a_arrPair, int a_nIdx) :m_arrPair(a_arrPair), m_nIndex(a_nIdx) {}
+			Pair&					operator* ();
+			Pair*					operator->();
+			iterator&				operator++();
+			iterator				operator++(int);
+			iterator&				operator--();
+			iterator				operator--(int);
+			bool					operator==(const iterator& a_rhs) const;
+			bool					operator!=(const iterator& a_rhs) const;
+									operator bool() const;
+			const K&				key() const;
+			V&						value();
+		private:
+			TArray<Pair>&		m_arrPair;
+			int					m_nIndex;
 		};
 
 		class const_iterator
 		{
+		public:
+			INLINE const_iterator(const TArray<Pair>& a_arrPair, int a_nIndex) :m_arrPair(a_arrPair), m_nIndex(a_nIndex) {}
+			const Pair&				operator* () const;
+			const Pair*				operator->() const;
+			const_iterator&			operator++();
+			const_iterator			operator++(int);
+			const_iterator&			operator--();
+			const_iterator			operator--(int);
+			bool					operator==(const const_iterator& a_rhs) const;
+			bool					operator!=(const const_iterator& a_rhs) const;
+			operator bool() const;
+			const K&				key() const;
+			const V&				value() const;
+		protected:
+			const TArray<Pair>&		m_arrPair;
+			int						m_nIndex;
 		};
 
 		class reverse_iterator
-		{};
+		{
+		public:
+			INLINE reverse_iterator(TArray<Pair>& a_arrPair, int a_nIndex) :m_arrPair(a_arrPair), m_nIndex(a_nIndex) {}
+			Pair&					operator* ();
+			Pair*					operator->();
+			reverse_iterator&		operator++();
+			reverse_iterator		operator++(int);
+			reverse_iterator&		operator--();
+			reverse_iterator		operator--(int);
+			bool					operator==(const reverse_iterator& a_rhs) const;
+			bool					operator!=(const reverse_iterator& a_rhs) const;
+			operator bool() const;
+			const K&				key() const;
+			V&						value();
+		protected:
+			TArray<Pair>&			m_arrPair;
+			int						m_nIndex;
+		};
 
 		class const_reverse_iterator
-		{};
+		{
+		public:
+			INLINE const_reverse_iterator(const TArray<Pair>& a_arrPair, int a_nIndex) :m_arrPair(a_arrPair), m_nIndex(a_nIndex) {}
+			const Pair&				operator* () const;
+			const Pair*				operator->() const;
+			const_reverse_iterator&	operator++();
+			const_reverse_iterator	operator++(int);
+			const_reverse_iterator&	operator--();
+			const_reverse_iterator	operator--(int);
+			bool					operator==(const const_reverse_iterator& a_rhs) const;
+			bool					operator!=(const const_reverse_iterator& a_rhs) const;
+			operator bool() const;
+			const K&				key() const;
+			const V&				value() const;
+		protected:
+			const TArray<Pair>&		m_arrPair;
+			int						m_nIndex;
+		};
+
 	public:
 		THashMap();
 		THashMap(int a_nCapacity);
@@ -81,11 +147,18 @@ namespace sgf
 		int						size() const;
 		void					swap(THashMap<K, V>& a_rhs);
 	private:
+		void					_rehash();
+		int						_findIndex(const K& a_k) const;
+		void					_add(const K& a_k, const V& a_v);
+		void					_relax();
+	private:
 		int						m_nHashCount;
-		int*					m_pHash;
+		int*					m_arrHashIdx;
 		TArray<Pair>			m_arrPair;
 	};
 
 }
+#define HASH_INDEX_NONE	-1
+#define HASH_REHASH_FACTOR 1.2
 
 #include "sgfHashMap.inl"

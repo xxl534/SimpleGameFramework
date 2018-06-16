@@ -16,3 +16,4 @@
 
 #include "sgfString.h"
 #include "sgfArray.h"
+#include "sgfHashMap.h"

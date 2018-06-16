@@ -26,6 +26,11 @@ typedef unsigned long long uint64;
 #define INVALID_INDEX -1
 #define ALIGNMENT_DEFAULT 8
 
+#define SAFE_RELEASE(p)     { if (p) { (p)->Release(); (p)=NULL; } }
+#define SAFE_DELETE(p)		{ if (p) { delete (p); (p)=NULL; } }
+#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p); (p)=NULL; } }
+#define SAFE_FREE(p)		{ if(p) { free(p); p = NULL;} }
+
 template<typename T> void
 sgfSwap(T& lhs, T& rhs)
 {
