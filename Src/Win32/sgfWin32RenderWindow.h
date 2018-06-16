@@ -13,11 +13,11 @@
 
 namespace sgf
 {
-	class Win32RenderWindow : public RenderWindow
+	class RenderWindowNative : public RenderWindow
 	{
 	public:
-		Win32RenderWindow(int32 a_nWidth, int32 a_nHeight, WNDPROC a_fnProc, const String& a_szName);
-		virtual ~Win32RenderWindow();
+		RenderWindowNative(int32 a_nWidth, int32 a_nHeight, WNDPROC a_fnProc, const String& a_szName);
+		virtual ~RenderWindowNative();
 
 		virtual void	SwapBuffers(bool a_bWaitForVSync = true) {}
 		virtual HWND	GetHWND() const;
@@ -28,5 +28,12 @@ namespace sgf
 
 		HWND	m_hWnd;
 		HDC		m_hDC;
+	};
+
+	class RenderWindowMain : public RenderWindowNative
+	{
+	public:
+		RenderWindowMain(int32 a_nWidth, int32 a_nHeight, WNDPROC a_fnProc, const String& a_szName);
+		virtual ~RenderWindowMain();
 	};
 }

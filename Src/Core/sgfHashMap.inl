@@ -356,9 +356,9 @@ namespace sgf
 	{
 		if (m_arrHashIdx != NULL && m_arrPair.size() > 0)
 		{
-			for (int i = m_arrHashIdx[GetTypeHash(k)&(m_nHashCount - 1)]; i != HASH_INDEX_NONE; i = m_arrPair[i].m_nHashNext)
+			for (int i = m_arrHashIdx[GetTypeHash(a_k)&(m_nHashCount - 1)]; i != HASH_INDEX_NONE; i = m_arrPair[i].m_nHashNext)
 			{
-				if (k == m_arrPair[i].first)
+				if (a_k == m_arrPair[i].first)
 				{
 					return i;
 				}

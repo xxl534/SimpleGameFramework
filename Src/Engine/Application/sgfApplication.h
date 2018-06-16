@@ -24,6 +24,7 @@ namespace sgf
 		virtual void Run() = 0;
 		virtual void Destroy() = 0;
 		virtual void Exit() = 0;
+		virtual bool IsExiting() = 0;
 	public:
 		static Application& Instance();
 		static bool			HasInstance();

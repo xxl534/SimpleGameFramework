@@ -12,3 +12,6 @@
 *********************************************************************/
 
 #include "../Core/sgfCoreHeader.h"
+
+#include "sgfEngineDefines.h"
+#include "sgfEnginePrivate.h"

@@ -15,6 +15,11 @@
 
 namespace sgf
 {
+	inline unsigned int GetTypeHash(const signed long long i)
+	{
+		return (unsigned int)i + ((unsigned int)(i >> 32) * 23);
+	}
+
 	template<typename K,typename V>
 	class THashMap
 	{

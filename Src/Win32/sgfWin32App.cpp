@@ -1,5 +1,6 @@
 #include "sgfWin32AppPCH.h"
 #include "sgfWin32App.h"
+#include "sgfWin32RenderWindow.h"
 #include <DbgHelp.h>
 #include <time.h>
 
@@ -73,6 +74,7 @@ namespace sgf
 		,m_pGameWorld(NULL)
 		,m_nWidth( DEFAULT_WINDOW_WIDTH )
 		,m_nHeight(DEFAULT_WINDOW_HEIGHT)
+		,m_pRenderWindow(NULL)
 	{
 		g_nVersion = a_nVersion;
 #ifndef _DEBUG
@@ -99,26 +101,66 @@ namespace sgf
 
 	void Win32App::Run()
 	{
-		if (m_pGameWorld)
+		/*if (m_pGameWorld)
 		{
 
+		}*/
+		ShowWindow(m_pRenderWindow->GetHWND(), SW_NORMAL);
+		UpdateWindow(m_pRenderWindow->GetHWND());
+
+		// 			cs::RenderWindowSub* pRenderWindowSub = static_cast<cs::RenderWindowSub*>( 
+		// 				m_pGameWorld->GetCameraByID( 1 )->GetRenderWindow()
+		// 				);
+		// 			ShowWindow( pRenderWindowSub->GetHWnd() , SW_NORMAL);
+		// 			UpdateWindow( pRenderWindowSub->GetHWnd() );
+
+		while (!IsExiting()) {
+
+			MSG msg;
+			if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+			//else {
+			//	//SendMessage(hWnd,WM_PAINT,0,0);
+			//	//eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext);
+
+			//	_Update();
+			//	///*
+			//	//Swap Buffers.
+			//	//Brings to the native display the current render surface.
+			//	// */
+			//	eglSwapBuffers(eglDisplay, eglSurface);
+			//}
 		}
 	}
 
+	//-------------------------------------------------------------------------
 	void Win32App::Destroy()
 	{
 		
 	}
 
-	void Win32App::Exit()
+	//-------------------------------------------------------------------------
+	void 
+		Win32App::Exit()
 	{
-		
+		m_bExiting = true;
+	}
+
+	//-------------------------------------------------------------------------
+	bool 
+		Win32App::IsExiting()
+	{
+		return m_bExiting;
 	}
 
 	void Win32App::_LoadGameWorld(int argc, char** argv, GameWorld* a_pWorld, int a_nWidth, int a_nHeight)
 	{
 		m_nWidth = a_nWidth;
 		m_nHeight = a_nHeight;
+
+		m_pRenderWindow = new RenderWindowMain(m_nWidth, m_nHeight, m_fnProc, WINDOW_CLASS);
 	}
 
 }

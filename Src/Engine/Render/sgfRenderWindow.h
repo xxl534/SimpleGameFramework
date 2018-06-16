@@ -18,12 +18,26 @@ namespace sgf
 	public:
 				RenderWindow();
 		virtual ~RenderWindow();
+
+		int64			GetId() const;
+		virtual bool	IsValid() const;
+		int32			GetWidth() const;
+		int32			GetHeight() const;
+		virtual RHIViewportDesc&	GetViewport();
+
+		virtual void	Setup();
+		virtual void	SwapBuffers(bool a_bWaitForVSyn = true) = 0;
+
+		static RenderWindow*	GetRenderWindow(int64 a_nId);
+		static void				DestroyAll();
 	protected:
+		int64		m_nId;
 		int32		m_nWidth;
 		int32		m_nHeight;
 		bool		m_bValid;
-
+		RHIViewportDesc	m_sViewportDesc;
 		//static
-
+		static int64							ms_nValidId;
+		static THashMap<int64, RenderWindow*>	ms_mapRenderWindow;
 	};
 }

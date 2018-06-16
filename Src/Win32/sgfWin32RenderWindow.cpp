@@ -9,7 +9,7 @@ namespace sgf
 	//////////////////////////////////////////////////////////////////////////
 	//-------------------------------------------------------------------------
 
-	Win32RenderWindow::Win32RenderWindow(int32 a_nWidth, int32 a_nHeight, WNDPROC a_fnProc, const String& a_szName)
+	RenderWindowNative::RenderWindowNative(int32 a_nWidth, int32 a_nHeight, WNDPROC a_fnProc, const String& a_szName)
 		:m_hWnd( 0 )
 		, m_hDC( 0 )
 	{
@@ -20,7 +20,7 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	Win32RenderWindow::~Win32RenderWindow()
+	RenderWindowNative::~RenderWindowNative()
 	{
 		ReleaseDC(m_hWnd, m_hDC);
 		DestroyWindow(m_hWnd);
@@ -28,21 +28,21 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	HWND 
-		Win32RenderWindow::GetHWND() const
+		RenderWindowNative::GetHWND() const
 	{
 		return m_hWnd;
 	}
 
 	//-------------------------------------------------------------------------
 	HDC 
-		Win32RenderWindow::GetHDC() const
+		RenderWindowNative::GetHDC() const
 	{
 		return m_hDC;
 	}
 
 	//-------------------------------------------------------------------------
 	void 
-		Win32RenderWindow::_CreateWindow(int32 a_nWidth, int32 a_nHeight, WNDPROC a_fnProc, const String& a_szName)
+		RenderWindowNative::_CreateWindow(int32 a_nWidth, int32 a_nHeight, WNDPROC a_fnProc, const String& a_szName)
 	{
 		WNDCLASS wc;
 		wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -76,9 +76,27 @@ namespace sgf
 
 	}
 
-	void Win32RenderWindow::_SetupViewPort()
+	//-------------------------------------------------------------------------
+	void 
+		RenderWindowNative::_SetupViewPort()
 	{
-		//todo unimplemented
+		m_sViewportDesc.Setup(0, 0, m_nWidth, m_nHeight);
+	}
+
+	//-------------------------------------------------------------------------
+	//////////////////////////////////////////////////////////////////////////
+	//RenderWindowMain
+	//////////////////////////////////////////////////////////////////////////
+	//-------------------------------------------------------------------------
+	RenderWindowMain::RenderWindowMain(int32 a_nWidth, int32 a_nHeight, WNDPROC a_fnProc, const String& a_szName)
+		:RenderWindowNative( a_nWidth, a_nHeight, a_fnProc, a_szName )
+	{
+
+	}
+
+	RenderWindowMain::~RenderWindowMain()
+	{
+
 	}
 
 }

@@ -16,6 +16,7 @@
 #define DEFAULT_WINDOW_HEIGHT 720
 namespace sgf
 {
+	class RenderWindowMain;
 	class Win32App : public Application
 	{
 	public:
@@ -25,6 +26,7 @@ namespace sgf
 		virtual void Run() override;
 		virtual void Destroy() override;
 		virtual void Exit() override;
+		virtual bool IsExiting() override;
 	private:
 		void	_LoadGameWorld(int argc, char** argv, GameWorld* a_pWorld, int a_nWidth, int a_nHeight);
 	private:
@@ -37,5 +39,8 @@ namespace sgf
 		int32		m_nOffsetX;
 		int32		m_nOffsetY;
 		bool		m_bExiting;
+
+		//todo
+		RenderWindowMain*	m_pRenderWindow;
 	};
 }

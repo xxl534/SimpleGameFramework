@@ -698,17 +698,17 @@ namespace sgf
 				{
 					memcpy(pData, m_pData, m_nSize * sizeof(T));
 				}
-			}
-			if (NeedDtor)
-			{
-				for (int i = 0; i < m_nSize; ++i)
+				if (NeedDtor)
 				{
-					m_pData[i].~T();
+					for (int i = 0; i < m_nSize; ++i)
+					{
+						m_pData[i].~T();
+					}
 				}
+				ALIGN_FREE(m_pData);
+				m_pData = pData;
+				m_nCapacity = a_nCapacity;
 			}
-			ALIGN_FREE(m_pData);
-			m_pData = pData;
-			m_nCapacity = a_nCapacity;
 		}
 	}
 

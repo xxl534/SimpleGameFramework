@@ -1,7 +1,9 @@
 #pragma once
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <new.h>
 #ifndef ASSERT
 #include<assert.h>
 #define ASSERT assert
