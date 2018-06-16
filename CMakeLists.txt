@@ -20,6 +20,7 @@ endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 INCLUDE(CMakeMacro.txt)
 INCLUDE(CMake_PreCompiled.txt)
 ADD_SUBDIRECTORY(Src/Core)
+ADD_SUBDIRECTORY(Src/RenderHardwareInterface)
 ADD_SUBDIRECTORY(Src/Engine)
 ADD_SUBDIRECTORY(Src/Win32)
 

@@ -1,7 +1,6 @@
 AUX_SOURCE_DIRECTORY(. SRC )
 AUX_SOURCE_DIRECTORY(./Application SRC )
 AUX_SOURCE_DIRECTORY(./Render SRC )
-AUX_SOURCE_DIRECTORY(./Render/RHI SRC )
 AUX_SOURCE_DIRECTORY(./Game SRC )
 AUX_SOURCE_DIRECTORY(./Camera SRC )
 
@@ -16,3 +15,5 @@ ADD_STATIC( Engine "${INC}" "${SRC}" )
 ADD_PRECOMPILED_HEADER(Engine "sgfEnginePCH.h" "./sgfEnginePCH.cpp" SRC)
 ADD_DEPENDENCIES( Engine Core )
 TARGET_LINK_LIBRARIES( Engine Core )
+ADD_DEPENDENCIES( Engine RenderHardwareInterface )
+TARGET_LINK_LIBRARIES( Engine RenderHardwareInterface )

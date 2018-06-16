@@ -13,10 +13,11 @@
 
 #include "sgfEngineDefines.h"
 #include "../Core/sgfCoreHeader.h"
+#include "../RenderHardwareInterface/sgfRHIHead.h"
 
 #include "Application/sgfApplication.h"
 
 #include "Game/sgfGameWorld.h"
 
-#include "Render/RHI/sgfRHIViewport.h"
+//#include "Render/RHI/sgfRHIViewport.h"
 #include "Render/sgfRenderWindow.h"

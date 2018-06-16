@@ -1,0 +1,14 @@
+AUX_SOURCE_DIRECTORY(. SRC)
+
+FILE(GLOB_RECURSE INC "*.h")
+FILE(GLOB_RECURSE INC_TEMP "*.inl")
+LIST(APPEND INC ${INC_TEMP})
+
+INCLUDE_DIRECTORIES(
+./;
+)
+
+ADD_STATIC( RenderHardwareInterface "${INC}" "${SRC}" )
+ADD_PRECOMPILED_HEADER(Engine "sgfRHIPCH.h" "./sgfRHIPCH.cpp" SRC)
+ADD_DEPENDENCIES( RenderHardwareInterface Core )
+TARGET_LINK_LIBRARIES( RenderHardwareInterface Core )
