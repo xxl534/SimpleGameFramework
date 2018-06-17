@@ -9,6 +9,6 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_STATIC( RenderHardwareInterface "${INC}" "${SRC}" )
-ADD_PRECOMPILED_HEADER(Engine "sgfRHIPCH.h" "./sgfRHIPCH.cpp" SRC)
+ADD_PRECOMPILED_HEADER(RenderHardwareInterface "sgfRHIPCH.h" "./sgfRHIPCH.cpp" SRC)
 ADD_DEPENDENCIES( RenderHardwareInterface Core )
 TARGET_LINK_LIBRARIES( RenderHardwareInterface Core )

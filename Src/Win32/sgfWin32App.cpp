@@ -3,6 +3,8 @@
 #include "sgfWin32RenderWindow.h"
 #include <DbgHelp.h>
 #include <time.h>
+#include <d3d11.h>
+#include <dxgi.h>
 
 #pragma comment(lib, "DbgHelp.lib")
 
@@ -99,7 +101,9 @@ namespace sgf
 		_LoadGameWorld(argc, argv, a_pWorld, a_nWidth, a_nHeight);
 	}
 
-	void Win32App::Run()
+	//-------------------------------------------------------------------------
+	void 
+		Win32App::Run()
 	{
 		/*if (m_pGameWorld)
 		{
@@ -161,6 +165,104 @@ namespace sgf
 		m_nHeight = a_nHeight;
 
 		m_pRenderWindow = new RenderWindowMain(m_nWidth, m_nHeight, m_fnProc, WINDOW_CLASS);
+	}
+
+	//-------------------------------------------------------------------------
+	bool 
+		Win32App::_SetupDirectX11( HWND a_hwnd)
+	{
+		ID3D11Device* pDX11Device;
+		ID3D11DeviceContext* pDX11DeviceContext;
+		UINT uCreateDeviceFlag = 0;
+#if defined(_DEBUG)
+		uCreateDeviceFlag |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+		D3D_FEATURE_LEVEL featureLevel;
+		HRESULT hr = D3D11CreateDevice(
+			0,
+			D3D_DRIVER_TYPE_HARDWARE,
+			0,
+			uCreateDeviceFlag,
+			0, 0,
+			D3D11_SDK_VERSION,
+			&pDX11Device,
+			&featureLevel,
+			&pDX11DeviceContext
+		);
+
+		if (FAILED(hr))
+		{
+			MessageBox(0, "D3D11CreateDevice Failed!", 0, 0);
+			return false;
+		}
+
+		if (featureLevel != D3D_FEATURE_LEVEL_11_0)
+		{
+			MessageBox(0, "Direct3D feature level 11 unsupported!", 0, 0);
+			return false;
+		}
+
+		UINT uMsaa4xQuality;
+		hr = pDX11Device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &uMsaa4xQuality);
+		if (FAILED(hr))
+		{
+			MessageBox(0, "D3D11 check device MSAA level failed!", 0, 0);
+			return false;
+		}
+		ASSERT(uMsaa4xQuality > 0);
+
+		DXGI_SWAP_CHAIN_DESC swapChainDesc;
+		swapChainDesc.BufferDesc.Width = m_nWidth;
+		swapChainDesc.BufferDesc.Height = m_nHeight;
+		swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
+		swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
+		swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+		swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+
+		bool bEnableAA;
+		if (bEnableAA)
+		{
+			swapChainDesc.SampleDesc.Count = 4;
+			swapChainDesc.SampleDesc.Quality = uMsaa4xQuality - 1;
+		}
+		else
+		{
+			swapChainDesc.SampleDesc.Count = 1;
+			swapChainDesc.SampleDesc.Quality = 0;
+		}
+
+		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		swapChainDesc.BufferCount = 1;
+		swapChainDesc.OutputWindow = a_hwnd;
+		swapChainDesc.Windowed = true;
+		swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+		swapChainDesc.Flags = 0;
+
+		IDXGISwapChain* pSwapChain;
+
+		IDXGIDevice* dxgiDevice = 0;
+		hr = pDX11Device->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
+		ASSERT(!FAILED(hr));
+
+		IDXGIAdapter* dxgiAdapter = 0;
+		hr = dxgiDevice->GetParent(__uuidof(IDXGIAdapter), (void**)&dxgiAdapter);
+		ASSERT(!FAILED(hr));
+
+		IDXGIFactory* dxgiFactory = 0;
+		hr = dxgiAdapter->GetParent(__uuidof(IDXGIFactory), (void**)&dxgiFactory);
+		ASSERT(!FAILED(hr));
+
+		hr = dxgiFactory->CreateSwapChain(pDX11Device, &swapChainDesc, &pSwapChain);
+		ASSERT(!FAILED(hr));
+
+		SAFE_RELEASE(dxgiDevice);
+		SAFE_RELEASE(dxgiAdapter);
+		SAFE_RELEASE(dxgiFactory);
+
+		//todo init RHIDX11 
+
+		return true;
 	}
 
 }

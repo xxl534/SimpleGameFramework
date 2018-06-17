@@ -17,10 +17,14 @@ else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 
 endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 
+SET(DX_INCLUDE_DIR "C:/Program Files (x86)/Windows Kits/8.1/Include/um")
+SET(DX_LINK_DIR "C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x86")
 INCLUDE(CMakeMacro.txt)
 INCLUDE(CMake_PreCompiled.txt)
+
 ADD_SUBDIRECTORY(Src/Core)
 ADD_SUBDIRECTORY(Src/RenderHardwareInterface)
+ADD_SUBDIRECTORY(Src/RHIDX11)
 ADD_SUBDIRECTORY(Src/Engine)
 ADD_SUBDIRECTORY(Src/Win32)
 

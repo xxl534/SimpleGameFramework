@@ -31,8 +31,8 @@ namespace sgf
 
 		T&				operator()(const int32 a_row, const int32 a_col);
 		const T&		operator()(const int32 a_row, const int32 a_col) const;
-		float*			operator[](const int32 a_row);
-		const float*	operator[](const int32 a_row) const;
+		T*				operator[](const int32 a_row);
+		const T*		operator[](const int32 a_row) const;
 
 		TMatrix44<T>&	operator+=(const TMatrix44<T>& a_rhs);
 		TMatrix44<T>	operator+(const TMatrix44<T>& a_rhs) const;

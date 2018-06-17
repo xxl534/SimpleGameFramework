@@ -17,3 +17,5 @@
 #include "sgfString.h"
 #include "sgfArray.h"
 #include "sgfHashMap.h"
+#include "sgfVector.h"
+#include "sgfMatrix.h"
