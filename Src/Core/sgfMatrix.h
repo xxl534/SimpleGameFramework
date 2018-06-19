@@ -13,7 +13,7 @@
 
 namespace sgf
 {
-	template<template T>
+	template<typename T>
 	struct TMatrix44
 	{
 		union

@@ -1,21 +1,21 @@
 namespace sgf
 { 
-	template<template T>
+	template<typename T>
 	INLINE T& TMatrix44<T>::operator()(const int32 a_row, const int32 a_col)
 	{
 		return f[4 * a_row + a_col];
 	}
 
 	//-------------------------------------------------------------------------
-	template<template T>
-	INLINE T& 
+	template<typename T>
+	INLINE const T& 
 		TMatrix44<T>::operator()(const int32 a_row, const int32 a_col) const
 	{
 		return f[4 * a_row + a_col];
 	}
 	
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE T* 
 		TMatrix44<T>::operator[](const int32 a_row)
 	{
@@ -23,7 +23,7 @@ namespace sgf
 	}
 	
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE const T* 
 		TMatrix44<T>::operator[](const int32 a_row) const
 	{
@@ -31,7 +31,7 @@ namespace sgf
 	}
 	
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE TMatrix44<T>& 
 		TMatrix44<T>::operator+=(const TMatrix44<T>& a_rhs)
 	{
@@ -43,7 +43,7 @@ namespace sgf
 	}
 	
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE TMatrix44<T> 
 		TMatrix44<T>::operator+(const TMatrix44<T>& a_rhs) const
 	{
@@ -53,7 +53,7 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE TMatrix44<T>& 
 		TMatrix44<T>::operator-=(const TMatrix44<T>& a_rhs)
 	{
@@ -65,7 +65,7 @@ namespace sgf
 	}
 	
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE TMatrix44<T> 
 		TMatrix44<T>::operator-(const TMatrix44<T>& a_rhs) const
 	{
@@ -75,7 +75,7 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE TMatrix44<T>& 
 		TMatrix44<T>::operator*=(const T a_val)
 	{
@@ -87,7 +87,7 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE TMatrix44<T> 
 		TMatrix44<T>::operator*(const T a_val) const
 	{
@@ -97,7 +97,7 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE TMatrix44<T>& 
 		TMatrix44<T>::operator/=(const T a_val)
 	{
@@ -109,7 +109,7 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE TMatrix44<T> 
 		TMatrix44<T>::operator/(const T a_val) const
 	{
@@ -119,7 +119,7 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE bool 
 		TMatrix44<T>::operator==(const TMatrix44<T>& a_rhs) const
 	{
@@ -127,7 +127,7 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	template<template T>
+	template<typename T>
 	INLINE bool 
 		TMatrix44<T>::operator!=(const TMatrix44<T>& a_rhs) const
 	{
