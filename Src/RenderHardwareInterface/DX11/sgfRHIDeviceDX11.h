@@ -19,6 +19,7 @@ namespace sgf
 {
 	class RHIDeviceDX11 : public RHIDevice
 	{
+		friend class RHIDevice;
 	public:
 		static void		SetMainWindowHandle(HWND a_hWnd);
 		static void		SetMainWindowSize(int32 a_nWidth, int32 a_nHeight);
@@ -41,6 +42,13 @@ namespace sgf
 		ID3D11Device*			m_pDevice;
 		ID3D11DeviceContext*	m_pDeviceContext;
 		IDXGISwapChain*			m_pSwapChain;
+		ID3D11Texture2D*		m_pDepthStencilBuffer;
+		ID3D11RenderTargetView* m_pRenderTargetView;
+		ID3D11DepthStencilView* m_pDepthStencilView;
+		D3D11_VIEWPORT			mScreenViewport;
+
+		bool					m_bEnable4xMsaa;
+		UINT					m_uMsaa4xQuality;
 	private:
 		static HWND				ms_hWnd;
 		static int32			ms_nWindowWidth;
