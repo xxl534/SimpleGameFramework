@@ -29,8 +29,6 @@ namespace sgf
 		virtual bool IsExiting() override;
 	private:
 		void	_LoadGameWorld(int argc, char** argv, GameWorld* a_pWorld, int a_nWidth, int a_nHeight);
-
-		bool	_SetupDirectX11(HWND a_hwnd);
 	private:
 		WNDPROC		m_fnProc;
 		GameWorld*	m_pGameWorld;
