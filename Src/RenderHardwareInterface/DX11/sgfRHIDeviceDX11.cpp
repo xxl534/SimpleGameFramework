@@ -1,8 +1,11 @@
 #include "sgfRHIPCH.h"
+#include "sgfRHIDX11Private.h"
 #include "sgfRHIDeviceDX11.h"
+
 
 namespace sgf
 {
+	RHIDeviceDX11* RHIDeviceDX11::ms_pInstace = NULL;
 	HWND RHIDeviceDX11::ms_hWnd = 0;
 	int32 RHIDeviceDX11::ms_nWindowWidth = 0;
 	int32 RHIDeviceDX11::ms_nWindowHeight = 0;
@@ -18,10 +21,27 @@ namespace sgf
 		,m_bEnable4xMsaa( true )
 		,m_uMsaa4xQuality(0)
 	{
+		ASSERT(ms_pInstace == NULL);
+		ms_pInstace = this;
 	}
 
 	RHIDeviceDX11::~RHIDeviceDX11()
 	{
+		ms_pInstace = NULL;
+	}
+
+	//-------------------------------------------------------------------------
+	ID3D11Device* 
+		RHIDeviceDX11::GetDevice() const
+	{
+		return m_pDevice;
+	}
+
+	//-------------------------------------------------------------------------
+	ID3D11DeviceContext* 
+		RHIDeviceDX11::GetDeviceContext() const
+	{
+		return m_pDeviceContext;
 	}
 
 	//-------------------------------------------------------------------------
@@ -40,12 +60,20 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
+	RHIDeviceDX11* 
+		RHIDeviceDX11::Get()
+	{
+		return ms_pInstace;
+	}
+
+	//-------------------------------------------------------------------------
 	void 
 		RHIDeviceDX11::_OnInit()
 	{
 		bool bInit = _InitDevice();
 		ASSERT(bInit == true);
 
+		InitializeRHIFunc();
 		//todo implement
 	}
 
@@ -218,12 +246,12 @@ namespace sgf
 		if( m_bEnable4xMsaa )
 		{
 			depthStencilDesc.SampleDesc.Count = 4;
-			depthStencilDesc.SampleDesc.Count = m_uMsaa4xQuality - 1;
+			depthStencilDesc.SampleDesc.Quality = m_uMsaa4xQuality - 1;
 		}
 		else
 		{
 			depthStencilDesc.SampleDesc.Count = 1;
-			depthStencilDesc.SampleDesc.Count = 0;
+			depthStencilDesc.SampleDesc.Quality = 0;
 		}
 		depthStencilDesc.Usage		= D3D11_USAGE_DEFAULT;
 		depthStencilDesc.BindFlags	= D3D11_BIND_DEPTH_STENCIL;

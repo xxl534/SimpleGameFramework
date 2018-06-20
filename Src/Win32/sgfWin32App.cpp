@@ -4,6 +4,8 @@
 #include <DbgHelp.h>
 #include <time.h>
 
+#include "../RenderHardwareInterface/DX11/sgfRHIDeviceDX11.h"
+
 #pragma comment(lib, "DbgHelp.lib")
 
 int g_nVersion = 0;
@@ -163,6 +165,10 @@ namespace sgf
 		m_nHeight = a_nHeight;
 
 		m_pRenderWindow = new RenderWindowMain(m_nWidth, m_nHeight, m_fnProc, WINDOW_CLASS);
+
+		RHIDeviceDX11::SetMainWindowHandle(m_pRenderWindow->GetHWND());
+		RHIDeviceDX11::SetMainWindowSize(m_nWidth, m_nHeight);
+		RHIDevice::Init();
 	}
 
 
