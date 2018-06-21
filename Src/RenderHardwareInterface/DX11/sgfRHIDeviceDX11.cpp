@@ -45,6 +45,27 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
+	ID3D11RenderTargetView* 
+		RHIDeviceDX11::GetCurrentRenderTargetView() const
+	{
+		return m_pRenderTargetView;
+	}
+
+	//-------------------------------------------------------------------------
+	ID3D11DepthStencilView* 
+		RHIDeviceDX11::GetCurrentDepthStencilView() const
+	{
+		return m_pDepthStencilView;
+	}
+
+	//-------------------------------------------------------------------------
+	IDXGISwapChain* 
+		RHIDeviceDX11::GetSwapChain() const
+	{
+		return m_pSwapChain;
+	}
+
+	//-------------------------------------------------------------------------
 	void 
 		RHIDeviceDX11::SetMainWindowHandle(HWND a_hWnd)
 	{

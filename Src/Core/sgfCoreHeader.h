@@ -14,8 +14,12 @@
 
 #include "sgfCoreType.h"
 
+#include "sgfSingleton.h"
+#include "sgfMath.h"
+#include "sgfColor.h"
 #include "sgfString.h"
 #include "sgfArray.h"
 #include "sgfHashMap.h"
 #include "sgfVector.h"
 #include "sgfMatrix.h"
+#include "sgfTimer.h"

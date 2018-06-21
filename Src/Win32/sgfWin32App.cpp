@@ -125,6 +125,8 @@ namespace sgf
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
+			ColorByte4 col(1.f, 0.5f, 0.f, 1.f);
+			RHIClear(true, col, false, 0.f, false, 0);
 			//else {
 			//	//SendMessage(hWnd,WM_PAINT,0,0);
 			//	//eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext);

@@ -13,3 +13,4 @@
 
 #include "sgfRHIEnum.h"
 #include "sgfRHIViewport.h"
+#include "sgfRHIFunc.h"

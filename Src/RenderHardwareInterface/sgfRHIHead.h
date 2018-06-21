@@ -14,3 +14,4 @@
 #include "sgfRHIEnum.h"
 #include "sgfRHIDevice.h"
 #include "sgfRHIViewport.h"
+#include "sgfRHIFunc.h"

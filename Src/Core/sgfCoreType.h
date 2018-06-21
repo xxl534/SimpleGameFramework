@@ -4,10 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <new.h>
+#include <math.h>
 #ifndef ASSERT
 #include<assert.h>
 #define ASSERT assert
 #endif // !ASSERT
+
+#include <Windows.h>
 
 #ifdef _MSC_VER
 	#define INLINE		__forceinline
@@ -43,3 +46,5 @@ sgfSwap(T& lhs, T& rhs)
 }
 
 #define wchar wchar_t
+
+#pragma warning (disable : 4244)

@@ -22,6 +22,9 @@ namespace sgf
 	public:
 		ID3D11Device*	GetDevice() const;
 		ID3D11DeviceContext*	GetDeviceContext() const;
+		ID3D11RenderTargetView*	GetCurrentRenderTargetView() const;
+		ID3D11DepthStencilView*	GetCurrentDepthStencilView() const;
+		IDXGISwapChain*			GetSwapChain() const;
 	public:
 		static void		SetMainWindowHandle(HWND a_hWnd);
 		static void		SetMainWindowSize(int32 a_nWidth, int32 a_nHeight);
