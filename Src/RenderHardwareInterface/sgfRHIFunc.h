@@ -16,6 +16,7 @@ namespace sgf
 	typedef void(*_RHISetViewport)(const RHIViewportDesc& a_desc);
 	typedef void(*_RHIClear)(bool a_bCleanColor, const ColorByte4& a_col, bool a_bCleanDepth, float a_fDepth, bool a_bCleanStencil, uint32 a_uStencil);
 
+
 	extern _RHISetViewport			RHISetViewport;
 	extern _RHIClear				RHIClear;
 }

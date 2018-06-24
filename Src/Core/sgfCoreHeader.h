@@ -20,6 +20,8 @@
 #include "sgfString.h"
 #include "sgfArray.h"
 #include "sgfHashMap.h"
+#include "sgfFastList.h"
 #include "sgfVector.h"
 #include "sgfMatrix.h"
 #include "sgfTimer.h"
+#include "sgfRefCount.h"

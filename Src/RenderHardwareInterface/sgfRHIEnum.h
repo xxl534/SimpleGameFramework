@@ -20,5 +20,28 @@ namespace sgf
 		ERHIDeviceType_DX11,
 	};
 
+	enum ERHIShaderConstanceType
+	{
+		ERHIShaderConstanceType_Invalid = -1,
+		ERHIShaderConstanceType_1f,
+		ERHIShaderConstanceType_2f,
+		ERHIShaderConstanceType_3f,
+		ERHIShaderConstanceType_4f,
+		ERHIShaderConstanceType_1i,
+		ERHIShaderConstanceType_2i,
+		ERHIShaderConstanceType_3i,
+		ERHIShaderConstanceType_4i,
+		ERHIShaderConstanceType_1b,
+		ERHIShaderConstanceType_2b,
+		ERHIShaderConstanceType_3b,
+		ERHIShaderConstanceType_4b,
+		ERHIShaderConstanceType_Matrix2,
+		ERHIShaderConstanceType_Matrix3,
+		ERHIShaderConstanceType_Matrix4,
+		ERHIShaderConstanceType_Sampler2D,
+		ERHIShaderConstanceType_Sampler3D,
+		ERHIShaderConstanceType_SamplerCube,
+		ERHIShaderConstanceType_Count,
+	};
 
 }
