@@ -654,11 +654,9 @@ namespace sgf
 	INLINE void 
 		TArray<T, NeedCtor, NeedDtor, alignment>::_copy(const TArray<T, NeedCtor, NeedDtor, alignment>& a_rhs)
 	{
-		assert(m_nSize == 0 && m_nCapacity == 0 && m_pData == NULL)
-		{
-			m_nSize = a_rhs.m_nSize;
-			m_nCapacity = m_nSize;
-		}
+		assert(m_nSize == 0 && m_nCapacity == 0 && m_pData == NULL);
+		m_nSize = a_rhs.m_nSize;
+		m_nCapacity = m_nSize;
 		if (m_nCapacity > 0)
 		{
 			m_pData = static_cast<T*>(ALIGN_MALLOC(m_nCapacity * sizeof(T), alignment));

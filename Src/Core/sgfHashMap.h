@@ -12,12 +12,34 @@
 	purpose:	
 *********************************************************************/
 #include "sgfArray.h"
-
+#include "sgfCRC.h"
 namespace sgf
 {
-	inline unsigned int GetTypeHash(const signed long long i)
+	inline uint32 GetTypeHash(const signed long long i)
 	{
 		return (unsigned int)i + ((unsigned int)(i >> 32) * 23);
+	}
+
+	template<typename T>
+	inline uint32 GetTypeHash(const TStringBase<T> a_sz)
+	{
+		return Crc32Little_Str(a_sz.c_str());
+	}
+
+	inline uint32 GetTypeHash(const char* a_sz)
+	{
+		return Crc32Little_Str(a_sz);
+	}
+
+	inline uint32 GetTypeHash(const wchar* a_sz)
+	{
+		return Crc32Little_Str(a_sz);
+	}
+
+	template<typename T>
+	inline uint32 GetTypeHash(const T& t)
+	{
+		return Crc32Little_Mem(&t, sizeof(T));
 	}
 
 	template<typename K,typename V>

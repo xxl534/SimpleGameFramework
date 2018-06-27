@@ -15,3 +15,5 @@
 #include "sgfRHIDevice.h"
 #include "sgfRHIViewport.h"
 #include "sgfRHIFunc.h"
+#include "sgfHardwareResource.h"
+#include "sgfRHIVertexInput.h"
