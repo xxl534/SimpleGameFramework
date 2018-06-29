@@ -44,4 +44,10 @@ namespace sgf
 		ERHIShaderConstanceType_Count,
 	};
 
+	enum ERHIResourceUsage
+	{
+		ERHIResourceUsage_Static,		// The resource will be created, filled, and never repacked.
+		ERHIResourceUsage_Dynamic,		// The resource will be repacked in-frequently.
+		ERHIResourceUsage_Volatile,		// The resource will be repacked EVERY frame.
+	};
 }

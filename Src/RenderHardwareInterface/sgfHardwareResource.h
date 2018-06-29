@@ -19,7 +19,9 @@ namespace sgf
 		HardwareResource();
 		virtual ~HardwareResource();
 
-		virtual int32	GetMemoryUsage() const = 0;
+		virtual int32	GetMemoryUsage() const {
+			return 0;
+		}
 		virtual void	OnLostDevice() = 0;
 		virtual void	OnResetDevice() = 0;
 

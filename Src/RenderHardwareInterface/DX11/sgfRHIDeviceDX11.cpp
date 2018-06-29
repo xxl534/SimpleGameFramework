@@ -1,6 +1,7 @@
 #include "sgfRHIPCH.h"
 #include "sgfRHIDX11Private.h"
 #include "sgfRHIDeviceDX11.h"
+#include "sgfRHIVertexInputDX11.h"
 
 
 namespace sgf
@@ -95,6 +96,8 @@ namespace sgf
 		ASSERT(bInit == true);
 
 		InitializeRHIFunc();
+
+		RHIVertexInputDX11::Init();
 		//todo implement
 	}
 
@@ -102,6 +105,7 @@ namespace sgf
 	void 
 		RHIDeviceDX11::_OnExit()
 	{
+		RHIVertexInputDX11::Exit();
 		//todo implement
 	}
 
@@ -109,6 +113,7 @@ namespace sgf
 	void 
 		RHIDeviceDX11::_OnTick()
 	{
+		RHIVertexInputDX11::Tick();
 		//todo implement
 	}
 
@@ -116,6 +121,7 @@ namespace sgf
 	void 
 		RHIDeviceDX11::_OnLostDevice()
 	{
+		HardwareResource::LostDevice();
 		//todo implement
 	}
 
@@ -123,6 +129,7 @@ namespace sgf
 	void 
 		RHIDeviceDX11::_OnResetDevice()
 	{
+		HardwareResource::ResetDevice();
 		//todo implement
 	}
 

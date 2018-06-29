@@ -17,7 +17,7 @@ namespace sgf
 	{
 	public:
 		TRefCountedObject():m_nRefCount(0){}
-		virtual ~TRefCountedObject();
+		virtual ~TRefCountedObject() {}
 		int32 AddRef() const
 		{
 			return ++m_nRefCount;

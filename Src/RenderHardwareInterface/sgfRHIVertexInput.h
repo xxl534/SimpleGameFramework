@@ -34,13 +34,13 @@ namespace sgf
 		bool			operator!=(const RHIVertexInputElement& a_rhs) const;
 	};
 
-	bool 
+	INLINE bool
 		RHIVertexInputElement::operator==(const RHIVertexInputElement& a_rhs) const
 	{
 		return SemanticName == a_rhs.SemanticName && Type == a_rhs.Type && Param == a_rhs.Param;
 	}
 
-	bool 
+	INLINE bool
 		RHIVertexInputElement::operator!=(const RHIVertexInputElement& a_rhs) const
 	{
 		return !((*this) == a_rhs);
@@ -54,15 +54,17 @@ namespace sgf
 		bool			operator!=(const RHIVertexInputDesc& a_rhs) const;
 	};
 
-	bool RHIVertexInputDesc::operator==(const RHIVertexInputDesc& a_rhs) const
+	INLINE bool RHIVertexInputDesc::operator==(const RHIVertexInputDesc& a_rhs) const
 	{
 		return m_arrElement == a_rhs.m_arrElement;
 	}
 
-	bool RHIVertexInputDesc::operator!=(const RHIVertexInputDesc& a_rhs) const
+	INLINE bool RHIVertexInputDesc::operator!=(const RHIVertexInputDesc& a_rhs) const
 	{
 		return !(*this == a_rhs);
 	}
+
+	uint32 GetTypeHash(const RHIVertexInputDesc& a_desc);
 
 	class RHIVertexInput :public HardwareResource
 	{

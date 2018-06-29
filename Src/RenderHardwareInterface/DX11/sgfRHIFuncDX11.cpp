@@ -1,6 +1,6 @@
 #include"sgfRHIPCH.h"
+#include"sgfRHIDX11Private.h"
 #include"sgfRHIFuncDX11.h"
-#include "sgfRHIDX11Private.h"
 
 namespace sgf
 {
@@ -8,6 +8,9 @@ namespace sgf
 	{
 		RHISetViewport = RHISetViewportDX11;
 		RHIClear = RHIClearDX11;
+
+		RHICreateVertexInput = RHICreateVertexInputDX11;
+		RHISetVertexInput = RHISetVertexInputDX11;
 	}
 
 	//-------------------------------------------------------------------------
@@ -41,4 +44,5 @@ namespace sgf
 		//todo
 		RHIDeviceDX11::Get()->GetSwapChain()->Present(0, 0);
 	}
+
 }
