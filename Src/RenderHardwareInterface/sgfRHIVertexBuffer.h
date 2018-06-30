@@ -16,7 +16,7 @@ namespace sgf
 	struct RHIVertexBuffer : public HardwareResource
 	{
 		int32			m_nStride;
-		int32			m_nVertexNum;
+		int32			m_nVertexCount;
 		void*			m_pHWData;
 		void*			m_pMemData;
 		bool			m_bLocked;
@@ -25,7 +25,7 @@ namespace sgf
 
 		RHIVertexBuffer()
 			:m_nStride(0)
-			, m_nVertexNum(0)
+			, m_nVertexCount(0)
 			, m_pHWData(NULL)
 			, m_pMemData(NULL)
 			, m_bLocked(false)

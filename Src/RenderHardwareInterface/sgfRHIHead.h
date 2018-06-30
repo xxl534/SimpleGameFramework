@@ -16,5 +16,6 @@
 #include "sgfRHIViewport.h"
 #include "sgfHardwareResource.h"
 #include "sgfRHIVertexInput.h"
-
+#include "sgfRHIVertexBuffer.h"
+#include "sgfRHIIndexBuffer.h"
 #include "sgfRHIFunc.h"

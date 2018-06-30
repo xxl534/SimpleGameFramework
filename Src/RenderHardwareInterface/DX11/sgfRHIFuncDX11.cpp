@@ -11,6 +11,16 @@ namespace sgf
 
 		RHICreateVertexInput = RHICreateVertexInputDX11;
 		RHISetVertexInput = RHISetVertexInputDX11;
+
+		RHICreateVertexBuffer = RHICreateVertexBufferDX11;
+		RHISetVertexBuffer = RHISetVertexBufferDX11;
+		RHILockVertexBuffer = RHILockVertexBufferDX11;
+		RHIUnlockVertexBuffer = RHIUnlockVertexBufferDX11;
+
+		RHICreateIndexBuffer = RHICreateIndexBufferDX11;
+		RHISetIndexBuffer = RHISetIndexBufferDX11;
+		RHILockIndexBuffer = RHILockIndexBufferDX11;
+		RHIUnlockIndexBuffer = RHIUnlockIndexBufferDX11;
 	}
 
 	//-------------------------------------------------------------------------
@@ -24,7 +34,7 @@ namespace sgf
 		dxViewport.TopLeftY = a_desc.m_nY;
 		dxViewport.MinDepth = a_desc.m_fMinDepth;
 		dxViewport.MaxDepth = a_desc.m_fMaxDepth;
-		RHIDeviceDX11::Get()->GetDeviceContext()->RSSetViewports(1, &dxViewport);
+		DX11_PDeviceContext->RSSetViewports(1, &dxViewport);
 	}
 
 	//-------------------------------------------------------------------------
@@ -34,15 +44,15 @@ namespace sgf
 		if (a_bCleanColor)
 		{
 			Color col(a_col);
-			RHIDeviceDX11::Get()->GetDeviceContext()->ClearRenderTargetView(RHIDeviceDX11::Get()->GetCurrentRenderTargetView(), col.f);
+			DX11_PDeviceContext->ClearRenderTargetView(RHIDeviceDX11::Get()->GetCurrentRenderTargetView(), col.f);
 		}
 		if (a_bCleanDepth || a_bCleanStencil)
 		{
 			UINT uFlag = ( a_bCleanDepth ? D3D11_CLEAR_DEPTH : 0 )|( a_bCleanStencil ? D3D11_CLEAR_STENCIL : 0 );
-			RHIDeviceDX11::Get()->GetDeviceContext()->ClearDepthStencilView(RHIDeviceDX11::Get()->GetCurrentDepthStencilView(), uFlag, a_fDepth, a_uStencil);
+			DX11_PDeviceContext->ClearDepthStencilView(RHIDeviceDX11::Get()->GetCurrentDepthStencilView(), uFlag, a_fDepth, a_uStencil);
 		}
 		//todo
-		RHIDeviceDX11::Get()->GetSwapChain()->Present(0, 0);
+		DX11_pSwapChain->Present(0, 0);
 	}
 
 }

@@ -24,9 +24,25 @@ namespace sgf
 	typedef void*					(*_RHILockVertexBuffer)(RHIVertexBufferRef& a_refBuffer, int32 a_nOffset, int32 a_nSize, bool a_bReadOnly);
 	typedef void					(*_RHIUnlockVertexBuffer)(RHIVertexBufferRef& a_refBuffer);
 
-	extern _RHISetViewport			RHISetViewport;
-	extern _RHIClear				RHIClear;
+	typedef RHIIndexBufferRef		(*_RHICreateIndexBuffer)(int32 a_nCount, void* a_pData, ERHIResourceUsage a_eUsage);
+	typedef void					(*_RHISetIndexBuffer)( const RHIIndexBufferRef& a_ref );
+	typedef void*					(*_RHILockIndexBuffer)(RHIIndexBufferRef& a_ref, int32 a_nOffset, int32 a_nSize, bool a_bReadonly);
+	typedef void					(*_RHIUnlockIndexBuffer)(RHIIndexBufferRef& a_ref);
 
-	extern _RHICreateVertexInput	RHICreateVertexInput;
-	extern _RHISetVertexInput		RHISetVertexInput;
+	extern _RHISetViewport				RHISetViewport;
+	extern _RHIClear					RHIClear;
+
+	extern _RHICreateVertexInput		RHICreateVertexInput;
+	extern _RHISetVertexInput			RHISetVertexInput;
+
+	extern _RHICreateVertexBuffer		RHICreateVertexBuffer;
+	extern _RHISetVertexBuffer			RHISetVertexBuffer;
+	extern _RHILockVertexBuffer			RHILockVertexBuffer;
+	extern _RHIUnlockVertexBuffer		RHIUnlockVertexBuffer;
+
+	extern _RHICreateIndexBuffer		RHICreateIndexBuffer;
+	extern _RHISetIndexBuffer			RHISetIndexBuffer;
+	extern _RHILockIndexBuffer			RHILockIndexBuffer;
+	extern _RHIUnlockIndexBuffer		RHIUnlockIndexBuffer;
+	
 }

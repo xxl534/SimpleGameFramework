@@ -7,10 +7,25 @@
 	file base:	sgfRHIDX11Private
 	file ext:	h
 	author:		Xiexuelong
-	
-	purpose:	
+
+	purpose:
 *********************************************************************/
 #include <d3d11.h>
 #include <dxgi.h>
+
 #include "sgfRHIDeviceDX11.h"
 #include "sgfRHIFuncDX11.h"
+
+#if defined(_DEBUG)
+	#ifndef HR
+	#define HR( x )								\
+	{											\
+		HRESULT hr = (x);						\
+		ASSERT( !FAILED(hr) );					\
+	}											
+    #endif //HR
+#else
+	#ifndef HR
+	#define HR( x )								
+	#endif
+#endif

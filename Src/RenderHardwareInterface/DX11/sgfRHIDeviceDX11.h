@@ -20,11 +20,8 @@ namespace sgf
 	{
 		friend class RHIDevice;
 	public:
-		ID3D11Device*	GetDevice() const;
-		ID3D11DeviceContext*	GetDeviceContext() const;
 		ID3D11RenderTargetView*	GetCurrentRenderTargetView() const;
 		ID3D11DepthStencilView*	GetCurrentDepthStencilView() const;
-		IDXGISwapChain*			GetSwapChain() const;
 	public:
 		static void		SetMainWindowHandle(HWND a_hWnd);
 		static void		SetMainWindowSize(int32 a_nWidth, int32 a_nHeight);
@@ -45,9 +42,6 @@ namespace sgf
 		bool		_InitDevice();
 		void		_Resize(int32 a_nWidht, int32 a_nHeight);
 	private:
-		ID3D11Device*			m_pDevice;
-		ID3D11DeviceContext*	m_pDeviceContext;
-		IDXGISwapChain*			m_pSwapChain;
 		ID3D11Texture2D*		m_pDepthStencilBuffer;
 		ID3D11RenderTargetView* m_pRenderTargetView;
 		ID3D11DepthStencilView* m_pDepthStencilView;
@@ -62,4 +56,8 @@ namespace sgf
 		static int32			ms_nWindowHeight;
 
 	};
+
+	extern ID3D11Device*		DX11_pDevice;
+	extern ID3D11DeviceContext*	DX11_PDeviceContext;
+	extern IDXGISwapChain*		DX11_pSwapChain;
 }

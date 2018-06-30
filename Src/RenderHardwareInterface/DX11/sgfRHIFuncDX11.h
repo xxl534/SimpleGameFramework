@@ -19,4 +19,14 @@ namespace sgf
 
 	extern RHIVertexInputRef		RHICreateVertexInputDX11(const RHIVertexInputDesc& a_desc);
 	extern void						RHISetVertexInputDX11(const RHIVertexInputRef& a_refInput);
+
+	extern RHIVertexBufferRef		RHICreateVertexBufferDX11(int32 a_nStride, int32 a_nVertexCount, void* a_pSrc, ERHIResourceUsage a_eUsage);
+	extern void						RHISetVertexBufferDX11(const RHIVertexBufferRef& a_refBuffer, int32 a_nSlot);
+	extern void*					RHILockVertexBufferDX11(RHIVertexBufferRef& a_refBuffer, int32 a_nOffset, int32 a_nSize, bool a_bReadOnly);
+	extern void						RHIUnlockVertexBufferDX11(RHIVertexBufferRef& a_refBuffer);
+
+	extern RHIIndexBufferRef		RHICreateIndexBufferDX11(int32 a_nCount, void* a_pData, ERHIResourceUsage a_eUsage);
+	extern void						RHISetIndexBufferDX11(const RHIIndexBufferRef& a_ref);
+	extern void*					RHILockIndexBufferDX11(RHIIndexBufferRef& a_ref, int32 a_nOffset, int32 a_nSize, bool a_bReadonly);
+	extern void						RHIUnlockIndexBufferDX11(RHIIndexBufferRef& a_ref);
 }

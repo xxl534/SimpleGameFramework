@@ -6,6 +6,11 @@
 
 namespace sgf
 {
+	ID3D11Device*			DX11_pDevice = NULL;
+	ID3D11DeviceContext*	DX11_PDeviceContext = NULL;
+	IDXGISwapChain*			DX11_pSwapChain = NULL;
+
+	//-------------------------------------------------------------------------
 	RHIDeviceDX11* RHIDeviceDX11::ms_pInstace = NULL;
 	HWND RHIDeviceDX11::ms_hWnd = 0;
 	int32 RHIDeviceDX11::ms_nWindowWidth = 0;
@@ -13,10 +18,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	RHIDeviceDX11::RHIDeviceDX11()
-		:m_pDevice(NULL)
-		,m_pDeviceContext(NULL)
-		,m_pSwapChain(NULL)
-		,m_pDepthStencilBuffer(NULL)
+		:m_pDepthStencilBuffer(NULL)
 		,m_pRenderTargetView(NULL)
 		,m_pDepthStencilView(NULL)
 		,m_bEnable4xMsaa( true )
@@ -32,20 +34,6 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	ID3D11Device* 
-		RHIDeviceDX11::GetDevice() const
-	{
-		return m_pDevice;
-	}
-
-	//-------------------------------------------------------------------------
-	ID3D11DeviceContext* 
-		RHIDeviceDX11::GetDeviceContext() const
-	{
-		return m_pDeviceContext;
-	}
-
-	//-------------------------------------------------------------------------
 	ID3D11RenderTargetView* 
 		RHIDeviceDX11::GetCurrentRenderTargetView() const
 	{
@@ -57,13 +45,6 @@ namespace sgf
 		RHIDeviceDX11::GetCurrentDepthStencilView() const
 	{
 		return m_pDepthStencilView;
-	}
-
-	//-------------------------------------------------------------------------
-	IDXGISwapChain* 
-		RHIDeviceDX11::GetSwapChain() const
-	{
-		return m_pSwapChain;
 	}
 
 	//-------------------------------------------------------------------------
@@ -163,9 +144,9 @@ namespace sgf
 			uCreateDeviceFlag,
 			0, 0,
 			D3D11_SDK_VERSION,
-			&m_pDevice,
+			&DX11_pDevice,
 			&featureLevel,
-			&m_pDeviceContext
+			&DX11_PDeviceContext
 		);
 
 		if (FAILED(hr))
@@ -181,7 +162,7 @@ namespace sgf
 		}
 
 		
-		hr = m_pDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m_uMsaa4xQuality);
+		hr = DX11_pDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m_uMsaa4xQuality);
 		if (FAILED(hr))
 		{
 			MessageBox(0, "D3D11 check device MSAA level failed!", 0, 0);
@@ -217,7 +198,7 @@ namespace sgf
 		swapChainDesc.Flags = 0;
 
 		IDXGIDevice* dxgiDevice = 0;
-		hr = m_pDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
+		hr = DX11_pDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
 		ASSERT(!FAILED(hr));
 
 		IDXGIAdapter* dxgiAdapter = 0;
@@ -228,7 +209,7 @@ namespace sgf
 		hr = dxgiAdapter->GetParent(__uuidof(IDXGIFactory), (void**)&dxgiFactory);
 		ASSERT(!FAILED(hr));
 
-		hr = dxgiFactory->CreateSwapChain(m_pDevice, &swapChainDesc, &m_pSwapChain);
+		hr = dxgiFactory->CreateSwapChain(DX11_pDevice, &swapChainDesc, &DX11_pSwapChain);
 		ASSERT(!FAILED(hr));
 
 		SAFE_RELEASE(dxgiDevice);
@@ -243,9 +224,9 @@ namespace sgf
 	void 
 		RHIDeviceDX11::_Resize(int32 a_nWidht, int32 a_nHeight)
 	{
-		ASSERT(m_pDevice != NULL);
-		ASSERT(m_pDeviceContext != NULL);
-		ASSERT(m_pSwapChain != NULL);
+		ASSERT(DX11_pDevice != NULL);
+		ASSERT(DX11_PDeviceContext != NULL);
+		ASSERT(DX11_pSwapChain != NULL);
 
 		// Release the old views, as they hold references to the buffers we
 		// will be destroying.  Also release the old depth/stencil buffer.
@@ -255,12 +236,12 @@ namespace sgf
 		SAFE_RELEASE(m_pDepthStencilView);
 
 		// Resize the swap chain and recreate the render target view.
-		HRESULT hr = m_pSwapChain->ResizeBuffers(1, a_nWidht, a_nHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
+		HRESULT hr = DX11_pSwapChain->ResizeBuffers(1, a_nWidht, a_nHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
 		ASSERT(!FAILED(hr));
 		ID3D11Texture2D* pBackBuffer;
-		hr = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&pBackBuffer));
+		hr = DX11_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&pBackBuffer));
 		ASSERT(!FAILED(hr));
-		hr = m_pDevice->CreateRenderTargetView(pBackBuffer, 0, &m_pRenderTargetView);
+		hr = DX11_pDevice->CreateRenderTargetView(pBackBuffer, 0, &m_pRenderTargetView);
 		SAFE_RELEASE(pBackBuffer);
 
 		// Create the depth/stencil buffer and view.
@@ -286,12 +267,12 @@ namespace sgf
 		depthStencilDesc.CPUAccessFlags = 0;
 		depthStencilDesc.MiscFlags	= 0;
 
-		hr = m_pDevice->CreateTexture2D(&depthStencilDesc, 0, &m_pDepthStencilBuffer);
+		hr = DX11_pDevice->CreateTexture2D(&depthStencilDesc, 0, &m_pDepthStencilBuffer);
 		ASSERT(!FAILED(hr));
-		hr = m_pDevice->CreateDepthStencilView(m_pDepthStencilBuffer, 0, &m_pDepthStencilView);
+		hr = DX11_pDevice->CreateDepthStencilView(m_pDepthStencilBuffer, 0, &m_pDepthStencilView);
 
 		// Bind the render target view and depth/stencil view to the pipeline.
-		m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+		DX11_PDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 
 		// todo Set the viewport transform.
 	}
