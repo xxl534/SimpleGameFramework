@@ -18,4 +18,5 @@
 #include "sgfRHIVertexInput.h"
 #include "sgfRHIVertexBuffer.h"
 #include "sgfRHIIndexBuffer.h"
+#include "sgfRHITexture.h"
 #include "sgfRHIFunc.h"

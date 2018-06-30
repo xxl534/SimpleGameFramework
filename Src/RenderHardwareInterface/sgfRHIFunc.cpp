@@ -18,4 +18,6 @@ namespace sgf
 	_RHISetIndexBuffer			RHISetIndexBuffer = NULL;
 	_RHILockIndexBuffer			RHILockIndexBuffer = NULL;
 	_RHIUnlockIndexBuffer		RHIUnlockIndexBuffer = NULL;
+
+	_RHICreateTextureFromFile	RHICreateTextureFromFile = NULL;
 }

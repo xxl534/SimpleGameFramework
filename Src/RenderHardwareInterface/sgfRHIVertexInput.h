@@ -16,7 +16,7 @@ namespace sgf
 	struct RHIVertexInputElement
 	{
 		String					SemanticName;
-		ERHIShaderConstanceType	Type;
+		ERHIShaderConstantType	Type;
 		union 
 		{
 			struct
@@ -34,13 +34,13 @@ namespace sgf
 		bool			operator!=(const RHIVertexInputElement& a_rhs) const;
 	};
 
-	INLINE bool
+	inline bool
 		RHIVertexInputElement::operator==(const RHIVertexInputElement& a_rhs) const
 	{
 		return SemanticName == a_rhs.SemanticName && Type == a_rhs.Type && Param == a_rhs.Param;
 	}
 
-	INLINE bool
+	inline bool
 		RHIVertexInputElement::operator!=(const RHIVertexInputElement& a_rhs) const
 	{
 		return !((*this) == a_rhs);
@@ -54,12 +54,12 @@ namespace sgf
 		bool			operator!=(const RHIVertexInputDesc& a_rhs) const;
 	};
 
-	INLINE bool RHIVertexInputDesc::operator==(const RHIVertexInputDesc& a_rhs) const
+	inline bool RHIVertexInputDesc::operator==(const RHIVertexInputDesc& a_rhs) const
 	{
 		return m_arrElement == a_rhs.m_arrElement;
 	}
 
-	INLINE bool RHIVertexInputDesc::operator!=(const RHIVertexInputDesc& a_rhs) const
+	inline bool RHIVertexInputDesc::operator!=(const RHIVertexInputDesc& a_rhs) const
 	{
 		return !(*this == a_rhs);
 	}

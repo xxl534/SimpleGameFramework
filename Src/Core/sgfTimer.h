@@ -56,77 +56,77 @@ namespace sgf
 	};
 
 	//-------------------------------------------------------------------------
-	INLINE void
+	inline void
 		Timer::Pause()
 	{
 		m_bPaused = true;
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE bool 
+	inline bool 
 		Timer::IsPaused() const
 	{
 		return m_bPaused;
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE void 
+	inline void 
 		Timer::Continue()
 	{
 		m_bPaused = false;
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE double
+	inline double
 		Timer::GetRate() const
 	{
 		return m_dRate;
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE void
+	inline void
 		Timer::SetRate(double a_dRate)
 	{
 		m_dRate = a_dRate;
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE double 
+	inline double 
 		Timer::GetElapsed(bool a_bEnableRate /*= true*/) const
 	{
 		return m_bPaused ? 0.0 : (a_bEnableRate ? m_dElapsed * m_dRate : m_dElapsed);
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE double 
+	inline double 
 		Timer::GetForceElasped(bool a_bEnableRate /*= true*/) const
 	{
 		return a_bEnableRate ? m_dElapsed * m_dRate : m_dElapsed;
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE double 
+	inline double 
 		Timer::GetRealElapsed() const
 	{
 		return m_dElapsed;
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE double 
+	inline double 
 		Timer::GetRunningTime() const
 	{
 		return m_dRunningTime;
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE double 
+	inline double 
 		Timer::GetFps() const
 	{
 		return m_dFps;
 	}
 
 	//-------------------------------------------------------------------------
-	INLINE int64
+	inline int64
 		Timer::GetCurrentFrame() const
 	{
 		return m_llCurrentFrame;

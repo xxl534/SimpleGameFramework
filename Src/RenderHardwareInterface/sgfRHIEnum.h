@@ -20,28 +20,28 @@ namespace sgf
 		ERHIDeviceType_DX11,
 	};
 
-	enum ERHIShaderConstanceType
+	enum ERHIShaderConstantType
 	{
-		ERHIShaderConstanceType_Invalid = -1,
-		ERHIShaderConstanceType_1f,
-		ERHIShaderConstanceType_2f,
-		ERHIShaderConstanceType_3f,
-		ERHIShaderConstanceType_4f,
-		ERHIShaderConstanceType_1i,
-		ERHIShaderConstanceType_2i,
-		ERHIShaderConstanceType_3i,
-		ERHIShaderConstanceType_4i,
-		ERHIShaderConstanceType_1b,
-		ERHIShaderConstanceType_2b,
-		ERHIShaderConstanceType_3b,
-		ERHIShaderConstanceType_4b,
-		ERHIShaderConstanceType_Matrix2,
-		ERHIShaderConstanceType_Matrix3,
-		ERHIShaderConstanceType_Matrix4,
-		ERHIShaderConstanceType_Sampler2D,
-		ERHIShaderConstanceType_Sampler3D,
-		ERHIShaderConstanceType_SamplerCube,
-		ERHIShaderConstanceType_Count,
+		ERHIShaderConstantType_Invalid = -1,
+		ERHIShaderConstantType_1f,
+		ERHIShaderConstantType_2f,
+		ERHIShaderConstantType_3f,
+		ERHIShaderConstantType_4f,
+		ERHIShaderConstantType_1i,
+		ERHIShaderConstantType_2i,
+		ERHIShaderConstantType_3i,
+		ERHIShaderConstantType_4i,
+		ERHIShaderConstantType_1b,
+		ERHIShaderConstantType_2b,
+		ERHIShaderConstantType_3b,
+		ERHIShaderConstantType_4b,
+		ERHIShaderConstantType_Matrix2,
+		ERHIShaderConstantType_Matrix3,
+		ERHIShaderConstantType_Matrix4,
+		ERHIShaderConstantType_Sampler2D,
+		ERHIShaderConstantType_Sampler3D,
+		ERHIShaderConstantType_SamplerCube,
+		ERHIShaderConstantType_Count,
 	};
 
 	enum ERHIResourceUsage
@@ -49,5 +49,57 @@ namespace sgf
 		ERHIResourceUsage_Static,		// The resource will be created, filled, and never repacked.
 		ERHIResourceUsage_Dynamic,		// The resource will be repacked in-frequently.
 		ERHIResourceUsage_Volatile,		// The resource will be repacked EVERY frame.
+	};
+
+	enum ERHISamplerFilter
+	{
+		ERHISamplerFilter_Invalid = -1,
+		ERHISamplerFilter_Min_Mag_Mip_Point,
+		ERHISamplerFilter_Min_Mag_Point_Mip_Linear,
+		ERHISamplerFilter_Min_Point_Mag_Linear_Mip_Point,
+		ERHISamplerFilter_Min_Point_Mag_Mip_Linear,
+		ERHISamplerFilter_Min_Linear_Mag_Mip_Point,
+		ERHISamplerFilter_Min_Linear_Mag_Point_Mip_Linear,
+		ERHISamplerFilter_Min_Mag_Linear_Mip_Point,
+		ERHISamplerFilter_Min_Mag_Mip_Linear,
+		ERHISamplerFilter_Anisotropic,
+		ERHISamplerFilter_Comparison_Min_Mag_Mip_Point,
+		ERHISamplerFilter_Comparison_Min_Mag_Point_Mip_Linear,
+		ERHISamplerFilter_Comparison_Min_Point_Mag_Linear_Mip_Point,
+		ERHISamplerFilter_Comparison_Min_Point_Mag_Mip_Linear,
+		ERHISamplerFilter_Comparison_Min_Linear_Mag_Mip_Point,
+		ERHISamplerFilter_Comparison_Min_Linear_Mag_Point_Mip_Linear,
+		ERHISamplerFilter_Comparison_Min_Mag_Linear_Mip_Point,
+		ERHISamplerFilter_Comparison_Min_Mag_Mip_Linear,
+		ERHISamplerFilter_Comparison_Anisotropic,
+		ERHISamplerFilter_Count,
+	};
+
+	enum ERHIClampMode
+	{
+		ERHIClampMode_Invalid = -1,
+		ERHIClampMode_Repeat,
+		ERHIClampMode_Clamp,
+		ERHIClampMode_Mirror,
+		ERHIClampMode_Border,
+		ERHIClampMode_ClampToEdge,
+		ERHIClampMode_Count,
+	};
+
+	enum ERHIPixelFormat
+	{
+		ERHIPixelFormat_Default = -1,
+		ERHIPixelFormat_A8,
+		ERHIPixelFormat_R8G8B8A8,
+		ERHIPixelFormat_R8G8B8X8,
+		ERHIPixelFormat_R4G4B4A4,
+		ERHIPixelFormat_R5G6B5,
+		ERHIPixelFormat_R8G8B8,
+		ERHIPixelFormat_PVR_RGB,
+		ERHIPixelFormat_PVR_RGBA,
+		ERHIPixelFormat_XTC,
+		ERHIPixelFormat_DXT,
+		ERHIPixelFormat_ETC1,
+		ERHIPixelFormat_Depth,
 	};
 }

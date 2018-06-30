@@ -25,3 +25,11 @@
 #include "sgfMatrix.h"
 #include "sgfTimer.h"
 #include "sgfRefCount.h"
+
+#include "sgfDataReader.h"
+#include "sgfDataWriter.h"
+
+#include "xml/rapidxml.hpp"
+#include "xml/rapidxml_iterators.hpp"
+#include "xml/rapidxml_print.hpp"
+#include "xml/rapidxml_utils.hpp"
