@@ -101,7 +101,7 @@ namespace sgf
 
 		int				length() const;
 		void			clear();
-		bool			empty();
+		bool			empty() const;
 		void			printf(const T* a_szFormat, ...);
 		const T*		c_str() const;
 		void			resize(int a_nLen);

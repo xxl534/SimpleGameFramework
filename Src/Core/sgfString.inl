@@ -231,7 +231,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	template<typename T> INLINE bool 
-		TStringBase<T>::empty()
+		TStringBase<T>::empty() const
 	{
 		return length() == 0;
 	}

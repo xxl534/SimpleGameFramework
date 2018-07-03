@@ -15,6 +15,7 @@
 #include "sgfCoreType.h"
 
 #include "sgfSingleton.h"
+#include "sgfLog.h"
 #include "sgfMath.h"
 #include "sgfColor.h"
 #include "sgfString.h"
@@ -26,8 +27,12 @@
 #include "sgfTimer.h"
 #include "sgfRefCount.h"
 
+#include "sgfArchive.h"
+
 #include "sgfDataReader.h"
 #include "sgfDataWriter.h"
+#include "sgfFileReader.h"
+#include "sgfFileWriter.h"
 
 #include "xml/rapidxml.hpp"
 #include "xml/rapidxml_iterators.hpp"

@@ -22,4 +22,14 @@ namespace sgf
 	{
 		return a_value < a_min ? a_min : a_value < a_min ? a_value : a_max;
 	}
+
+	template<class T> inline T Min(const T a, const T b)
+	{
+		return a <= b ? a : b;
+	}
+
+	template<class T> inline T Max(const T a, const T b)
+	{
+		return a >= b ? a : b;
+	}
 }
