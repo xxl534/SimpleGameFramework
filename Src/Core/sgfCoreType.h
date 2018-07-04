@@ -11,6 +11,8 @@
 #endif // !ASSERT
 
 #include <Windows.h>
+#include <io.h>
+#include <direct.h>
 
 #ifdef _MSC_VER
 	#define INLINE		__forceinline

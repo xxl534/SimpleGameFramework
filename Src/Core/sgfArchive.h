@@ -30,22 +30,21 @@ namespace sgf
 		static bool				Delete(const String& a_szPath);
 		static void				Rename(const String& a_szOld, const String& a_szNew);
 		static bool				IsRelative(const String& a_szFile);
-		static String			GetWriteFullPath(const String& a_szFile);
-		static String			GetReadFullPath(const String& a_szFile);
+		static String			GetWriteFullPath(const String& a_szPath);
+		static String			GetReadFullPath(const String& a_szPath);
 		static bool				IsFileExist(const String& a_szFile);
 		static bool				IsWriteFileExist(const String& a_szFile);
 		static bool				IsDirectoryExist(const String& a_szDir);
+		static bool				IsWriteDirectoryExist(const String& a_szDir);
 		static bool				CreateDirectory(const String& a_szDir);
-		static const String&	GetResourceRootPath();
-		static void				SetResourceRootPath(const String& a_szPath);
+		static const String&	GetRootPath();
+		static void				SetRootPath(const String& a_szPath);
 		static String			AdjustPath(const String& a_szPath);
 		static const String&	GetWriteRootPath();
 		static void				SetWriteRootPath(const String& a_szPath);
 	private:
 		TArray<String>			_ListFile(const String& a_szDir, const String& a_szFilter);
-		TArray<String>			_ListReadFile(const String& a_szDir, const String& a_szFilter);
 		TArray<String>			_ListDirectory(const String& a_szDir);
-		TArray<String>			_ListReadDirectory(const String& a_szDir);
 	private:
 		static bool				_RecurMakeDirectory(const String& a_szPath);
 	private:

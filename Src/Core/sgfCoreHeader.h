@@ -21,6 +21,7 @@
 #include "sgfString.h"
 #include "sgfArray.h"
 #include "sgfHashMap.h"
+#include "sgfHashSet.h"
 #include "sgfFastList.h"
 #include "sgfVector.h"
 #include "sgfMatrix.h"
