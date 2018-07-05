@@ -1,5 +1,6 @@
 #include "sgfCorePCH.h"
 #include "sgfArchive.h"
+#include "sgfHashSet.h"
 
 namespace sgf
 {
@@ -266,7 +267,7 @@ namespace sgf
 			arrFile.clear();
 			for (THashSet<String>::iterator it = setFile.begin(); it != setFile.end(); ++it)
 			{
-				arrFile.push_back(it.value());
+				arrFile.push_back(*it);
 			}
 		}
 		return arrFile;
@@ -440,7 +441,7 @@ namespace sgf
 		String szReadPath = GetReadFullPath(a_szDir);
 		_finddata_t data;
 		intptr_t hFile;
-		if ((hFile = _findfirst(szWritePath.c_str, &data)) != -1 ||
+		if ((hFile = _findfirst(szWritePath.c_str(), &data)) != -1 ||
 			(hFile = _findfirst(szReadPath.c_str(), &data)) != -1)
 		{
 			_findclose(hFile);
@@ -460,7 +461,7 @@ namespace sgf
 		String szWritePath = GetWriteFullPath(a_szDir);
 		_finddata_t data;
 		intptr_t hFile;
-		if ((hFile = _findfirst(szWritePath.c_str, &data)) != -1 )
+		if ((hFile = _findfirst(szWritePath.c_str(), &data)) != -1 )
 		{
 			_findclose(hFile);
 			return (data.attrib&_A_SUBDIR) != 0;

@@ -40,7 +40,7 @@ namespace sgf
 	template<typename T> INLINE
 	THashSet<T>::~THashSet()
 	{
-		SAFE_DELETE_ARRAY(m_pHash);
+		SAFE_DELETE_ARRAY(m_arrHashIdx);
 	}
 
 	//-------------------------------------------------------------------------
@@ -228,27 +228,68 @@ namespace sgf
 	void 
 		THashSet<T>::_rehash()
 	{
-
+		SAFE_DELETE_ARRAY(m_arrHashIdx);
+		m_arrHashIdx = new int[m_nHashCount];
+		for (int i = 0; i < m_nHashCount; ++i)
+		{
+			m_arrHashIdx[i] = HASH_INDEX_NONE;
+		}
+		for (int i = 0; i < m_arrData.size(); ++i)
+		{
+			Value& v = m_arrData[i];
+			int nHash = (GetTypeHash(v.m_value) & (m_nHashCount - 1));
+			v.m_nHashNext = m_arrHashIdx[nHash];
+			m_arrHashIdx[nHash] = i;
+		}
 	}
 
+	//-------------------------------------------------------------------------
 	template<typename T> INLINE
 	int 
 		THashSet<T>::_findIndex(const T& a_value) const
 	{
-
+		if (m_arrHashIdx && m_arrData.size() > 0)
+		{
+			for (int i = m_arrHashIdx[GetTypeHash(a_value) & (m_nHashCount - 1)]; i != HASH_INDEX_NONE; i = m_arrData[i].m_nHashNext)
+			{
+				if (m_arrData[i].m_value == a_value)
+				{
+					return i;
+				}
+			}
+		}
+		return HASH_INDEX_NONE;
 	}
 
+	//-------------------------------------------------------------------------
 	template<typename T> INLINE
 	void 
 		THashSet<T>::_add(const T& a_value)
 	{
-
+		m_arrData.push_back(Value(a_value));
+		if (m_nHashCount * HASH_REHASH_FACTOR + 8 < m_arrData.size())
+		{
+			m_nHashCount *= 2;
+			_rehash();
+		}
+		else
+		{
+			Value& v = m_arrData.back();
+			int nHash = (GetTypeHash(a_value) & (m_nHashCount - 1));
+			v.m_nHashNext = m_arrHashIdx[nHash];
+			m_arrHashIdx[nHash] = m_arrData.size() - 1;
+		}
 	}
 
+	//-------------------------------------------------------------------------
 	template<typename T> INLINE
 	void 
 		THashSet<T>::_relax()
 	{
-
+		while (m_nHashCount > m_arrData.size() * HASH_REHASH_FACTOR + 8)
+		{
+			m_nHashCount /= 2;
+		}
+		_rehash();
 	}
 }

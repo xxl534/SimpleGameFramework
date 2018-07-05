@@ -83,7 +83,7 @@ namespace sgf
 			void		freeMemory();
 			Rep*		clone() const;
 			static Rep*	Create(int a_nLen);
-			int			m_nlength;
+			int			m_nLength;
 			int			m_nCapacity;
 			int			m_nReference;
 		};

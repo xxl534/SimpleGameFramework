@@ -62,7 +62,7 @@ namespace sgf
 		TStringBase<T>::Rep::clone() const
 	{
 		Rep* pRep = reinterpret_cast<Rep*>(malloc(getSize()));
-		pRep->m_nlength = m_nlength;
+		pRep->m_nLength = m_nLength;
 		pRep->m_nCapacity = m_nCapacity;
 		pRep->m_nReference = 0;
 		return pRep;
@@ -78,7 +78,7 @@ namespace sgf
 			nCapacity = MIN_STRING_CAPACITY;
 		}
 		Rep* pRep = reinterpret_cast<Rep*>(malloc(sizeof(Rep) + sizeof(T) * (nCapacity + 1)));
-		pRep->m_nlength = a_nLen;
+		pRep->m_nLength = a_nLen;
 		pRep->m_nCapacity = nCapacity;
 		pRep->m_nReference = 0;
 		return pRep;
@@ -202,7 +202,7 @@ namespace sgf
 				m_string = Rep::Create(nLen)->getData();
 			}
 			MemCpy(m_string, rhs, nLen + 1);
-			_GetRep().m_nlength = nLen;
+			_GetRep().m_nLength = nLen;
 		}
 	}
 
@@ -210,7 +210,7 @@ namespace sgf
 	template<typename T> INLINE T 
 		TStringBase<T>::operator[](int a_nIdx) const
 	{
-		ASSERT(a_nIdx >= 0 && a_nIdx < _GetRep().m_nlength);
+		ASSERT(a_nIdx >= 0 && a_nIdx < _GetRep().m_nLength);
 		return m_string[a_nIdx];
 	}
 
@@ -218,7 +218,7 @@ namespace sgf
 	template<typename T> INLINE int 
 		TStringBase<T>::length() const
 	{
-		return _GetRep().m_nlength;
+		return _GetRep().m_nLength;
 	}
 
 	//-------------------------------------------------------------------------
@@ -256,7 +256,7 @@ namespace sgf
 
 			if (nChars >= 0 && nChars < nSize)
 			{
-				_GetRep().m_nlength = nChars;
+				_GetRep().m_nLength = nChars;
 				break;
 			}
 			else
@@ -294,7 +294,7 @@ namespace sgf
 
 		int nLen = length();
 		Rep* pRep = Rep::Create(a_nDstLen);
-		MemCpy(pRep->GetData(), c_str(), nLen);
+		MemCpy(pRep->getData(), c_str(), nLen);
 		pRep->getData()[nLen] = 0;
 		pRep->m_nLength = nLen;
 		_GetRep().unRef();
@@ -322,7 +322,7 @@ namespace sgf
 		Rep* pRep = Rep::Create(nSubLen);
 		T* pData = pRep->getData();
 		MemCpy(pData, m_string + a_nIdx, nSubLen);
-		pRep[nSubLen] = 0;
+		pData[nSubLen] = 0;
 		return TStringBase(pRep);
 	}
 
@@ -355,7 +355,7 @@ namespace sgf
 			m_string[a_nIdx] = a_char;
 			if (a_char == 0)
 			{
-				_GetRep().m_nlength = a_nIdx;
+				_GetRep().m_nLength = a_nIdx;
 			}
 		}
 		return *this;
@@ -480,7 +480,6 @@ namespace sgf
 		{
 			nStart = a_nStart;
 		}
-		const T* cursor;
 		for (const T* cursor = c_str() + nStart; cursor >= c_str(); --cursor)
 		{
 			if ((*cursor) == a_ch)
@@ -512,7 +511,7 @@ namespace sgf
 		reserve(length() + nOtherLen);
 		memmove(m_string + a_nPos + nOtherLen, m_string + a_nPos, (length() - nPos) * sizeof(T));
 		MemCpy(m_string + a_nPos, a_sz.m_string + a_nStart, nOtherLen);
-		_GetRep().m_nlength = length() + nOtherLen;
+		_GetRep().m_nLength = length() + nOtherLen;
 		m_string[length()] = 0;
 		return *this;
 	}
@@ -536,7 +535,7 @@ namespace sgf
 		reserve(length() + a_nLen);
 		memmove(m_string + a_nPos + a_nLen, m_string + a_nPos, (length() - a_nPos) * sizeof(T));
 		MemCpy(m_string + a_nPos, sz, a_nLen);
-		_GetRep().m_nlength = length() + a_nLen;
+		_GetRep().m_nLength = length() + a_nLen;
 		m_string[length()] = 0;
 		return *this;
 	}
@@ -651,7 +650,7 @@ namespace sgf
 		ASSERT(a_nLen >= 0 && a_nLen + a_nIdx <= a_sz.length());
 		reserve(length() + a_nLen);
 		MemCpy(m_string + length(), a_sz.c_str() + a_nIdx, a_nLen + 1);
-		_GetRep().m_nlength = length() + a_nLen;
+		_GetRep().m_nLength = length() + a_nLen;
 		return *this;
 	}
 
@@ -696,7 +695,7 @@ namespace sgf
 		ASSERT(nOtherLen >= 0);
 		reserve(length() + nOtherLen);
 		MemCpy(m_string + length(), a_sz + a_nIdx, nOtherLen);
-		_GetRep().m_nlength = length() + nOtherLen;
+		_GetRep().m_nLength = length() + nOtherLen;
 		m_string[length()] = 0;
 		return *this;
 	}
@@ -708,7 +707,7 @@ namespace sgf
 		ASSERT(a_nCount >= 0);
 		reserve(length() + a_nCount);
 		StrSet(m_string + length(), a_ch, a_nCount);
-		_GetRep().m_nlength = length() + a_nCount;
+		_GetRep().m_nLength = length() + a_nCount;
 		m_string[length()] = 0;
 		return *this;
 	}
@@ -752,9 +751,9 @@ namespace sgf
 	template<typename T> INLINE bool 
 		TStringBase<T>::beginsWith(const T * a_sz) const
 	{
-		for (int i = 0; s[i] != 0; ++i)
+		for (int i = 0; a_sz[i] != 0; ++i)
 		{
-			if (i >= length() || c_str()[i] != s[i])
+			if (i >= length() || c_str()[i] != a_sz[i])
 			{
 				return false;
 			}
@@ -922,7 +921,7 @@ namespace sgf
 
 			if (nChars >= 0 && nChars < nSize)
 			{
-				str._GetRep().m_nlength = nChars;
+				str._GetRep().m_nLength = nChars;
 				break;
 			}
 			else
