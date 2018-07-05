@@ -39,3 +39,5 @@
 #include "xml/rapidxml_iterators.hpp"
 #include "xml/rapidxml_print.hpp"
 #include "xml/rapidxml_utils.hpp"
+
+#include "sgfXmlHelper.h"

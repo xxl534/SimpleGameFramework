@@ -198,6 +198,13 @@ namespace sgf
 	bool ShaderEffect::_Load(const String& a_szName)
 	{
 		//todo fileReader
+		DataReader* pReader = FileReader::OpenReadFile(a_szName);
+		if (pReader)
+		{
+			rapidxml::xml_document<char> doc;
+			doc.parse<0>((char*)pReader->Data());
+			rapidxml::xml_node<char>* pEffectNode = doc.first_node();
+		}
 	}
 
 	void ShaderEffect::_LoadPropDecl(rapidxml::xml_node<char>* a_pNode)
