@@ -44,6 +44,10 @@ namespace sgf
 		ERHIShaderConstantType_Count,
 	};
 
+	extern const String&			RHIShaderConstantTypeToString(ERHIShaderConstantType a_eType);
+	extern ERHIShaderConstantType	RHIStringToShaderConstantType(const String& a_szType, ERHIShaderConstantType a_eDefault = ERHIShaderConstantType_Invalid);
+	extern int32					RHIGetShaderConstantTypeSize(ERHIShaderConstantType a_eType);
+
 	enum ERHIResourceUsage
 	{
 		ERHIResourceUsage_Static,		// The resource will be created, filled, and never repacked.
@@ -74,7 +78,9 @@ namespace sgf
 		ERHISamplerFilter_Comparison_Anisotropic,
 		ERHISamplerFilter_Count,
 	};
-
+	extern const String&			RHISamplerFilterToString(ERHISamplerFilter a_eFilter);
+	extern ERHISamplerFilter		RHIStringToSamplerFilter(const String& a_szFilter, ERHISamplerFilter a_eDefault = ERHISamplerFilter_Invalid);
+	//-------------------------------------------------------------------------
 	enum ERHIClampMode
 	{
 		ERHIClampMode_Invalid = -1,
@@ -85,6 +91,9 @@ namespace sgf
 		ERHIClampMode_ClampToEdge,
 		ERHIClampMode_Count,
 	};
+	extern const String&			RHIClampModeToString(ERHIClampMode a_eMode);
+	extern ERHIClampMode			RHIStringToClampMode(const String& a_szType, ERHIClampMode a_eDefault = ERHIClampMode_Invalid);
+
 
 	enum ERHIPixelFormat
 	{

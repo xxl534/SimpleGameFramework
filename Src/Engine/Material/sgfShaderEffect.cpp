@@ -199,25 +199,99 @@ namespace sgf
 	{
 		//todo fileReader
 		DataReader* pReader = FileReader::OpenReadFile(a_szName);
+		bool bRet = false;
 		if (pReader)
 		{
 			rapidxml::xml_document<char> doc;
 			doc.parse<0>((char*)pReader->Data());
-			rapidxml::xml_node<char>* pEffectNode = doc.first_node();
+			rapidxml::xml_node<char>* pEffectNode = doc.first_node( Serialization::k_ShaderEffect.c_str() );
+			if (pEffectNode)
+			{
+				GetXmlAttribute(pEffectNode, Serialization::k_DisplayName.c_str(), m_szDisplayName);
+
+				_LoadPropDecl(pEffectNode);
+				_LoadTexDecl(pEffectNode);
+				_LoadPass(pEffectNode);
+				_LoadEffectInfo(pEffectNode);
+			}
+		}
+		SAFE_DELETE(pReader);
+		return bRet;
+	}
+
+	//-------------------------------------------------------------------------
+	void 
+		ShaderEffect::_LoadPropDecl(rapidxml::xml_node<char>* a_pNode)
+	{
+		rapidxml::xml_node<char>* pPropNode = a_pNode->first_node(Serialization::k_ShaderEffectProp.c_str());
+		while (pPropNode)
+		{
+			ShaderEffectPropDecl* pPropDecl = new ShaderEffectPropDecl();
+			GetXmlAttribute(pPropNode, Serialization::k_Name.c_str(), pPropDecl->m_szName);
+			GetXmlAttribute(pPropNode, Serialization::k_DisplayName.c_str(), pPropDecl->m_szDisplay);
+			GetXmlAttribute(pPropNode, Serialization::k_Count.c_str(), pPropDecl->m_nCount);
+			pPropDecl->m_eType = RHIStringToShaderConstantType(GetXmlAttributeValue(pPropNode, Serialization::k_ShaderEffectType.c_str()));
+
+			if (!pPropDecl->m_szName.empty() &&
+				pPropDecl->m_eType != ERHIShaderConstantType_Invalid &&
+				pPropDecl->m_nCount > 0 &&
+				_LoadPropData(pPropDecl, GetXmlAttributeValue(pPropNode, Serialization::k_Value.c_str()))
+				)
+			{
+				if (pPropDecl->m_szDisplay.empty())
+				{
+					pPropDecl->m_szDisplay = pPropDecl->m_szName;
+				}
+				pPropDecl->m_nIndex = m_arrShaderPropDecl.size();
+				m_arrShaderPropDecl.push_back(pPropDecl);
+			}
+			else
+			{
+				SAFE_DELETE(pPropDecl);
+			}
+			pPropNode = pPropNode->next_sibling(Serialization::k_ShaderEffectProp.c_str());
 		}
 	}
 
-	void ShaderEffect::_LoadPropDecl(rapidxml::xml_node<char>* a_pNode)
+	//-------------------------------------------------------------------------
+	void 
+		ShaderEffect::_LoadTexDecl(rapidxml::xml_node<char>* a_pNode)
 	{
+		rapidxml::xml_node<char>* pTexNode = a_pNode->first_node(Serialization::k_ShaderEffectTexture.c_str());
+		while (pTexNode)
+		{
+			ShaderEffectTexDecl* pDecl = new ShaderEffectTexDecl();
+			GetXmlAttribute(pTexNode, Serialization::k_Name.c_str(), pDecl->m_szName);
+			GetXmlAttribute(pTexNode, Serialization::k_DisplayName.c_str(), pDecl->m_szDisplay);
+			pDecl->m_eType = RHIStringToShaderConstantType(GetXmlAttributeValue(pTexNode, Serialization::k_ShaderEffectType.c_str()));
+			if (!pDecl->m_szName.empty() &&
+				(	pDecl->m_eType == ERHIShaderConstantType_Sampler2D ||
+					pDecl->m_eType == ERHIShaderConstantType_Sampler3D ||
+					pDecl->m_eType == ERHIShaderConstantType_SamplerCube )
+				)
+			{
+				pDecl->m_eClampU = RHIStringToClampMode(GetXmlAttributeValue(pTexNode, Serialization::k_ShaderEffectClampU.c_str()), ERHIClampMode_Clamp);
+				pDecl->m_eClampV = RHIStringToClampMode(GetXmlAttributeValue(pTexNode, Serialization::k_ShaderEffectClampV.c_str()), ERHIClampMode_Clamp);
+				pDecl->m_eClampW = RHIStringToClampMode(GetXmlAttributeValue(pTexNode, Serialization::k_ShaderEffectClampW.c_str()), ERHIClampMode_Clamp);
 
+				pDecl->m_eFilter = RHIStringToSamplerFilter(GetXmlAttributeValue(pTexNode, Serialization::k_ShaderEffectFilter.c_str()), ERHISamplerFilter_Min_Mag_Mip_Linear);
+				if (pDecl->m_szDisplay.empty())
+				{
+					pDecl->m_szDisplay = pDecl->m_szName;
+				}
+				m_arrShaderTexDecl.push_back(pDecl);
+			}
+			else
+			{
+				SAFE_DELETE(pDecl);
+			}
+			pTexNode = pTexNode->next_sibling(Serialization::k_ShaderEffectTexture.c_str());
+		}
 	}
 
-	void ShaderEffect::_LoadTexDecl(rapidxml::xml_node<char>* a_pNode)
-	{
-
-	}
-
-	void ShaderEffect::_LoadPass(rapidxml::xml_node<char>* a_pNode)
+	//-------------------------------------------------------------------------
+	void 
+		ShaderEffect::_LoadPass(rapidxml::xml_node<char>* a_pNode)
 	{
 
 	}
