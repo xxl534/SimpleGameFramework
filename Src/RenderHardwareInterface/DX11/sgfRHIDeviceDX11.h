@@ -22,6 +22,8 @@ namespace sgf
 	public:
 		ID3D11RenderTargetView*	GetCurrentRenderTargetView() const;
 		ID3D11DepthStencilView*	GetCurrentDepthStencilView() const;
+
+		virtual const String& GetName() const override;
 	public:
 		static void		SetMainWindowHandle(HWND a_hWnd);
 		static void		SetMainWindowSize(int32 a_nWidth, int32 a_nHeight);
@@ -54,7 +56,6 @@ namespace sgf
 		static HWND				ms_hWnd;
 		static int32			ms_nWindowWidth;
 		static int32			ms_nWindowHeight;
-
 	};
 
 	extern ID3D11Device*		DX11_pDevice;

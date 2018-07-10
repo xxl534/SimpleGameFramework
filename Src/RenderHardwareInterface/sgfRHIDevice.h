@@ -23,6 +23,7 @@ namespace sgf
 		static void					ResetDevice();
 		static void					Resize(int32 a_nWidth, int32 a_nHeight);
 		virtual	ERHIDeviceType		GetType() const { return ERHIDeviceType_Invalid;  }
+		virtual const String&		GetName() const = 0;
 	protected:
 		virtual void				_OnInit() = 0;
 		virtual void				_OnExit() = 0;

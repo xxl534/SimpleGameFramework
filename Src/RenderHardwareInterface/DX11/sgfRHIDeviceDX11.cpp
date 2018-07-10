@@ -9,13 +9,13 @@ namespace sgf
 	ID3D11Device*			DX11_pDevice = NULL;
 	ID3D11DeviceContext*	DX11_PDeviceContext = NULL;
 	IDXGISwapChain*			DX11_pSwapChain = NULL;
-
+	static const String		s_szDeviceName = "DX11";
 	//-------------------------------------------------------------------------
 	RHIDeviceDX11* RHIDeviceDX11::ms_pInstace = NULL;
 	HWND RHIDeviceDX11::ms_hWnd = 0;
 	int32 RHIDeviceDX11::ms_nWindowWidth = 0;
 	int32 RHIDeviceDX11::ms_nWindowHeight = 0;
-
+	
 	//-------------------------------------------------------------------------
 	RHIDeviceDX11::RHIDeviceDX11()
 		:m_pDepthStencilBuffer(NULL)
@@ -31,6 +31,13 @@ namespace sgf
 	RHIDeviceDX11::~RHIDeviceDX11()
 	{
 		ms_pInstace = NULL;
+	}
+
+	//-------------------------------------------------------------------------
+	const String& 
+		RHIDeviceDX11::GetName() const
+	{
+		return s_szDeviceName;
 	}
 
 	//-------------------------------------------------------------------------
@@ -276,8 +283,6 @@ namespace sgf
 
 		// todo Set the viewport transform.
 	}
-
-	
 
 }
 

@@ -53,10 +53,16 @@ namespace sgf
 		static String	k_ShaderEffectClampV;
 		static String	k_ShaderEffectClampW;
 		static String	k_ShaderEffectFilter;
+		static String	k_ShaderEffectPass;
+		static String	k_ShaderEffectQueue;
+		static String	k_ShaderEffectRasterizer;
+		static String	k_ShaderEffectBlend;
+		static String	k_ShaderEffectDepthStencil;
 
 		static String	k_Name;
 		static String	k_Count;
 		static String	k_DisplayName;
 		static String	k_Value;
+		static String	k_Visible;
 	};
 }

@@ -293,17 +293,56 @@ namespace sgf
 	void 
 		ShaderEffect::_LoadPass(rapidxml::xml_node<char>* a_pNode)
 	{
+		rapidxml::xml_node<char>* pDeviceNode = NULL;
+		rapidxml::xml_node<char>* pPassNode = a_pNode->first_node(Serialization::k_ShaderEffectPass.c_str());
+		while (pPassNode)
+		{
+			ShaderPass* pPass = new ShaderPass();
+			pPass->_LoadFromXml(pPassNode);
+			m_arrShaderPass.push_back(pPass);
 
+			pPassNode = pPassNode->next_sibling(Serialization::k_ShaderEffectPass.c_str());
+		}
 	}
 
-	void ShaderEffect::_LoadEffectInfo(rapidxml::xml_node<char>* a_pNode)
+	//-------------------------------------------------------------------------
+	void 
+		ShaderEffect::_LoadEffectInfo(rapidxml::xml_node<char>* a_pNode)
 	{
-
+		bool bSucc = false;
+		bSucc = GetXmlAttribute(a_pNode, Serialization::k_Visible.c_str(), m_bVisible);
+		ASSERT(bSucc);
 	}
 
-	bool ShaderEffect::_LoadPropData(ShaderEffectPropDecl* a_pDecl, const char* a_szData)
+	//-------------------------------------------------------------------------
+	bool 
+		ShaderEffect::_LoadPropData(ShaderEffectPropDecl* a_pDecl, const char* a_szData)
 	{
-		//todo serializable 
+		a_pDecl->m_nStride = RHIGetShaderConstantTypeSize(a_pDecl->m_eType);
+		if (a_pDecl->m_nStride > 0)
+		{
+			SAFE_FREE(a_pDecl->m_pDefaultValue);
+			a_pDecl->m_pDefaultValue = malloc(a_pDecl->m_nStride * a_pDecl->m_nCount);
+			switch ( a_pDecl->m_eType )
+			{
+			case ERHIShaderConstantType_1f:		return Serialization::ReadFloatArray(a_szData, (float*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_2f:		return Serialization::ReadFloat2Array(a_szData, (float*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_3f:		return Serialization::ReadFloat3Array(a_szData, (float*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_4f:		return Serialization::ReadFloat4Array(a_szData, (float*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_1i:		return Serialization::ReadIntArray(a_szData, (int32*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_2i:		return Serialization::ReadIntArray(a_szData, (int32*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_3i:		return Serialization::ReadIntArray(a_szData, (int32*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_4i:		return Serialization::ReadIntArray(a_szData, (int32*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_1b:		return Serialization::ReadIntArray(a_szData, (int32*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_2b:		return Serialization::ReadIntArray(a_szData, (int32*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_3b:		return Serialization::ReadIntArray(a_szData, (int32*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_4b:		return Serialization::ReadIntArray(a_szData, (int32*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_Matrix2:		return Serialization::ReadMatrix2Array(a_szData, (float*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_Matrix3:		return Serialization::ReadMatrix3Array(a_szData, (float*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			case ERHIShaderConstantType_Matrix4:		return Serialization::ReadMatrix4Array(a_szData, (float*)a_pDecl->m_pDefaultValue, a_pDecl->m_nCount);
+			}
+		}
+		return false;
 	}
 
 }

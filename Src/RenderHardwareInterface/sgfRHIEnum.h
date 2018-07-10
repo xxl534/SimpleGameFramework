@@ -94,7 +94,7 @@ namespace sgf
 	extern const String&			RHIClampModeToString(ERHIClampMode a_eMode);
 	extern ERHIClampMode			RHIStringToClampMode(const String& a_szType, ERHIClampMode a_eDefault = ERHIClampMode_Invalid);
 
-
+	//-------------------------------------------------------------------------
 	enum ERHIPixelFormat
 	{
 		ERHIPixelFormat_Default = -1,
@@ -111,4 +111,101 @@ namespace sgf
 		ERHIPixelFormat_ETC1,
 		ERHIPixelFormat_Depth,
 	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIFillMode
+	{
+		ERHIFillMode_Invalid = -1,
+		ERHIFillMode_Wireframe,		//貌似GLES2是不支持这么搞滴
+		ERHIFillMode_Solid,
+		ERHIFillMode_Count,
+	};
+	extern String					RHIFillModeToString(ERHIFillMode eMode);
+	extern ERHIFillMode				RHIStringToFillMode(const String& szType, ERHIFillMode eDefault = ERHIFillMode_Invalid);
+
+	//------------------------------------------------------------------------
+	enum ERHICullMode
+	{
+		ERHICullMode_Invalid = -1,
+		ERHICullMode_Front,
+		ERHICullMode_Back,
+		ERHICullMode_None,
+		ERHICullMode_Count,
+	};
+	extern String					RHICullModeToString(ERHICullMode eMode);
+	extern ERHICullMode				RHIStringToCullMode(const String& szType, ERHICullMode eDefault = ERHICullMode_Invalid);
+
+	//-------------------------------------------------------------------------
+	enum ERHIBlend
+	{
+		ERHIBlend_Invalid = -1,
+		ERHIBlend_Zero,
+		ERHIBlend_One,
+		ERHIBlend_SrcColor,
+		ERHIBlend_InvSrcColor,
+		ERHIBlend_SrcAlpha,
+		ERHIBlend_InvSrcAlpha,
+		ERHIBlend_DestAlpha,
+		ERHIBlend_InvDestAlpha,
+		ERHIBlend_DestColor,
+		ERHIBlend_InvDestColor,
+		ERHIBlend_SrcAlphaSat,
+		ERHIBlend_BlendFactor,
+		ERHIBlend_InvBlendFactor,
+		ERHIBlend_Src1Color,
+		ERHIBlend_InvSrc1Color,
+		ERHIBlend_Src1Alpha,
+		ERHIBlend_InvSrc1Alpha,
+		ERHIBlend_Count,
+	};
+	extern String					RHIBlendToString(ERHIBlend eBlend);
+	extern ERHIBlend				RHIStringToBlend(const String& szBlend, ERHIBlend eDefault = ERHIBlend_Invalid);
+
+	//-------------------------------------------------------------------------
+	enum ERHIBlendFunc
+	{
+		ERHIBlendFunc_Invalid = -1,
+		ERHIBlendFunc_Add,
+		ERHIBlendFunc_Sub,
+		ERHIBlendFunc_RevSub,
+		ERHIBlendFunc_Min,
+		ERHIBlendFunc_Max,
+		ERHIBlendFunc_Count,
+	};
+	extern String					RHIBlendFuncToString(ERHIBlendFunc eFunc);
+	extern ERHIBlendFunc			RHIStringToBlendFunc(const String& szFunc, ERHIBlendFunc eDefault = ERHIBlendFunc_Invalid);
+
+	//-------------------------------------------------------------------------
+	enum ERHIComparisonFunc
+	{
+		ERHIComparisonFunc_Invalid = -1,
+		ERHIComparisonFunc_Never,
+		ERHIComparisonFunc_Less,
+		ERHIComparisonFunc_Equal,
+		ERHIComparisonFunc_LEqual,
+		ERHIComparisonFunc_Greater,
+		ERHIComparisonFunc_NotEqual,
+		ERHIComparisonFunc_GEqual,
+		ERHIComparisonFunc_Always,
+		ERHIComparisonFunc_Count,
+	};
+	extern String					RHIComparisonFuncToString(ERHIComparisonFunc eFunc);
+	extern ERHIComparisonFunc		RHIStringToComparisonFunc(const String& szFunc, ERHIComparisonFunc eDefault = ERHIComparisonFunc_Invalid);
+
+	//-------------------------------------------------------------------------
+	enum ERHIStencilFunc
+	{
+		ERHIStencilFunc_Invalid = -1,
+		ERHIStencilFunc_Keep,
+		ERHIStencilFunc_Zero,
+		ERHIStencilFunc_Replace,
+		ERHIStencilFunc_IncrSat,
+		ERHIStencilFunc_DecrSat,
+		ERHIStencilFunc_Invert,
+		ERHIStencilFunc_Incr,
+		ERHIStencilFunc_Decr,
+		ERHIStencilFunc_Count,
+	};
+	extern String					RHIStencilFuncToString(ERHIStencilFunc eFunc);
+	extern ERHIStencilFunc			RHIStringToStencilFunc(const String& szFunc, ERHIStencilFunc eDefault = ERHIStencilFunc_Invalid);
 }
