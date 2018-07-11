@@ -7,7 +7,7 @@
 namespace sgf
 {
 	ID3D11Device*			DX11_pDevice = NULL;
-	ID3D11DeviceContext*	DX11_PDeviceContext = NULL;
+	ID3D11DeviceContext*	DX11_pDeviceContext = NULL;
 	IDXGISwapChain*			DX11_pSwapChain = NULL;
 	static const String		s_szDeviceName = "DX11";
 	//-------------------------------------------------------------------------
@@ -153,7 +153,7 @@ namespace sgf
 			D3D11_SDK_VERSION,
 			&DX11_pDevice,
 			&featureLevel,
-			&DX11_PDeviceContext
+			&DX11_pDeviceContext
 		);
 
 		if (FAILED(hr))
@@ -232,7 +232,7 @@ namespace sgf
 		RHIDeviceDX11::_Resize(int32 a_nWidht, int32 a_nHeight)
 	{
 		ASSERT(DX11_pDevice != NULL);
-		ASSERT(DX11_PDeviceContext != NULL);
+		ASSERT(DX11_pDeviceContext != NULL);
 		ASSERT(DX11_pSwapChain != NULL);
 
 		// Release the old views, as they hold references to the buffers we
@@ -279,7 +279,7 @@ namespace sgf
 		hr = DX11_pDevice->CreateDepthStencilView(m_pDepthStencilBuffer, 0, &m_pDepthStencilView);
 
 		// Bind the render target view and depth/stencil view to the pipeline.
-		DX11_PDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+		DX11_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 
 		// todo Set the viewport transform.
 	}

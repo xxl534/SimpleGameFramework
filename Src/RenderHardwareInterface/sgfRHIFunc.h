@@ -35,6 +35,20 @@ namespace sgf
 	//texture
 	typedef RHITextureRef			(*_RHICreateTextureFromFile)(const String& a_szFile, ERHIResourceUsage a_eUsage, ERHIPixelFormat a_eFormat, int32 a_nMipMap );
 
+	//rasterizer state 
+	typedef RHIRasterizerStateRef	(*_RHICreateRasterizerState)(const RHIRasterizerStateDesc& a_sDesc);
+	typedef RHIRasterizerStateRef	(*_RHIGetRasterizerState)();
+	typedef void					(*_RHISetRasterizerState)(const RHIRasterizerStateRef& a_refState);
+
+	//blend state
+	typedef RHIBlendStateRef		(*_RHICreateBlendState)(const RHIBlendStateDesc& a_sDesc);
+
+	//depth stencil state
+	typedef RHIDepthStencilStateRef	(*_RHICreateDepthStencilState)(const RHIDepthStencilStateDesc& a_sDesc);
+
+	//shader
+	typedef RHIShaderRef			(*_RHICreateShader)(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro);
+
 	extern _RHISetViewport				RHISetViewport;
 	extern _RHIClear					RHIClear;
 
@@ -52,5 +66,14 @@ namespace sgf
 	extern _RHIUnlockIndexBuffer		RHIUnlockIndexBuffer;
 
 	extern _RHICreateTextureFromFile	RHICreateTextureFromFile;
-	
+
+	extern _RHICreateRasterizerState	RHICreateRasterizerState;
+	extern _RHIGetRasterizerState		RHIGetRasterizerState;
+	extern _RHISetRasterizerState		RHISetRasterizerState;
+
+	extern _RHICreateBlendState			RHICreateBlendState;
+
+	extern _RHICreateDepthStencilState	RHICreateDepthStencilState;
+
+	extern _RHICreateShader				RHICreateShader;
 }

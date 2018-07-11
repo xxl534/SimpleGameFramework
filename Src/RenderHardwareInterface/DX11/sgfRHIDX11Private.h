@@ -15,6 +15,7 @@
 
 #include "sgfRHIDeviceDX11.h"
 #include "sgfRHIFuncDX11.h"
+#include "sgfRHITypeMapDX11.h"
 
 #if defined(_DEBUG)
 	#ifndef HR

@@ -41,6 +41,7 @@ namespace sgf
 
 		void							_LoadRasterizerState(rapidxml::xml_node<char>* a_pNode);
 		void							_LoadBlendState(rapidxml::xml_node<char>* a_pNode);
+		void							_LoadBlendTarget(rapidxml::xml_node<char>* a_pNode, RHIRenderTargetBlendDesc& a_sDesc);
 		void							_LoadDepthStencilState(rapidxml::xml_node<char>* a_pNode);
 		void							_LoadTechs(rapidxml::xml_node<char>* a_pNode);
 	private:

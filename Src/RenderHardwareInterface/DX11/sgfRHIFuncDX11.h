@@ -29,4 +29,20 @@ namespace sgf
 	extern void						RHISetIndexBufferDX11(const RHIIndexBufferRef& a_ref);
 	extern void*					RHILockIndexBufferDX11(RHIIndexBufferRef& a_ref, int32 a_nOffset, int32 a_nSize, bool a_bReadonly);
 	extern void						RHIUnlockIndexBufferDX11(RHIIndexBufferRef& a_ref);
+
+	extern RHITextureRef			RHICreateTextureFromFileDX11(const String& a_szFile, ERHIResourceUsage a_eUsage, ERHIPixelFormat a_eFormat, int32 a_nMipMap);
+
+	//rasterizer state 
+	extern RHIRasterizerStateRef	RHICreateRasterizerStateDX11(const RHIRasterizerStateDesc& a_sDesc);
+	extern RHIRasterizerStateRef	RHIGetRasterizerStateDX11();
+	extern void						RHISetRasterizerStateDX11(const RHIRasterizerStateRef& a_refState);
+
+	//blend state
+	extern RHIBlendStateRef			RHICreateBlendStateDX11(const RHIBlendStateDesc& a_sDesc);
+
+	//depth stencil state
+	extern RHIDepthStencilStateRef	RHICreateDepthStencilStateDX11(const RHIDepthStencilStateDesc& a_sDesc);
+
+	//shader
+	extern RHIShaderRef				RHICreateShaderDX11(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro);
 }

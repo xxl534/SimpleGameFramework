@@ -25,5 +25,5 @@ namespace sgf
 		static void			Exit();
 		static void			Tick();
 	};
-	extern RHIVertexInputDX11* DX11_gVertexInput;
+	extern RHIVertexInputDX11* DX11_pVertexInput;
 }

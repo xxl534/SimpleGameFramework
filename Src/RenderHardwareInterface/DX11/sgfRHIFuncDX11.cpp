@@ -21,6 +21,18 @@ namespace sgf
 		RHISetIndexBuffer = RHISetIndexBufferDX11;
 		RHILockIndexBuffer = RHILockIndexBufferDX11;
 		RHIUnlockIndexBuffer = RHIUnlockIndexBufferDX11;
+
+		RHICreateTextureFromFile = RHICreateTextureFromFileDX11;
+	
+		RHICreateRasterizerState = RHICreateRasterizerStateDX11;
+		RHIGetRasterizerState = RHIGetRasterizerStateDX11;
+		RHISetRasterizerState = RHISetRasterizerStateDX11;
+
+		RHICreateBlendState = RHICreateBlendStateDX11;
+
+		RHICreateDepthStencilState = RHICreateDepthStencilStateDX11;
+
+		RHICreateShader = RHICreateShaderDX11;
 	}
 
 	//-------------------------------------------------------------------------
@@ -34,7 +46,7 @@ namespace sgf
 		dxViewport.TopLeftY = a_desc.m_nY;
 		dxViewport.MinDepth = a_desc.m_fMinDepth;
 		dxViewport.MaxDepth = a_desc.m_fMaxDepth;
-		DX11_PDeviceContext->RSSetViewports(1, &dxViewport);
+		DX11_pDeviceContext->RSSetViewports(1, &dxViewport);
 	}
 
 	//-------------------------------------------------------------------------
@@ -44,12 +56,12 @@ namespace sgf
 		if (a_bCleanColor)
 		{
 			Color col(a_col);
-			DX11_PDeviceContext->ClearRenderTargetView(RHIDeviceDX11::Get()->GetCurrentRenderTargetView(), col.f);
+			DX11_pDeviceContext->ClearRenderTargetView(RHIDeviceDX11::Get()->GetCurrentRenderTargetView(), col.f);
 		}
 		if (a_bCleanDepth || a_bCleanStencil)
 		{
 			UINT uFlag = ( a_bCleanDepth ? D3D11_CLEAR_DEPTH : 0 )|( a_bCleanStencil ? D3D11_CLEAR_STENCIL : 0 );
-			DX11_PDeviceContext->ClearDepthStencilView(RHIDeviceDX11::Get()->GetCurrentDepthStencilView(), uFlag, a_fDepth, a_uStencil);
+			DX11_pDeviceContext->ClearDepthStencilView(RHIDeviceDX11::Get()->GetCurrentDepthStencilView(), uFlag, a_fDepth, a_uStencil);
 		}
 		//todo
 		DX11_pSwapChain->Present(0, 0);

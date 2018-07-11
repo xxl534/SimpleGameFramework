@@ -25,11 +25,12 @@ namespace sgf
 		int32				m_nRenderTargetWriteMask;
 	};
 
+#define RHI_BLEND_TARGET_COUNT_MAX 8
 	struct RHIBlendStateDesc
 	{
 		int32						m_nAlphaToCoverageEnbale;
 		int32						m_nIndependentBlendEnable;
-		RHIRenderTargetBlendDesc	m_arrRenderTarget[8];
+		RHIRenderTargetBlendDesc	m_arrRenderTarget[RHI_BLEND_TARGET_COUNT_MAX];
 		
 		RHIBlendStateDesc()
 		{

@@ -3,7 +3,7 @@
 
 namespace sgf
 {
-	RHIVertexInputDX11*	DX11_gVertexInput = NULL;
+	RHIVertexInputDX11*	DX11_pVertexInput = NULL;
 
 	typedef THashMap<RHIVertexInputDesc, RHIVertexInputDX11*> VertexInputMapDX11;
 	VertexInputMapDX11 DX11_mapVertexInput;
@@ -39,7 +39,7 @@ namespace sgf
 	void 
 		RHIVertexInputDX11::Exit()
 	{
-		DX11_gVertexInput = NULL;
+		DX11_pVertexInput = NULL;
 		for (VertexInputMapDX11::iterator it = DX11_mapVertexInput.begin(); it != DX11_mapVertexInput.end(); ++it)
 		{
 			it->second->Release();
@@ -51,7 +51,7 @@ namespace sgf
 	void 
 		RHIVertexInputDX11::Tick()
 	{
-		DX11_gVertexInput = NULL;
+		DX11_pVertexInput = NULL;
 	}
 
 	//-------------------------------------------------------------------------
@@ -76,6 +76,6 @@ namespace sgf
 	void 
 		RHISetVertexInputDX11(const RHIVertexInputRef& a_refInput)
 	{
-		DX11_gVertexInput = a_refInput.GetReference<RHIVertexInputDX11>();
+		DX11_pVertexInput = a_refInput.GetReference<RHIVertexInputDX11>();
 	}
 }

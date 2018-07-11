@@ -20,4 +20,14 @@ namespace sgf
 	_RHIUnlockIndexBuffer		RHIUnlockIndexBuffer = NULL;
 
 	_RHICreateTextureFromFile	RHICreateTextureFromFile = NULL;
+
+	_RHICreateRasterizerState	RHICreateRasterizerState = NULL;
+	_RHIGetRasterizerState		RHIGetRasterizerState = NULL;
+	_RHISetRasterizerState		RHISetRasterizerState = NULL;
+
+	_RHICreateBlendState		RHICreateBlendState = NULL;
+
+	_RHICreateDepthStencilState	RHICreateDepthStencilState = NULL;
+
+	_RHICreateShader			RHICreateShader = NULL;
 }

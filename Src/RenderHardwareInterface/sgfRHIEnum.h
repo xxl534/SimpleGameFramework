@@ -208,4 +208,15 @@ namespace sgf
 	};
 	extern String					RHIStencilFuncToString(ERHIStencilFunc eFunc);
 	extern ERHIStencilFunc			RHIStringToStencilFunc(const String& szFunc, ERHIStencilFunc eDefault = ERHIStencilFunc_Invalid);
+
+	//-------------------------------------------------------------------------
+	enum ERHIColorWriteEnable
+	{
+		ERHIColorWriteEnable_Invalid = -1,
+		ERHIColorWriteEnable_Red = 1,
+		ERHIColorWriteEnable_Green = 2,
+		ERHIColorWriteEnable_Blue = 4,
+		ERHIColorWriteEnable_Alpha = 8,
+		ERHIColorWriteEnable_All = (((ERHIColorWriteEnable_Red | ERHIColorWriteEnable_Green) | ERHIColorWriteEnable_Blue) | ERHIColorWriteEnable_Alpha)
+	};
 }

@@ -59,6 +59,6 @@ namespace sgf
 	};
 
 	extern ID3D11Device*		DX11_pDevice;
-	extern ID3D11DeviceContext*	DX11_PDeviceContext;
+	extern ID3D11DeviceContext*	DX11_pDeviceContext;
 	extern IDXGISwapChain*		DX11_pSwapChain;
 }
