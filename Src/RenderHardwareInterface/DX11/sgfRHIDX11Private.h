@@ -12,6 +12,7 @@
 *********************************************************************/
 #include <d3d11.h>
 #include <dxgi.h>
+#include <d3dcompiler.h>
 
 #include "sgfRHIDeviceDX11.h"
 #include "sgfRHIFuncDX11.h"
@@ -27,6 +28,10 @@
     #endif //HR
 #else
 	#ifndef HR
-	#define HR( x )								
+	#define HR( x )								\
+	{											\
+		HRESULT hr = (x);						\
+		if(FAILED(hr)){LOG_CALL;}				\
+	}	
 	#endif
 #endif

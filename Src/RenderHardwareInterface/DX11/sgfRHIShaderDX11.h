@@ -26,7 +26,16 @@ namespace sgf
 
 		virtual void OnLostDevice() override;
 		virtual void OnResetDevice() override;
+	public:
+		static void			Init();
+		static void			Tick();
+		static void			Exit();
 	private:
 		void	_Initialize(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro);
+		void	_InitAttribute();
+		void	_InitUniform();
+	private:
+		ID3D11VertexShader*	m_pVertexShader;
+		ID3D11PixelShader*	m_pPixelShader;
 	};
 }
