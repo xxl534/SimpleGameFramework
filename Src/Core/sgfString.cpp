@@ -158,4 +158,21 @@ namespace sgf
 			: a_ch;
 	}
 
+	static wchar fs_szWideBuffer[4096];
+	//-------------------------------------------------------------------------
+	WString 
+		StringHelper::Utf8ToUtf16(const CString& a_szUtf8)
+	{
+		MultiByteToWideChar(CP_UTF8, 0, a_szUtf8.c_str(), -1, fs_szWideBuffer, 4096);
+		return WString(fs_szWideBuffer, 4096);
+	}
+
+	//-------------------------------------------------------------------------
+	WString 
+		StringHelper::AnsiToUtf16(const CString& a_szAnsi)
+	{
+		MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, a_szAnsi.c_str(), -1, fs_szWideBuffer, 4096);
+		return WString(fs_szWideBuffer, 4096);
+	}
+
 }

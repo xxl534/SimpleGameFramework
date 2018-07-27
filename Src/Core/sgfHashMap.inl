@@ -180,7 +180,7 @@ namespace sgf
 		}
 		else
 		{
-			m_arrPair[nIdx].second;
+			return m_arrPair[nIdx].second;
 		}
 	}
 

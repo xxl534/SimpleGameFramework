@@ -15,6 +15,7 @@ namespace sgf
 {
 	class ShaderEffect;
 	class ShaderEffectPropDecl;
+	class ShaderEffectTexDecl;
 	class MaterialProperties
 	{
 		struct Prop
@@ -203,65 +204,10 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	int32
-		MaterialProperties::GetIndex(const String& a_szName)
-	{
-		for (int32 i = 0; i < m_arrProperty.size(); ++i)
-		{
-			if (m_arrProperty[i].m_pDecl->m_szName == a_szName)
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	//-------------------------------------------------------------------------
-	inline const String&
-		MaterialProperties::GetName(int32 a_nIdx)
-	{
-		return m_arrProperty[a_nIdx].m_pDecl->m_szName;
-	}
-
-	//-------------------------------------------------------------------------
-	inline ERHIShaderConstantType
-		MaterialProperties::GetType(int32 a_nIdx)
-	{
-		return m_arrProperty[a_nIdx].m_pDecl->m_eType;
-	}
-
-	//-------------------------------------------------------------------------
-	inline int32
-		MaterialProperties::GetStride(int32 a_nIdx)
-	{
-		return m_arrProperty[a_nIdx].m_pDecl->m_nStride;
-	}
-
-	//-------------------------------------------------------------------------
-	inline int32
-		MaterialProperties::GetArraySize(int32 a_nIdx)
-	{
-		return m_arrProperty[a_nIdx].m_pDecl->m_nCount;
-	}
-
-	//-------------------------------------------------------------------------
 	inline void*
 		MaterialProperties::GetValue(int32 a_nIdx)
 	{
 		return m_arrProperty[a_nIdx].m_pValue;
-	}
-
-	//-------------------------------------------------------------------------
-	inline bool
-		MaterialProperties::SetValue(int32 a_nIdx, const void* a_pData, int32 a_nLen)
-	{
-		Prop& sProp = m_arrProperty[a_nIdx];
-		if (sProp.m_pDecl->m_nStride * sProp.m_pDecl->m_nCount >= a_nLen)
-		{
-			memcpy(sProp.m_pValue, a_pData, a_nLen);
-			return true;
-		}
-		return false;
 	}
 
 	//-------------------------------------------------------------------------
@@ -273,34 +219,6 @@ namespace sgf
 		MaterialTextures::GetCount()
 	{
 		return m_arrSlot.size();
-	}
-
-	//-------------------------------------------------------------------------
-	inline int32
-		MaterialTextures::GetIndex(const String& a_szName)
-	{
-		for (int32 i = 0; i < m_arrSlot.size(); ++i)
-		{
-			if (m_arrSlot[i].m_pDecl->m_szName == a_szName)
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	//-------------------------------------------------------------------------
-	inline const String&
-		MaterialTextures::GetName(int32 a_nIdx)
-	{
-		return m_arrSlot[a_nIdx].m_pDecl->m_szName;
-	}
-
-	//-------------------------------------------------------------------------
-	inline ERHIShaderConstantType
-		MaterialTextures::GetType(int32 a_nIdx)
-	{
-		return m_arrSlot[a_nIdx].m_pDecl->m_eType;
 	}
 
 	//-------------------------------------------------------------------------

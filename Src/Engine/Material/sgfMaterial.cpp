@@ -51,6 +51,49 @@ namespace sgf
 		m_arrProperty.push_back(sProp);
 	}
 
+	sgf::ERHIShaderConstantType MaterialProperties::GetType(int32 a_nIdx)
+	{
+		return m_arrProperty[a_nIdx].m_pDecl->m_eType;
+	}
+
+	int32 MaterialProperties::GetArraySize(int32 a_nIdx)
+	{
+		return m_arrProperty[a_nIdx].m_pDecl->m_nCount;
+	}
+
+	bool MaterialProperties::SetValue(int32 a_nIdx, const void* a_pData, int32 a_nLen)
+	{
+		Prop& sProp = m_arrProperty[a_nIdx];
+		if (sProp.m_pDecl->m_nStride * sProp.m_pDecl->m_nCount >= a_nLen)
+		{
+			memcpy(sProp.m_pValue, a_pData, a_nLen);
+			return true;
+		}
+		return false;
+	}
+
+	int32 MaterialProperties::GetStride(int32 a_nIdx)
+	{
+		return m_arrProperty[a_nIdx].m_pDecl->m_nStride;
+	}
+
+	int32 MaterialProperties::GetIndex(const String& a_szName)
+	{
+		for (int32 i = 0; i < m_arrProperty.size(); ++i)
+		{
+			if (m_arrProperty[i].m_pDecl->m_szName == a_szName)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	const String& MaterialProperties::GetName(int32 a_nIdx)
+	{
+		return m_arrProperty[a_nIdx].m_pDecl->m_szName;
+	}
+
 	//-------------------------------------------------------------------------
 	//////////////////////////////////////////////////////////////////////////
 	//MaterialTextures
@@ -73,10 +116,40 @@ namespace sgf
 
 	}
 
-	void MaterialTextures::_AddTexture(const ShaderEffectTexDecl* a_pDecl)
+	//-------------------------------------------------------------------------
+	void 
+		MaterialTextures::_AddTexture(const ShaderEffectTexDecl* a_pDecl)
 	{
 		TexSlot sSlot = { a_pDecl, NULL, a_pDecl->m_eFilter, a_pDecl->m_eClampU, a_pDecl->m_eClampV, a_pDecl->m_eClampW };
 		m_arrSlot.push_back(sSlot);
+	}
+
+	//-------------------------------------------------------------------------
+	ERHIShaderConstantType 
+		MaterialTextures::GetType(int32 a_nIdx)
+	{
+		return m_arrSlot[a_nIdx].m_pDecl->m_eType;
+	}
+
+	//-------------------------------------------------------------------------
+	int32 
+		MaterialTextures::GetIndex(const String& a_szName)
+	{
+		for (int32 i = 0; i < m_arrSlot.size(); ++i)
+		{
+			if (m_arrSlot[i].m_pDecl->m_szName == a_szName)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	//-------------------------------------------------------------------------
+	const String& 
+		MaterialTextures::GetName(int32 a_nIdx)
+	{
+		return m_arrSlot[a_nIdx].m_pDecl->m_szName;
 	}
 
 	//-------------------------------------------------------------------------
@@ -95,6 +168,7 @@ namespace sgf
 
 	}
 
+	//-------------------------------------------------------------------------
 	Material::Material(const String& a_szMtrl)
 		:m_bVisible(false)
 		, m_pEffect(NULL)
@@ -106,6 +180,7 @@ namespace sgf
 		_LoadFromFileImpl(a_szMtrl);
 	}
 
+	//-------------------------------------------------------------------------
 	Material::Material(const Material& a_rhs)
 		:m_bVisible(false)
 		, m_pEffect(NULL)
@@ -289,7 +364,6 @@ namespace sgf
 		Material::GetTextureClampModeU(int32 a_nIdx) const
 	{
 		return m_pTextures->GetClampModeU(a_nIdx);
-		_MarkTexturesDirty();
 	}
 
 	//-------------------------------------------------------------------------
@@ -460,7 +534,7 @@ namespace sgf
 		_InitProperties();
 		_InitTextures();
 
-		int32 nPassCount = m_pEffect->GetPassCount;
+		int32 nPassCount = m_pEffect->GetPassCount();
 		for (int32 i = 0; i < nPassCount; ++i)
 		{
 			ShaderPass* pPass = m_pEffect->GetPass(i);
@@ -468,8 +542,8 @@ namespace sgf
 				new MaterialLayer(
 					pPass,
 					m_pProperties,
-					m_pTextures,
-					);
+					m_pTextures
+					)
 			);
 		}
 	}
@@ -491,7 +565,7 @@ namespace sgf
 		m_pTextures = new MaterialTextures(*(a_rhs.m_pTextures));
 		m_uSortingKey = a_rhs.m_uSortingKey;
 
-		int32 nPassCount = m_pEffect->GetPassCount;
+		int32 nPassCount = m_pEffect->GetPassCount();
 		for (int32 i = 0; i < nPassCount; ++i)
 		{
 			ShaderPass* pPass = m_pEffect->GetPass(i);
@@ -499,8 +573,8 @@ namespace sgf
 				new MaterialLayer(
 					pPass,
 					m_pProperties,
-					m_pTextures,
-					);
+					m_pTextures
+					)
 			);
 		}
 	}

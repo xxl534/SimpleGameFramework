@@ -18,6 +18,20 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
+	void 
+		HardwareResource::OnLostDevice()
+	{
+
+	}
+
+	//-------------------------------------------------------------------------
+	void 
+		HardwareResource::OnResetDevice()
+	{
+
+	}
+
+	//-------------------------------------------------------------------------
 	void HardwareResource::LostDevice()
 	{
 		for (TFastList<HardwareResource*>::iterator it = ms_listHardwareResource.begin();

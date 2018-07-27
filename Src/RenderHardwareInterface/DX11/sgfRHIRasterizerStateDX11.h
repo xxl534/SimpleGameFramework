@@ -19,9 +19,6 @@ namespace sgf
 		RHIRasterizerStateDX11(const RHIRasterizerStateDesc& a_sDesc);
 		virtual	~RHIRasterizerStateDX11();
 
-		virtual void OnLostDevice() override;
-		virtual void OnResetDevice() override;
-
 		void Setup();
 
 		static void			Init();

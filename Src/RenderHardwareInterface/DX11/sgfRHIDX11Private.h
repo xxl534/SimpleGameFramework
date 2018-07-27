@@ -22,16 +22,16 @@
 	#ifndef HR
 	#define HR( x )								\
 	{											\
-		HRESULT hr = (x);						\
-		ASSERT( !FAILED(hr) );					\
+		HRESULT ___hr = (x);						\
+		ASSERT( !FAILED(___hr) );					\
 	}											
     #endif //HR
 #else
 	#ifndef HR
 	#define HR( x )								\
 	{											\
-		HRESULT hr = (x);						\
-		if(FAILED(hr)){LOG_CALL;}				\
+		HRESULT ___hr = (x);						\
+		if(FAILED(___hr)){LOG_CALL;}				\
 	}	
 	#endif
 #endif

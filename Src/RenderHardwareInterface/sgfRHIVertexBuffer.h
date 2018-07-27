@@ -34,8 +34,6 @@ namespace sgf
 
 		}
 
-		virtual void		OnLostDevice() {}
-		virtual void		OnResetDevice() {}
 	};
 
 	typedef TRefCountPtr<RHIVertexBuffer>		RHIVertexBufferRef;

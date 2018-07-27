@@ -204,6 +204,7 @@ namespace sgf
 			MemCpy(m_string, rhs, nLen + 1);
 			_GetRep().m_nLength = nLen;
 		}
+		return *this;
 	}
 
 	//-------------------------------------------------------------------------

@@ -488,7 +488,7 @@ namespace sgf
 			{
 				for (int i = 0; i < a_nLen; ++i)
 				{
-					new(m_pData + a_nIdx + i) T(a_arr[T]);
+					new(m_pData + a_nIdx + i) T(a_arr[i]);
 				}
 			}
 			else

@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <iterator>
 #include <string.h>
 #include <new.h>
 #include <math.h>

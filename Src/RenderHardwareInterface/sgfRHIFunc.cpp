@@ -26,6 +26,8 @@ namespace sgf
 	_RHISetRasterizerState		RHISetRasterizerState = NULL;
 
 	_RHICreateBlendState		RHICreateBlendState = NULL;
+	_RHIGetBlendState			RHIGetBlendState = NULL;
+	_RHISetBlendState			RHISetBlendState = NULL;
 
 	_RHICreateDepthStencilState	RHICreateDepthStencilState = NULL;
 

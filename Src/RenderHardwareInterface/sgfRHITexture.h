@@ -15,8 +15,7 @@ namespace sgf
 {
 	struct RHITexture : public HardwareResource
 	{
-		virtual void	OnLostDevice() {}
-		virtual void	OnResetDevice() {}
+		
 	};
 
 	typedef TRefCountPtr<RHITexture>		RHITextureRef;

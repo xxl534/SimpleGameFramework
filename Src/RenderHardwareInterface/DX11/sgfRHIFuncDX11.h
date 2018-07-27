@@ -39,6 +39,8 @@ namespace sgf
 
 	//blend state
 	extern RHIBlendStateRef			RHICreateBlendStateDX11(const RHIBlendStateDesc& a_sDesc);
+	extern RHIBlendStateRef			RHIGetBlendStateDX11();
+	extern void						RHISetBlendStateDX11(const RHIBlendStateRef& a_refBlend);
 
 	//depth stencil state
 	extern RHIDepthStencilStateRef	RHICreateDepthStencilStateDX11(const RHIDepthStencilStateDesc& a_sDesc);

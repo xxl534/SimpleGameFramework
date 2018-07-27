@@ -200,6 +200,13 @@ namespace sgf
 	typedef TStringBase<wchar>	WString;
 
 	typedef CString				String;
-}
 
+
+	class StringHelper
+	{
+	public:
+		static WString		Utf8ToUtf16(const CString& a_szUtf8);
+		static WString		AnsiToUtf16(const CString& a_szAnsi);
+	};
+}
 #include "sgfString.inl"

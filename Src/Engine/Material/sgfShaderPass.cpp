@@ -20,9 +20,9 @@ namespace sgf
 	{
 		GetXmlAttribute(a_pNode, Serialization::k_ShaderEffectQueue.c_str(), m_nRenderQueue);
 
-		_LoadRasterizerState(a_pNode->first_node( Serialization::k_Rasterizer.c_str() );
-		_LoadBlendState(a_pNode->first_node( Serialization::k_Blend.c_str());
-		_LoadDepthStencilState(a_pNode->first_node( Serialization::k_DepthStencil.c_str());
+		_LoadRasterizerState(a_pNode->first_node(Serialization::k_Rasterizer.c_str()));
+		_LoadBlendState(a_pNode->first_node(Serialization::k_Blend.c_str()));
+		_LoadDepthStencilState(a_pNode->first_node(Serialization::k_DepthStencil.c_str()));
 
 		String szDeviceName = RHIDevice::Get()->GetName();
 		_LoadTechs(a_pNode->first_node( szDeviceName.c_str()));
@@ -75,7 +75,7 @@ namespace sgf
 		if (a_pNode)
 		{
 			RHIBlendStateDesc sDesc;
-			GetXmlAttribute(a_pNode, Serialization::k_BlendAlphaToCoverage.c_str(), sDesc.m_nAlphaToCoverageEnbale);
+			GetXmlAttribute(a_pNode, Serialization::k_BlendAlphaToCoverage.c_str(), sDesc.m_nAlphaToCoverageEnable);
 			GetXmlAttribute(a_pNode, Serialization::k_BlendIndependent.c_str(), sDesc.m_nIndependentBlendEnable);
 			if (sDesc.m_nIndependentBlendEnable)
 			{
@@ -157,7 +157,7 @@ namespace sgf
 			TArray<RHIShader::Macro> arrSkinningMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechSkinning);
 			TArray<RHIShader::Macro> arrLightmapMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechLightmap);
 
-			m_arrShaderTech.clear;
+			m_arrShaderTech.clear();
 			m_arrShaderTech.resize(ETech_Count);
 			rapidxml::xml_node<char>* pShaderNode = a_pNode->first_node(Serialization::k_ShaderEffectShader.c_str());
 			if (pShaderNode)

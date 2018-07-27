@@ -31,8 +31,6 @@ namespace sgf
 		{
 		}
 
-		virtual void OnResetDevice() {}
-		virtual void OnLostDevice() {}
 	};
 
 	typedef	TRefCountPtr<RHIIndexBuffer> RHIIndexBufferRef;

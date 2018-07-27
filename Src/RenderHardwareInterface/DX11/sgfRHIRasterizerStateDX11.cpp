@@ -35,20 +35,6 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	void 
-		RHIRasterizerStateDX11::OnLostDevice()
-	{
-		
-	}
-
-	//-------------------------------------------------------------------------
-	void 
-		RHIRasterizerStateDX11::OnResetDevice()
-	{
-		
-	}
-
-	//-------------------------------------------------------------------------
-	void 
 		RHIRasterizerStateDX11::Setup()
 	{
 		DX11_pDeviceContext->RSSetState(m_pDX11State);

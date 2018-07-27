@@ -42,6 +42,8 @@ namespace sgf
 
 	//blend state
 	typedef RHIBlendStateRef		(*_RHICreateBlendState)(const RHIBlendStateDesc& a_sDesc);
+	typedef RHIBlendStateRef		(*_RHIGetBlendState)();
+	typedef void					(*_RHISetBlendState)(const RHIBlendStateRef& a_refBlend);
 
 	//depth stencil state
 	typedef RHIDepthStencilStateRef	(*_RHICreateDepthStencilState)(const RHIDepthStencilStateDesc& a_sDesc);
@@ -72,6 +74,8 @@ namespace sgf
 	extern _RHISetRasterizerState		RHISetRasterizerState;
 
 	extern _RHICreateBlendState			RHICreateBlendState;
+	extern _RHIGetBlendState			RHIGetBlendState;
+	extern _RHISetBlendState			RHISetBlendState;
 
 	extern _RHICreateDepthStencilState	RHICreateDepthStencilState;
 

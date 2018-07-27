@@ -18,9 +18,6 @@ namespace sgf
 	public:
 		RHIVertexInputDX11(const RHIVertexInputDesc& a_desc);
 
-		virtual void		OnLostDevice();
-		virtual void		OnResetDevice();
-
 		static void			Init();
 		static void			Exit();
 		static void			Tick();

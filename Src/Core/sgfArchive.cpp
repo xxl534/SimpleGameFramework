@@ -311,7 +311,7 @@ namespace sgf
 				Delete(a_szPath + "/" + arrFile[i]);
 			}
 
-			if (rmdir(szWritePath.c_str()) == 0)
+			if (_rmdir(szWritePath.c_str()) == 0)
 			{
 				return true;
 			}
@@ -337,7 +337,7 @@ namespace sgf
 	bool 
 		Archive::IsRelative(const String& a_szFile)
 	{
-		if (!a_szFile.length() > 1)
+		if (a_szFile.length() > 1)
 		{
 			String szSub = a_szFile.subString(1);
 			if (szSub.beginsWith(":/") || szSub.beginsWith(":\\"))

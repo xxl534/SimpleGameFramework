@@ -26,8 +26,8 @@ namespace sgf
 		virtual void						SetTextureResource(int32 a_nIdx, const RHITextureRef& a_refTex) = 0;
 		virtual void						SetTextureSampler(int32 a_nIdx, ERHISamplerFilter a_eFilter, ERHIClampMode a_eClampU, ERHIClampMode a_eClampV, ERHIClampMode a_eClampW) = 0;
 
-		virtual void						InitTextureMap(MaterialTextures* a_pTextures) = 0;
-		virtual void						UpdateTextureMap(MaterialTextures* a_pTextures) = 0;
+		/*virtual void						InitTextureMap(MaterialTextures* a_pTextures) = 0;
+		virtual void						UpdateTextureMap(MaterialTextures* a_pTextures) = 0;*/
 	};
 
 	typedef TRefCountPtr<RHIShaderTextures> RHIShaderTexturesRef;

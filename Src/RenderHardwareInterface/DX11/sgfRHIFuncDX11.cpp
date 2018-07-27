@@ -29,6 +29,8 @@ namespace sgf
 		RHISetRasterizerState = RHISetRasterizerStateDX11;
 
 		RHICreateBlendState = RHICreateBlendStateDX11;
+		RHIGetBlendState = RHIGetBlendStateDX11;
+		RHISetBlendState = RHISetBlendStateDX11;
 
 		RHICreateDepthStencilState = RHICreateDepthStencilStateDX11;
 
