@@ -30,6 +30,8 @@ namespace sgf
 	_RHISetBlendState			RHISetBlendState = NULL;
 
 	_RHICreateDepthStencilState	RHICreateDepthStencilState = NULL;
+	_RHIGetDepthStencilState	RHIGetDepthStencilState = NULL;
+	_RHISetDepthStencilState	RHISetDepthStencilState = NULL;
 
 	_RHICreateShader			RHICreateShader = NULL;
 }

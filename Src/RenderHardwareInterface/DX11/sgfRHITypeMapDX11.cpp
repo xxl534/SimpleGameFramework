@@ -1,3 +1,4 @@
+#include "sgfRHIPCH.h"
 #include "sgfRHIDX11Private.h"
 #include "sgfRHITypeMapDX11.h"
 
@@ -44,5 +45,29 @@ namespace sgf
 		D3D11_BLEND_OP_REV_SUBTRACT,
 		D3D11_BLEND_OP_MIN,
 		D3D11_BLEND_OP_MAX
+	};
+
+	//-------------------------------------------------------------------------
+	D3D11_COMPARISON_FUNC	DX11_arrComparisonFunc[ERHIComparisonFunc_Count] = {
+		D3D11_COMPARISON_NEVER,
+		D3D11_COMPARISON_LESS,
+		D3D11_COMPARISON_EQUAL,
+		D3D11_COMPARISON_LESS_EQUAL,
+		D3D11_COMPARISON_GREATER,
+		D3D11_COMPARISON_NOT_EQUAL,
+		D3D11_COMPARISON_GREATER_EQUAL,
+		D3D11_COMPARISON_ALWAYS
+	};
+
+	//-------------------------------------------------------------------------
+	D3D11_STENCIL_OP DX11_arrStencilOp[ERHIStencilFunc_Count] = {
+		D3D11_STENCIL_OP_KEEP,
+		D3D11_STENCIL_OP_ZERO,
+		D3D11_STENCIL_OP_REPLACE,
+		D3D11_STENCIL_OP_INCR_SAT,
+		D3D11_STENCIL_OP_DECR_SAT,
+		D3D11_STENCIL_OP_INVERT,
+		D3D11_STENCIL_OP_INCR,
+		D3D11_STENCIL_OP_DECR
 	};
 }

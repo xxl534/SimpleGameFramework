@@ -18,7 +18,8 @@ namespace sgf
 	inline ERHIShaderConstantType	RHIFromDX11_FormatType(DXGI_FORMAT a_eFormat);
 	inline D3D11_BLEND				RHIToDX11_Blend(ERHIBlend a_eBlend);
 	inline D3D11_BLEND_OP			RHIToDX11_BlendOp(ERHIBlendFunc a_eFunc);
-
+	inline D3D11_COMPARISON_FUNC	RHIToDX11_ComparisonFunc(ERHIComparisonFunc a_eFunc);
+	inline D3D11_STENCIL_OP			RHIToDX11_StencilOp(ERHIStencilFunc a_eFunc);
 
 	//-------------------------------------------------------------------------
 	extern D3D11_FILL_MODE DX11_arrFillMode[ERHIFillMode_Count];
@@ -91,6 +92,22 @@ namespace sgf
 		return DX11_arrBlendFunc[a_eFunc];
 	}
 
+	//-------------------------------------------------------------------------
+	extern D3D11_COMPARISON_FUNC DX11_arrComparisonFunc[ERHIComparisonFunc_Count];
+	D3D11_COMPARISON_FUNC 
+		RHIToDX11_ComparisonFunc(ERHIComparisonFunc a_eFunc)
+	{
+		assert(a_eFunc > ERHIComparisonFunc_Invalid && a_eFunc < ERHIComparisonFunc_Count);
+		return DX11_arrComparisonFunc[a_eFunc];
+	}
 
+	//-------------------------------------------------------------------------
+	extern D3D11_STENCIL_OP DX11_arrStencilOp[ERHIStencilFunc_Count];
+	D3D11_STENCIL_OP
+		RHIToDX11_StencilOp(ERHIStencilFunc a_eFunc)
+	{
+		assert(a_eFunc > ERHIStencilFunc_Invalid && a_eFunc < ERHIStencilFunc_Count);
+		return DX11_arrStencilOp[a_eFunc];
+	}
 
 }

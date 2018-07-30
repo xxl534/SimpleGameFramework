@@ -1,3 +1,4 @@
+#include "sgfRHIPCH.h"
 #include "sgfRHIDX11Private.h"
 #include "sgfRHIBlendStateDX11.h"
 

@@ -47,6 +47,8 @@ namespace sgf
 
 	//depth stencil state
 	typedef RHIDepthStencilStateRef	(*_RHICreateDepthStencilState)(const RHIDepthStencilStateDesc& a_sDesc);
+	typedef RHIDepthStencilStateRef	(*_RHIGetDepthStencilState)();
+	typedef void					(*_RHISetDepthStencilState)(const RHIDepthStencilStateRef& a_refState);
 
 	//shader
 	typedef RHIShaderRef			(*_RHICreateShader)(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro);
@@ -78,6 +80,8 @@ namespace sgf
 	extern _RHISetBlendState			RHISetBlendState;
 
 	extern _RHICreateDepthStencilState	RHICreateDepthStencilState;
+	extern _RHIGetDepthStencilState		RHIGetDepthStencilState;
+	extern _RHISetDepthStencilState		RHISetDepthStencilState;
 
 	extern _RHICreateShader				RHICreateShader;
 }
