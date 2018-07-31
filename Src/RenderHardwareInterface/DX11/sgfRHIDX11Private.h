@@ -12,6 +12,7 @@
 *********************************************************************/
 #include <d3d11.h>
 #include <dxgi.h>
+#include <Initguid.h>
 #include <d3dcompiler.h>
 
 #include "sgfRHIDeviceDX11.h"

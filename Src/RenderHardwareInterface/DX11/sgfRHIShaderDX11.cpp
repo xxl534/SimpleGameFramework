@@ -1,6 +1,5 @@
 #include "sgfRHIPCH.h"
 #include "sgfRHIDX11Private.h"
-#include <d3d11shader.h>
 #include "sgfRHIShaderDX11.h"
 
 
