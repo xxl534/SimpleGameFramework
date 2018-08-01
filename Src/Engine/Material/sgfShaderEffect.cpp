@@ -61,14 +61,14 @@ namespace sgf
 		m_arrShaderPropDecl.clear();
 		for (int32 i = 0; i < m_arrShaderTexDecl.size(); ++i)
 		{
-			SAFE_FREE(m_arrShaderPropDecl[i]);
+			SAFE_FREE(m_arrShaderTexDecl[i]);
 		}
-		m_arrShaderPropDecl.clear();
+		m_arrShaderTexDecl.clear();
 		for (int32 i = 0; i < m_arrShaderPass.size(); ++i)
 		{
-			SAFE_FREE(m_arrShaderPropDecl[i]);
+			SAFE_FREE(m_arrShaderPass[i]);
 		}
-		m_arrShaderPropDecl.clear();
+		m_arrShaderPass.clear();
 	}
 
 	//-------------------------------------------------------------------------
@@ -197,7 +197,6 @@ namespace sgf
 	//-------------------------------------------------------------------------
 	bool ShaderEffect::_Load(const String& a_szName)
 	{
-		//todo fileReader
 		DataReader* pReader = FileReader::OpenReadFile(a_szName);
 		bool bRet = false;
 		if (pReader)
@@ -213,6 +212,11 @@ namespace sgf
 				_LoadTexDecl(pEffectNode);
 				_LoadPass(pEffectNode);
 				_LoadEffectInfo(pEffectNode);
+				bRet = true;
+			}
+			else
+			{
+				bRet = false;
 			}
 		}
 		SAFE_DELETE(pReader);

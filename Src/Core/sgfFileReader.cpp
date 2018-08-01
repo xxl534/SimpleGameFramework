@@ -126,6 +126,11 @@ namespace sgf
 
 		String szPath = Archive::GetWriteFullPath(a_szFile);
 		FILE* pFile = fopen(szPath.c_str(), "rb");
+		/*TCHAR szCurrWorkPath[MAX_PATH];
+		memset(szCurrWorkPath, 0, sizeof(TCHAR)*MAX_PATH);
+		GetCurrentDirectory(MAX_PATH, szCurrWorkPath);
+		Archive::IsFileExist(szPath);
+		const char* pMsg = strerror(errno);*/
 		if (!pFile)
 		{
 			szPath = Archive::GetReadFullPath(a_szFile);

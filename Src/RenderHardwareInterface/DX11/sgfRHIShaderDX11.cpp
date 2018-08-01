@@ -101,7 +101,8 @@ namespace sgf
 	TArray<D3D_SHADER_MACRO,false,false> 
 		_GetDX11Marco(const TArray<RHIShader::Macro>& a_arrMacro)
 	{
-		TArray<D3D_SHADER_MACRO, false, false> arrDXMacro(a_arrMacro.size() + 1);
+		TArray<D3D_SHADER_MACRO, false, false> arrDXMacro;
+		arrDXMacro.resize(a_arrMacro.size() + 1);
 		for (int32 i = 0; i < a_arrMacro.size(); ++i)
 		{
 			arrDXMacro[i].Name = a_arrMacro[i].a_szKey.c_str();
@@ -310,7 +311,8 @@ namespace sgf
 	void 
 		RHIShaderDX11::_InitUniform()
 	{
-
+		_InitShaderUniform(m_pVertexShader);
+		_InitShaderUniform(m_pPixelShader);
 	}
 
 	void RHIShaderDX11::_InitShaderUniform(void* a_pShader)

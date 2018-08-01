@@ -113,6 +113,10 @@ namespace sgf
 			m_string = Rep::Create(nLen)->getData();
 			MemCpy(m_string, a_str, nLen+1);
 		}
+		else
+		{
+			m_string = _GetEmptyStringRep().refCopy();
+		}
 	}
 
 	//-------------------------------------------------------------------------

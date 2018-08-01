@@ -25,7 +25,7 @@ namespace sgf
 		};
 		friend class Material;
 	public:
-		int32							GetCount();
+		inline int32							GetCount();
 		int32							GetIndex(const String& a_szName);
 		const String&					GetName(int32 a_nIdx);
 		ERHIShaderConstantType			GetType(int32 a_nIdx);
@@ -182,13 +182,13 @@ namespace sgf
 			
 		}
 
-		Material*&			operator[](int a_nIdx);
-		const Material*		operator[](int a_nIdx) const;
+		inline Material*&			operator[](int a_nIdx);
+		inline const Material*		operator[](int a_nIdx) const;
 
-		void				push_back(Material* a_pMaterial);
-		int32				size() const;
-		void				clear();
-		void				erase(int a_nIdx);
+		inline void				push_back(Material* a_pMaterial);
+		inline int32				size() const;
+		inline void				clear();
+		inline void				erase(int a_nIdx);
 	private:
 		TArray<Material*>	m_arrMaterials;
 	};

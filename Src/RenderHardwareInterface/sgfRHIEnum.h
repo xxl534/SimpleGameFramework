@@ -120,8 +120,8 @@ namespace sgf
 		ERHIFillMode_Solid,
 		ERHIFillMode_Count,
 	};
-	extern String					RHIFillModeToString(ERHIFillMode eMode);
-	extern ERHIFillMode				RHIStringToFillMode(const String& szType, ERHIFillMode eDefault = ERHIFillMode_Invalid);
+	extern String					RHIFillModeToString(ERHIFillMode a_eMode);
+	extern ERHIFillMode				RHIStringToFillMode(const String& a_szType, ERHIFillMode a_eDefault = ERHIFillMode_Invalid);
 
 	//------------------------------------------------------------------------
 	enum ERHICullMode
@@ -132,8 +132,8 @@ namespace sgf
 		ERHICullMode_None,
 		ERHICullMode_Count,
 	};
-	extern String					RHICullModeToString(ERHICullMode eMode);
-	extern ERHICullMode				RHIStringToCullMode(const String& szType, ERHICullMode eDefault = ERHICullMode_Invalid);
+	extern String					RHICullModeToString(ERHICullMode a_eMode);
+	extern ERHICullMode				RHIStringToCullMode(const String& a_szType, ERHICullMode a_eDefault = ERHICullMode_Invalid);
 
 	//-------------------------------------------------------------------------
 	enum ERHIBlend
@@ -158,8 +158,8 @@ namespace sgf
 		ERHIBlend_InvSrc1Alpha,
 		ERHIBlend_Count,
 	};
-	extern String					RHIBlendToString(ERHIBlend eBlend);
-	extern ERHIBlend				RHIStringToBlend(const String& szBlend, ERHIBlend eDefault = ERHIBlend_Invalid);
+	extern String					RHIBlendToString(ERHIBlend a_eBlend);
+	extern ERHIBlend				RHIStringToBlend(const String& a_szBlend, ERHIBlend a_eDefault = ERHIBlend_Invalid);
 
 	//-------------------------------------------------------------------------
 	enum ERHIBlendFunc
@@ -172,8 +172,8 @@ namespace sgf
 		ERHIBlendFunc_Max,
 		ERHIBlendFunc_Count,
 	};
-	extern String					RHIBlendFuncToString(ERHIBlendFunc eFunc);
-	extern ERHIBlendFunc			RHIStringToBlendFunc(const String& szFunc, ERHIBlendFunc eDefault = ERHIBlendFunc_Invalid);
+	extern String					RHIBlendFuncToString(ERHIBlendFunc a_eFunc);
+	extern ERHIBlendFunc			RHIStringToBlendFunc(const String& a_szFunc, ERHIBlendFunc a_eDefault = ERHIBlendFunc_Invalid);
 
 	//-------------------------------------------------------------------------
 	enum ERHIComparisonFunc
@@ -189,8 +189,8 @@ namespace sgf
 		ERHIComparisonFunc_Always,
 		ERHIComparisonFunc_Count,
 	};
-	extern String					RHIComparisonFuncToString(ERHIComparisonFunc eFunc);
-	extern ERHIComparisonFunc		RHIStringToComparisonFunc(const String& szFunc, ERHIComparisonFunc eDefault = ERHIComparisonFunc_Invalid);
+	extern String					RHIComparisonFuncToString(ERHIComparisonFunc a_eFunc);
+	extern ERHIComparisonFunc		RHIStringToComparisonFunc(const String& a_szFunc, ERHIComparisonFunc a_eDefault = ERHIComparisonFunc_Invalid);
 
 	//-------------------------------------------------------------------------
 	enum ERHIStencilFunc
@@ -206,8 +206,8 @@ namespace sgf
 		ERHIStencilFunc_Decr,
 		ERHIStencilFunc_Count,
 	};
-	extern String					RHIStencilFuncToString(ERHIStencilFunc eFunc);
-	extern ERHIStencilFunc			RHIStringToStencilFunc(const String& szFunc, ERHIStencilFunc eDefault = ERHIStencilFunc_Invalid);
+	extern String					RHIStencilFuncToString(ERHIStencilFunc a_eFunc);
+	extern ERHIStencilFunc			RHIStringToStencilFunc(const String& a_szFunc, ERHIStencilFunc a_eDefault = ERHIStencilFunc_Invalid);
 
 	//-------------------------------------------------------------------------
 	enum ERHIColorWriteEnable

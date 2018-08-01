@@ -28,17 +28,17 @@ namespace sgf
 		static bool		ReadMatrix3Array(const char* a_szSrc, float* a_pData, int32 a_nCount);
 		static bool		ReadMatrix4Array(const char* a_szSrc, float* a_pData, int32 a_nCount);
 
-		static bool		ReadFloatArray( String& a_szBuffer, const float* a_pData, int32 a_nCount);
-		static bool		ReadFloat2Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
-		static bool		ReadFloat3Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
-		static bool		ReadFloat4Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
-		static bool		ReadIntArray(String& a_szBuffer, const int32* a_pData, int32 a_nCount);
-		static bool		ReadInt2Array(String& a_szBuffer, const int32* a_pData, int32 a_nCount);
-		static bool		ReadInt3Array(String& a_szBuffer, const int32* a_pData, int32 a_nCount);
-		static bool		ReadInt4Array(String& a_szBuffer, const int32* a_pData, int32 a_nCount);
-		static bool		ReadMatrix2Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
-		static bool		ReadMatrix3Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
-		static bool		ReadMatrix4Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
+		static void		WriteFloatArray( String& a_szBuffer, const float* a_pData, int32 a_nCount);
+		static void		WriteFloat2Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
+		static void		WriteFloat3Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
+		static void		WriteFloat4Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
+		static void		WriteIntArray(String& a_szBuffer, const int32* a_pData, int32 a_nCount);
+		static void		WriteInt2Array(String& a_szBuffer, const int32* a_pData, int32 a_nCount);
+		static void		WriteInt3Array(String& a_szBuffer, const int32* a_pData, int32 a_nCount);
+		static void		WriteInt4Array(String& a_szBuffer, const int32* a_pData, int32 a_nCount);
+		static void		WriteMatrix2Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
+		static void		WriteMatrix3Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
+		static void		WriteMatrix4Array(String& a_szBuffer, const float* a_pData, int32 a_nCount);
 
 		static int32		GetTypeAlignSize(int32 a_nSize, int32 a_nAlignment = 4);
 		static int32		GetStringAlignSize(const String& a_szStr, int32 a_nAlignment = 4);

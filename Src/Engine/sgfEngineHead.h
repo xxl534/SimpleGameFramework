@@ -19,5 +19,7 @@
 
 #include "Game/sgfGameWorld.h"
 
+#include "Material/sgfMaterial.h"
+
 //#include "Render/RHI/sgfRHIViewport.h"
 #include "Render/sgfRenderWindow.h"

@@ -165,4 +165,226 @@ namespace sgf
 		return ERHIClampMode_Invalid;
 	}
 
+	//-------------------------------------------------------------------------
+	static const String s_arrFillModeMap[ERHIFillMode_Count] =
+	{
+		"wireframe",
+		"solid",
+	};
+
+	//-------------------------------------------------------------------------
+	String
+		RHIFillModeToString(ERHIFillMode a_eMode)
+	{
+		if (a_eMode > ERHIFillMode_Invalid&&a_eMode < ERHIFillMode_Count)
+		{
+			return s_arrFillModeMap[a_eMode];
+		}
+		return s_szInvalid;
+	}
+
+	//-------------------------------------------------------------------------
+	ERHIFillMode
+		RHIStringToFillMode(const String& a_szType, ERHIFillMode a_eDefault)
+	{
+		for (int32 i = 0; i < ERHIFillMode_Count; i++)
+		{
+			if (a_szType == s_arrFillModeMap[i])
+			{
+				return (ERHIFillMode)i;
+			}
+		}
+		return a_eDefault;
+	}
+
+	//-------------------------------------------------------------------------
+	static const String s_arrCullModeMap[ERHICullMode_Count] =
+	{
+		"front",
+		"back",
+		"none",
+	};
+
+	//-------------------------------------------------------------------------
+	String
+		RHICullModeToString(ERHICullMode a_eMode)
+	{
+		if (a_eMode > ERHICullMode_Invalid&&a_eMode < ERHICullMode_Count)
+		{
+			return s_arrCullModeMap[a_eMode];
+		}
+		return s_szInvalid;
+	}
+
+	//-------------------------------------------------------------------------
+	ERHICullMode
+		RHIStringToCullMode(const String& a_szType, ERHICullMode a_eDefault)
+	{
+		for (int32 i = 0; i < ERHICullMode_Count; i++)
+		{
+			if (a_szType == s_arrCullModeMap[i])
+			{
+				return (ERHICullMode)i;
+			}
+		}
+		return a_eDefault;
+	}
+
+	//-------------------------------------------------------------------------
+	static const String s_arrBlendMap[ERHIBlend_Count] =
+	{
+		"zero",
+		"one",
+		"src_color",
+		"inv_src_color",
+		"src_alpha",
+		"inv_src_alpha",
+		"dest_alpha",
+		"inv_dest_alpha",
+		"dest_color",
+		"inv_dest_color",
+		"src_alpha_sat",
+		"blend_factor",
+		"inv_blend_factor",
+		"src1_color",
+		"inv_src1_color",
+		"src1_alpha",
+		"inv_src1_alpha",
+	};
+
+	//-------------------------------------------------------------------------
+	String
+		RHIBlendToString(ERHIBlend a_eBlend)
+	{
+		if (a_eBlend > ERHIBlend_Invalid&&a_eBlend < ERHIBlend_Count)
+		{
+			return s_arrBlendMap[a_eBlend];
+		}
+		return s_szInvalid;
+	}
+
+	//-------------------------------------------------------------------------
+	ERHIBlend
+		RHIStringToBlend(const String& szBlend, ERHIBlend a_eDefault)
+	{
+		for (int32 i = 0; i < ERHIBlend_Count; i++)
+		{
+			if (szBlend == s_arrBlendMap[i])
+			{
+				return (ERHIBlend)i;
+			}
+		}
+		return a_eDefault;
+	}
+
+	//-------------------------------------------------------------------------
+	static const String s_arrBlendFuncMap[ERHIBlendFunc_Count] =
+	{
+		"add",
+		"sub",
+		"rev_sub",
+		"min",
+		"max",
+	};
+
+	//-------------------------------------------------------------------------
+	String
+		RHIBlendFuncToString(ERHIBlendFunc a_eFunc)
+	{
+		if (a_eFunc > ERHIBlendFunc_Invalid&&a_eFunc < ERHIBlendFunc_Count)
+		{
+			return s_arrBlendFuncMap[a_eFunc];
+		}
+		return s_szInvalid;
+	}
+
+	//-------------------------------------------------------------------------
+	ERHIBlendFunc
+		RHIStringToBlendFunc(const String& a_szFunc, ERHIBlendFunc a_eDefault)
+	{
+		for (int32 i = 0; i < ERHIBlendFunc_Count; i++)
+		{
+			if (a_szFunc == s_arrBlendFuncMap[i])
+			{
+				return (ERHIBlendFunc)i;
+			}
+		}
+		return a_eDefault;
+	}
+
+	//-------------------------------------------------------------------------
+	static const String s_arrComparisonFuncMap[ERHIComparisonFunc_Count] =
+	{
+		"never",
+		"less",
+		"equal",
+		"l_equal",
+		"greater",
+		"not_equal",
+		"g_equal",
+		"always",
+	};
+
+	//-------------------------------------------------------------------------
+	String
+		RHIComparisonFuncToString(ERHIComparisonFunc a_eFunc)
+	{
+		if (a_eFunc > ERHIComparisonFunc_Invalid&&a_eFunc < ERHIComparisonFunc_Count)
+		{
+			return s_arrComparisonFuncMap[a_eFunc];
+		}
+		return s_szInvalid;
+	}
+
+	//-------------------------------------------------------------------------
+	ERHIComparisonFunc
+		RHIStringToComparisonFunc(const String& a_szFunc, ERHIComparisonFunc a_eDefault)
+	{
+		for (int32 i = 0; i < ERHIComparisonFunc_Count; i++)
+		{
+			if (a_szFunc == s_arrComparisonFuncMap[i])
+			{
+				return (ERHIComparisonFunc)i;
+			}
+		}
+		return a_eDefault;
+	}
+
+	//-------------------------------------------------------------------------
+	const String s_arrStencilFuncMap[ERHIStencilFunc_Count] =
+	{
+		"keep",
+		"zero",
+		"replace",
+		"incr_sat",
+		"decr_sat",
+		"invert",
+		"incr",
+		"decr",
+	};
+
+	//-------------------------------------------------------------------------
+	String
+		RHIStencilFuncToString(ERHIStencilFunc a_eFunc)
+	{
+		if (a_eFunc > ERHIStencilFunc_Invalid&&a_eFunc < ERHIStencilFunc_Count)
+		{
+			return s_arrStencilFuncMap[a_eFunc];
+		}
+		return s_szInvalid;
+	}
+
+	//-------------------------------------------------------------------------
+	ERHIStencilFunc
+		RHIStringToStencilFunc(const String& a_szFunc, ERHIStencilFunc a_eDefault)
+	{
+		for (int32 i = 0; i < ERHIStencilFunc_Count; i++)
+		{
+			if (a_szFunc == s_arrStencilFuncMap[i])
+			{
+				return (ERHIStencilFunc)i;
+			}
+		}
+		return a_eDefault;
+	}
 }
