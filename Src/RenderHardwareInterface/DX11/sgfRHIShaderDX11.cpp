@@ -341,7 +341,9 @@ namespace sgf
 
 					RHIShaderConstantDecl decl;
 					decl.m_szName = sVarDesc.Name;
-					decl.m_nCount = sVarDesc.Size;
+					decl.m_nStride = sVarDesc.Size;
+					decl.m_nCount = sTypeDesc.Elements;
+					
 				}
 			}
 		}
