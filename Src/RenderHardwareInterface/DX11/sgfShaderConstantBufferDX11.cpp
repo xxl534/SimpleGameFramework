@@ -4,7 +4,7 @@
 
 namespace sgf
 {
-	ERHIShaderConstantType s_arrVectorType[D3D_SVT_FLOAT + 1][4] = {
+	ERHIShaderConstantType s_arrVectorType[4][D3D_SVT_FLOAT + 1] = {
 		{	
 			ERHIShaderConstantType_Invalid,
 			ERHIShaderConstantType_1b,
@@ -52,7 +52,7 @@ namespace sgf
 		{
 			if (a_sDesc.Type > D3D_SVT_VOID && a_sDesc.Type <= D3D_SVT_FLOAT && a_sDesc.Rows > 0 && a_sDesc.Rows <= 4 )
 			{
-				return s_arrVectorType[a_sDesc.Type][a_sDesc.Rows - 1];
+				return s_arrVectorType[a_sDesc.Rows - 1][a_sDesc.Type];
 			 }
 		}
 		else if( a_sDesc.Class == D3D_SVC_MATRIX_COLUMNS )

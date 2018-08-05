@@ -107,6 +107,63 @@ namespace sgf
 		TVector4<T>		operator/(float a_f) const;
 		float			dot(const TVector4<T>& a_rhs) const;
 	};
+
+	struct Vector3f : public TVector3<float>
+	{
+		Vector3f()
+		{
+
+		}
+
+		Vector3f(const TVector3<float>& a_v)
+			:TVector3<float>(a_v)
+		{
+
+		}
+
+		Vector3f(float a_f)
+		{
+			x = a_f;
+			y = a_f;
+			z = a_f;
+		}
+		Vector3f(float a_fx, float a_fy, float a_fz)
+		{
+			x = a_fx;
+			y = a_fy;
+			z = a_fz;
+		}
+
+		Vector3f(const float* a_p)
+		{
+			x = a_p[0];
+			y = a_p[1];
+			z = a_p[2];
+		}
+
+		inline Vector3f&		Lerp(const Vector3f& a_v, float a_fFactor);
+		inline Vector3f			GetLerp(const Vector3f& a_v, float a_fFactor) const;
+		inline Vector3f&		Abs();
+		inline Vector3f			GetAbs() const;
+		inline Vector3f&		Normalize();
+		inline Vector3f			GetNormalize() const;
+		inline float			Length();
+		inline float			LengthSqr();
+		inline void				FindBestAxisVectors(Vector3f& a_vAxis1, Vector3f& a_vAxis2);
+		inline Vector3f&		Set(float a_fx, float a_fy, float a_fz);
+
+		// Rotates the vector by a specified number of a_fDegrees around the X axis and the specified a_vecCenter
+		inline void			RotateYZBy(float a_fDegrees, const Vector3f& a_vecCenter = Vector3f(0.f, 0.f, 0.f));
+		// Rotates the vector by a specified number of a_fDegrees around the Y axis and the specified a_vecCenter
+		inline void			RotateXZBy(float a_fDegrees, const Vector3f& a_vecCenter = Vector3f(0.f, 0.f, 0.f));
+		// Rotates the vector by a specified number of a_fDegrees around the Z axis and the specified a_vecCenter
+		inline void			RotateXYBy(float a_fDegrees, const Vector3f& a_vecCenter = Vector3f(0.f, 0.f, 0.f));
+
+		inline static const Vector3f&	Zero();
+	private:
+		static Vector3f			ms_vZero;
+	};
+
 }
 
 #include "sgfVector.inl"

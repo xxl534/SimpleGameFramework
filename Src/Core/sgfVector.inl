@@ -1,4 +1,3 @@
-#include "sgfVector.h"
 namespace sgf
 {
 	//-------------------------------------------------------------------------
@@ -422,5 +421,164 @@ namespace sgf
 		TVector4<T>::dot(const TVector4<T>& a_rhs) const
 	{
 		return x * a_rhs.x + y * a_rhs.y + z * a_rhs.z + w * a_rhs.w;
+	}
+
+	//----------------------------------------
+	//////////////////////////////////////////
+	//Vector3f
+	//////////////////////////////////////////
+	//----------------------------------------
+	Vector3f& 
+		Vector3f::Lerp(const Vector3f& a_v, float a_fFactor)
+	{
+		float fNegFactor = 1 - a_fFactor;
+		x = fNegFactor * x + a_fFactor * a_v.x;
+		y = fNegFactor * y + a_fFactor * a_v.y;
+		z = fNegFactor * z + a_fFactor * a_v.z;
+		return *this;
+	}
+
+	//----------------------------------------
+	Vector3f 
+		Vector3f::GetLerp(const Vector3f& a_v, float a_fFactor) const
+	{
+		Vector3f vTmp(*this);
+		vTmp.Lerp(a_v, a_fFactor);
+		return vTmp;
+	}
+
+	//----------------------------------------
+	Vector3f& 
+		Vector3f::Abs()
+	{
+		x = MathAbs(x);
+		y = MathAbs(y);
+		z = MathAbs(z);
+	}
+
+	//----------------------------------------
+	Vector3f 
+		Vector3f::GetAbs() const
+	{
+		Vector3f vTmp(*this);
+		vTmp.Abs();
+		return vTmp;
+	}
+
+	//----------------------------------------
+	Vector3f& 
+		Vector3f::Normalize()
+	{
+		double dLenSqr = (double)(x * x) + (y * y) + (z * z);
+		if( dLenSqr > 0.0 )
+		{
+			float fLenRecp = 1.f / sqrt(dLenSqr);
+			x *= fLenRecp;
+			y *= fLenRecp;
+			z *= fLenRecp;
+		}
+		return *this;
+	}
+
+	//----------------------------------------
+	Vector3f 
+		Vector3f::GetNormalize() const
+	{
+		Vector3f vTmp(*this);
+		vTmp.Normalize();
+		return vTmp;
+	}
+
+	//----------------------------------------
+	float Vector3f::Length()
+	{
+		double dLenSqr = (double)(x * x) + (y * y) + (z * z);
+		return sqrt(dLenSqr);
+	}
+
+	//----------------------------------------
+	float 
+		Vector3f::LengthSqr()
+	{
+		return x*x + y*y + z*z;;
+	}
+
+	//----------------------------------------
+	void 
+		Vector3f::FindBestAxisVectors(Vector3f& a_vAxis1, Vector3f& a_vAxis2)
+	{
+		Normalize();
+		Vector3f vAbs = GetAbs();
+
+		if (vAbs.z > vAbs.x && vAbs.z > vAbs.y)
+		{
+			a_vAxis1 = Vector3f(1.f, 0.f, 0.f);
+		}
+		else
+		{
+			a_vAxis1 = Vector3f(0.f, 0.f, 1.f);
+		}
+
+		a_vAxis1 = (a_vAxis1 - *this * (a_vAxis1.dot(*this)));
+		a_vAxis1.Normalize();
+		a_vAxis2 = a_vAxis1.cross(*this);
+	}
+
+	//----------------------------------------
+	Vector3f& 
+		Vector3f::Set(float a_fx, float a_fy, float a_fz)
+	{
+		x = a_fx;
+		y = a_fy;
+		z = a_fz;
+	}
+
+	//----------------------------------------
+	void 
+		Vector3f::RotateYZBy(float a_fDegrees, const Vector3f& a_vecCenter /*= Vector3f(0.f, 0.f, 0.f)*/)
+	{
+		a_fDegrees *= kPIDivide180;
+		float cs = MathCosFloat(a_fDegrees);
+		float sn = MathSinFloat(a_fDegrees);
+		z -= a_vecCenter.z;
+		y -= a_vecCenter.y;
+		Set(x, y*cs - z*sn, y*sn + z*cs);
+		z += a_vecCenter.z;
+		y += a_vecCenter.y;
+	}
+
+	//----------------------------------------
+	void 
+		Vector3f::RotateXZBy(float a_fDegrees, const Vector3f& a_vecCenter /*= Vector3f(0.f, 0.f, 0.f)*/)
+	{
+		a_fDegrees *= kPIDivide180;
+		float cs = MathCosFloat(a_fDegrees);
+		float sn = MathSinFloat(a_fDegrees);
+		x -= a_vecCenter.x;
+		z -= a_vecCenter.z;
+		Set(x*cs - z*sn, y, x*sn + z*cs);
+		x += a_vecCenter.x;
+		z += a_vecCenter.z;
+	}
+
+	//----------------------------------------
+	void 
+		Vector3f::RotateXYBy(float a_fDegrees, const Vector3f& a_vecCenter /*= Vector3f(0.f, 0.f, 0.f)*/)
+	{
+		a_fDegrees *= kPIDivide180;
+		float cs = MathCosFloat(a_fDegrees);
+		float sn = MathSinFloat(a_fDegrees);
+		x -= a_vecCenter.x;
+		y -= a_vecCenter.y;
+		Set(x*cs - y*sn, x*sn + y*cs, z);
+		x += a_vecCenter.x;
+		y += a_vecCenter.y;
+	}
+
+	//----------------------------------------
+	const Vector3f& 
+		Vector3f::Zero()
+	{
+		return ms_vZero;
 	}
 }
