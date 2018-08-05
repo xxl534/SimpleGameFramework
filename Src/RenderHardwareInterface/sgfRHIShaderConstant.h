@@ -17,7 +17,7 @@ namespace sgf
 	{
 	public:
 		String					m_szName;
-		int32					m_nHandle;
+		int32					m_nHandle;		//dx11ÖÐÎªÆ«ÒÆÁ¿
 		ERHIShaderConstantType	m_eType;
 		int32					m_nStride;
 		int32					m_nCount;

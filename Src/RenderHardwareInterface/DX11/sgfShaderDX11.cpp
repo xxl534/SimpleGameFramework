@@ -1,6 +1,7 @@
 #include"sgfRHIPCH.h"
 #include"sgfRHIDX11Private.h"
 #include"sgfShaderDX11.h"
+#include "sgfShaderConstantBufferDX11.h"
 
 namespace sgf
 {
@@ -81,7 +82,10 @@ namespace sgf
 	//----------------------------------------
 	ShaderDX11::~ShaderDX11()
 	{
-
+		for (TArray<ShaderConstantBufferDX11*>::iterator it = m_arrConstantBuffer.begin(); it != m_arrConstantBuffer.end(); ++it)
+		{
+			SAFE_DELETE(*it);
+		}
 	}
 
 	//----------------------------------------
@@ -113,30 +117,9 @@ namespace sgf
 
 		for (UINT i = 0; i < sDesc.ConstantBuffers; ++i)
 		{
-			D3D11_SHADER_BUFFER_DESC sBufferDesc;
 			ID3D11ShaderReflectionConstantBuffer* pBuffer = a_pReflection->GetConstantBufferByIndex(i);
-			pBuffer->GetDesc(&sBufferDesc);
-
-			D3D11_SHADER_INPUT_BIND_DESC sBindDesc;
-			a_pReflection->GetResourceBindingDesc(i, &sBindDesc);
-
-			for (UINT j = 0; j < sBufferDesc.Variables; ++j)
-			{
-				ID3D11ShaderReflectionVariable* pVariable = pBuffer->GetVariableByIndex(j);
-				D3D11_SHADER_VARIABLE_DESC sVarDesc;
-				pVariable->GetDesc(&sVarDesc);
-
-				D3D11_SHADER_TYPE_DESC sTypeDesc;
-				ID3D11ShaderReflectionType* pType = pVariable->GetType();
-				pType->GetDesc(&sTypeDesc);
-
-				RHIShaderConstantDecl decl;
-				decl.m_szName = sVarDesc.Name;
-				decl.m_nStride = sVarDesc.Size;
-				decl.m_nCount = sTypeDesc.Rows * sTypeDesc.Columns * (sTypeDesc.Elements > 0 ? sTypeDesc.Elements : 1);
-				decl.m_eType = RHIFromDX11_VariableType(sTypeDesc.Type);
-			}
-
+			ShaderConstantBufferDX11* pConstantBuffer = new ShaderConstantBufferDX11(pBuffer);
+			m_arrConstantBuffer.push_back(pConstantBuffer);
 		}
 	}
 

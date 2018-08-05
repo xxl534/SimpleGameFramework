@@ -12,6 +12,7 @@
 
 namespace sgf
 {
+	class ShaderConstantBufferDX11;
 	class ShaderDX11 : public HardwareResource
 	{
 	protected:
@@ -33,6 +34,7 @@ namespace sgf
 		static TArray<D3D_SHADER_MACRO, false, false> _ToDx11Marco(const TArray<RHIEffect::Macro>& a_arrMacro);
 	protected:
 		TArray<AttributeDecl>	m_arrAttrDecl;
+		TArray<ShaderConstantBufferDX11*>	m_arrConstantBuffer;
 	};
 
 	typedef TRefCountPtr<ShaderDX11> ShaderDx11Ref;
