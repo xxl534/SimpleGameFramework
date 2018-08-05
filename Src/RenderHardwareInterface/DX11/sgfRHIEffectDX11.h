@@ -10,6 +10,7 @@
 	
 	purpose:	
 *********************************************************************/
+#include "sgfShaderDX11.h"
 
 namespace sgf
 {
@@ -47,5 +48,8 @@ namespace sgf
 		TArray<RHIShaderConstantDecl>	m_arrBuildinTextureDecl;
 		TArray<RHIShaderConstantDecl>	m_arrCustomConstantDecl;
 		TArray<RHIShaderConstantDecl>	m_arrCustomTextureDecl;
+
+		ShaderDx11Ref m_refVertexShader;
+		ShaderDx11Ref m_refPixelShader;
 	};
 }

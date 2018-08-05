@@ -9,31 +9,24 @@
 	
 	purpose:
 *************************************/
+#include "sgfShaderDX11.h"
 
 namespace sgf
 {
-	class RHIVertexShaderDX11
+	class VertexShaderDX11 : public ShaderDX11
 	{
-		struct AttributeDecl
-		{
-			String						m_szSemanticName;
-			UINT						m_nSemanticIndex;
-			ERHIShaderConstantType		m_eType;
-		};
 	public:
-		RHIVertexShaderDX11(const String& a_szVS, const TArray<RHIEffect::Macro>& a_arrMacro);
-		virtual ~RHIVertexShaderDX11();
+		VertexShaderDX11(const String& a_szVS, const TArray<RHIEffect::Macro>& a_arrMacro);
+		virtual ~VertexShaderDX11();
 
 		virtual void Setup(const RHIShaderConstantsRef& a_refCons, const RHIShaderTexturesRef& a_refTexs);
-
+	public:
+		static void	Exit();
 	private:
 		void	_Initialize(const String& a_szFile, const TArray<RHIEffect::Macro>& a_arrMacro);
-		void	_InitAttribute(ID3D11ShaderReflection* a_pReflection);
-		void	_InitUniform(ID3D11ShaderReflection* a_pReflection);
-
-		TArray<D3D_SHADER_MACRO, false, false> _ToDx11Marco(const TArray<RHIEffect::Macro>& a_arrMacro);
 	private:
 		ID3D11VertexShader*		m_pShader;
-		TArray<AttributeDecl>	m_arrAttrDecl;
 	};
+
+	extern ShaderDx11Ref CreateVertexShaderDX11(const String& a_szVS, const TArray<RHIEffect::Macro>& a_arrMacro);
 }

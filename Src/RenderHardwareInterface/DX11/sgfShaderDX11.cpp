@@ -1,9 +1,10 @@
-#include "sgfRHIPCH.h"
-#include "sgfRHIDX11Private.h"
-#include "sgfRHIVertexShaderDX11.h"
+#include"sgfRHIPCH.h"
+#include"sgfRHIDX11Private.h"
+#include"sgfShaderDX11.h"
 
 namespace sgf
 {
+
 	DXGI_FORMAT
 		_ParseInputParameterFormat(D3D11_SIGNATURE_PARAMETER_DESC& a_sDesc)
 	{
@@ -72,51 +73,20 @@ namespace sgf
 	}
 
 	//----------------------------------------
-	RHIVertexShaderDX11::RHIVertexShaderDX11(const String& a_szVS, const TArray<RHIEffect::Macro>& a_arrMacro)
-		:m_pShader(NULL)
-	{
-		_Initialize(a_szVS, a_arrMacro);
-	}
-
-	//----------------------------------------
-	RHIVertexShaderDX11::~RHIVertexShaderDX11()
-	{
-		SAFE_RELEASE(m_pShader);
-	}
-
-	//----------------------------------------
-	void 
-		RHIVertexShaderDX11::Setup(const RHIShaderConstantsRef& a_refCons, const RHIShaderTexturesRef& a_refTexs)
+	ShaderDX11::ShaderDX11()
 	{
 
 	}
 
 	//----------------------------------------
-	void 
-		RHIVertexShaderDX11::_Initialize(const String & a_szFile, const TArray<RHIEffect::Macro>& a_arrMacro)
+	ShaderDX11::~ShaderDX11()
 	{
-		TArray<D3D_SHADER_MACRO, false, false> arrDxMacro = _ToDx11Marco(a_arrMacro);
-		ID3D10Blob* sCompiledShader = NULL;
-		ID3D10Blob* sCompilationMsgs = NULL;
-		HRESULT hr = D3DCompileFromFile(StringHelper::Utf8ToUtf16(a_szFile).c_str(), arrDxMacro.begin(), NULL, "main", "vs_5_0", D3D10_SHADER_DEBUG | D3D10_SHADER_SKIP_OPTIMIZATION, NULL, &sCompiledShader, &sCompilationMsgs);
-		if (sCompilationMsgs != NULL)
-		{
-			MessageBox(0, (char*)sCompilationMsgs->GetBufferPointer(), 0, 0);
-			SAFE_RELEASE(sCompilationMsgs);
-		}
-		HR(hr);
-		HR(DX11_pDevice->CreateVertexShader(sCompiledShader->GetBufferPointer(), sCompiledShader->GetBufferSize(), NULL, &m_pShader));
-		ID3D11ShaderReflection* pReflect;
-		HR(D3DReflect(sCompiledShader->GetBufferPointer(), sCompiledShader->GetBufferSize(), IID_ID3D11ShaderReflection, (void**)&pReflect));
-		SAFE_RELEASE(sCompiledShader);
 
-		_InitAttribute(pReflect);
-		_InitUniform(pReflect);
 	}
 
 	//----------------------------------------
-	void 
-		RHIVertexShaderDX11::_InitAttribute(ID3D11ShaderReflection* a_pReflection)
+	void
+		ShaderDX11::_InitAttribute(ID3D11ShaderReflection* a_pReflection)
 	{
 		D3D11_SHADER_DESC sDesc;
 		a_pReflection->GetDesc(&sDesc);
@@ -135,8 +105,8 @@ namespace sgf
 	}
 
 	//----------------------------------------
-	void 
-		RHIVertexShaderDX11::_InitUniform(ID3D11ShaderReflection * a_pReflection)
+	void
+		ShaderDX11::_InitUniform(ID3D11ShaderReflection * a_pReflection)
 	{
 		D3D11_SHADER_DESC sDesc;
 		a_pReflection->GetDesc(&sDesc);
@@ -171,8 +141,8 @@ namespace sgf
 	}
 
 	//----------------------------------------
-	TArray<D3D_SHADER_MACRO, false, false> 
-		RHIVertexShaderDX11::_ToDx11Marco(const TArray<RHIEffect::Macro>& a_arrMacro)
+	TArray<D3D_SHADER_MACRO, false, false>
+		ShaderDX11::_ToDx11Marco(const TArray<RHIEffect::Macro>& a_arrMacro)
 	{
 		TArray<D3D_SHADER_MACRO, false, false> arrDxMacro;
 		arrDxMacro.resize(a_arrMacro.size() + 1);
@@ -186,4 +156,18 @@ namespace sgf
 		return arrDxMacro;
 	}
 
+	//----------------------------------------
+	String 
+		ShaderDX11::GetUniqueName(const String & a_szFile, const TArray<RHIEffect::Macro>& a_arrMacro)
+	{
+		String szUniqueName = a_szFile;
+		for (int32 i = 0; i < a_arrMacro.size(); ++i)
+		{
+			szUniqueName.append(a_arrMacro[i].a_szKey);
+			szUniqueName.append(a_arrMacro[i].a_szValue);
+		}
+		return szUniqueName;
+	}
+
+	//----------------------------------------
 }
