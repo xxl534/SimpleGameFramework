@@ -1,11 +1,11 @@
 #include "sgfRHIPCH.h"
 #include "sgfRHIDX11Private.h"
-#include "sgfRHIShaderDX11.h"
+#include "sgfRHIEffectDX11.h"
 
 
 namespace sgf
 { 
-	typedef THashMap<String, RHIShaderDX11*> ShaderMapDX11;
+	typedef THashMap<String, RHIEffectDX11*> ShaderMapDX11;
 	typedef THashMap<String, ID3D11VertexShader*> VertexShaderMapDX11;
 	typedef THashMap<String, ID3D11PixelShader*> PixelShaderMapDX11;
 	typedef THashMap<void*, ID3D11ShaderReflection*> ShaderReflectionMapDX11;
@@ -13,9 +13,9 @@ namespace sgf
 	VertexShaderMapDX11 DX11_mapVertexShader;
 	PixelShaderMapDX11	DX11_mapPixelShader;
 	ShaderReflectionMapDX11	DX11_mapShaderReflection;
-	RHIShaderDX11* DX11_pShader = NULL;
+	RHIEffectDX11* DX11_pShader = NULL;
 	//-------------------------------------------------------------------------
-	RHIShaderDX11::RHIShaderDX11(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro)
+	RHIEffectDX11::RHIEffectDX11(const String& a_szVS, const String& a_szPS, const TArray<RHIEffect::Macro>& a_arrMacro)
 		:m_pVertexShader(NULL)
 		,m_pPixelShader(NULL)
 	{
@@ -23,49 +23,49 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	RHIShaderDX11::~RHIShaderDX11()
+	RHIEffectDX11::~RHIEffectDX11()
 	{
 
 	}
 
 	//-------------------------------------------------------------------------
 	void 
-		RHIShaderDX11::Setup(const RHIShaderConstantsRef& a_refCons, const RHIShaderTexturesRef& a_refTexs)
+		RHIEffectDX11::Setup(const RHIShaderConstantsRef& a_refCons, const RHIShaderTexturesRef& a_refTexs)
 	{
 		throw std::exception("The method or operation is not implemented.");
 	}
 
 	//-------------------------------------------------------------------------
 	RHIShaderConstantsRef 
-		RHIShaderDX11::CreateShaderConstants()
+		RHIEffectDX11::CreateShaderConstants()
 	{
 		throw std::exception("The method or operation is not implemented.");
 	}
 
 	//-------------------------------------------------------------------------
 	RHIShaderTexturesRef 
-		RHIShaderDX11::CreateShaderTextures()
+		RHIEffectDX11::CreateShaderTextures()
 	{
 		throw std::exception("The method or operation is not implemented.");
 	}
 
 	//-------------------------------------------------------------------------
 	void 
-		RHIShaderDX11::Init()
+		RHIEffectDX11::Init()
 	{
 
 	}
 
 	//-------------------------------------------------------------------------
 	void 
-		RHIShaderDX11::Tick()
+		RHIEffectDX11::Tick()
 	{
 
 	}
 
 	//-------------------------------------------------------------------------
 	void 
-		RHIShaderDX11::Exit()
+		RHIEffectDX11::Exit()
 	{
 		for (ShaderMapDX11::iterator it = DX11_mapShader.begin(); it != DX11_mapShader.end(); ++it)
 		{
@@ -86,7 +86,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	String 
-		_UniqueIndividualShaderName(const String& a_szShader, const TArray<RHIShader::Macro>& a_arrMacro)
+		_UniqueIndividualShaderName(const String& a_szShader, const TArray<RHIEffect::Macro>& a_arrMacro)
 	{
 		String szName = a_szShader;
 		for (int32 i = 0; i < a_arrMacro.size(); ++i)
@@ -99,7 +99,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	TArray<D3D_SHADER_MACRO,false,false> 
-		_GetDX11Marco(const TArray<RHIShader::Macro>& a_arrMacro)
+		_GetDX11Marco(const TArray<RHIEffect::Macro>& a_arrMacro)
 	{
 		TArray<D3D_SHADER_MACRO, false, false> arrDXMacro;
 		arrDXMacro.resize(a_arrMacro.size() + 1);
@@ -115,7 +115,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	ID3D11VertexShader* 
-		_CreateVertexShader(const String& a_szVS, const TArray<RHIShader::Macro>& a_arrMacro, ID3D11ShaderReflection** out_ppReflection)
+		_CreateVertexShader(const String& a_szVS, const TArray<RHIEffect::Macro>& a_arrMacro, ID3D11ShaderReflection** out_ppReflection)
 	{
 		TArray<D3D_SHADER_MACRO, false, false> arrDXMacro = _GetDX11Marco(a_arrMacro);
 		ID3D10Blob* sCompiledShader = NULL;
@@ -139,7 +139,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	ID3D11VertexShader* 
-		_ParseVertexShader(const String& a_szVS, const TArray<RHIShader::Macro>& a_arrMacro)
+		_ParseVertexShader(const String& a_szVS, const TArray<RHIEffect::Macro>& a_arrMacro)
 	{
 		String szName = _UniqueIndividualShaderName(a_szVS, a_arrMacro);
 		VertexShaderMapDX11::iterator it = DX11_mapVertexShader.find(szName);
@@ -162,7 +162,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	ID3D11PixelShader*
-		_CreatePixelShader(const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro, ID3D11ShaderReflection** out_ppReflection)
+		_CreatePixelShader(const String& a_szPS, const TArray<RHIEffect::Macro>& a_arrMacro, ID3D11ShaderReflection** out_ppReflection)
 	{
 		TArray<D3D_SHADER_MACRO, false, false> arrDXMacro = _GetDX11Marco(a_arrMacro);
 		ID3D10Blob* sCompiledShader = NULL;
@@ -185,7 +185,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	ID3D11PixelShader*
-		_ParserPixelShader(CONST String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro)
+		_ParserPixelShader(CONST String& a_szPS, const TArray<RHIEffect::Macro>& a_arrMacro)
 	{
 		String szName = _UniqueIndividualShaderName(a_szPS, a_arrMacro);
 		PixelShaderMapDX11::iterator it = DX11_mapPixelShader.find(szName);
@@ -208,7 +208,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	void 
-		RHIShaderDX11::_Initialize(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro)
+		RHIEffectDX11::_Initialize(const String& a_szVS, const String& a_szPS, const TArray<RHIEffect::Macro>& a_arrMacro)
 	{
 		m_pVertexShader = _ParseVertexShader(a_szVS, a_arrMacro);
 		m_pPixelShader = _ParserPixelShader(a_szPS, a_arrMacro);
@@ -285,7 +285,7 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	void 
-		RHIShaderDX11::_InitAttribute()
+		RHIEffectDX11::_InitAttribute()
 	{
 		if (m_pVertexShader && DX11_mapShaderReflection.hasKey( m_pVertexShader ) )
 		{
@@ -309,13 +309,13 @@ namespace sgf
 
 	//-------------------------------------------------------------------------
 	void 
-		RHIShaderDX11::_InitUniform()
+		RHIEffectDX11::_InitUniform()
 	{
 		_InitShaderUniform(m_pVertexShader);
 		_InitShaderUniform(m_pPixelShader);
 	}
 
-	void RHIShaderDX11::_InitShaderUniform(void* a_pShader)
+	void RHIEffectDX11::_InitShaderUniform(void* a_pShader)
 	{
 		if (DX11_mapShaderReflection.hasKey(a_pShader))
 		{
@@ -328,6 +328,9 @@ namespace sgf
 				D3D11_SHADER_BUFFER_DESC sBufferDesc;
 				ID3D11ShaderReflectionConstantBuffer* pBuffer = pReflect->GetConstantBufferByIndex(i);
 				pBuffer->GetDesc(&sBufferDesc);
+
+				D3D11_SHADER_INPUT_BIND_DESC sBindDesc;
+				pReflect->GetResourceBindingDesc(i, &sBindDesc);
 
 				for (UINT j = 0; j < sBufferDesc.Variables; ++j)
 				{
@@ -342,16 +345,19 @@ namespace sgf
 					RHIShaderConstantDecl decl;
 					decl.m_szName = sVarDesc.Name;
 					decl.m_nStride = sVarDesc.Size;
-					decl.m_nCount = sTypeDesc.Elements;
+					decl.m_nCount = sTypeDesc.Rows * sTypeDesc.Columns * (sTypeDesc.Elements > 0 ? sTypeDesc.Elements : 1);
+					decl.m_eType = RHIFromDX11_VariableType(sTypeDesc.Type);
+					//ASSERT(decl.m_nStride == decl.m_nCount * RHIGetShaderConstantTypeSize(decl.m_eType));
 					
 				}
+
 			}
 		}
 	}
 
 	//-------------------------------------------------------------------------
 	String 
-		_UniqueShaderName(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro)
+		_UniqueShaderName(const String& a_szVS, const String& a_szPS, const TArray<RHIEffect::Macro>& a_arrMacro)
 	{
 		String szUniqueName = a_szVS + a_szPS;
 		for (int32 i = 0; i < a_arrMacro.size(); ++i)
@@ -362,8 +368,8 @@ namespace sgf
 		return szUniqueName;
 	}
 	//-------------------------------------------------------------------------
-	RHIShaderRef
-		RHICreateShaderDX11(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro)
+	RHIEffectRef
+		RHICreateEffectDX11(const String& a_szVS, const String& a_szPS, const TArray<RHIEffect::Macro>& a_arrMacro)
 	{
 		String szUniqueName = _UniqueShaderName(a_szVS, a_szPS, a_arrMacro);
 		ShaderMapDX11::iterator it = DX11_mapShader.find(szUniqueName);
@@ -373,7 +379,7 @@ namespace sgf
 		}
 		else
 		{
-			RHIShaderDX11* pShader = new RHIShaderDX11(a_szVS, a_szPS, a_arrMacro);
+			RHIEffectDX11* pShader = new RHIEffectDX11(a_szVS, a_szPS, a_arrMacro);
 			pShader->AddRef();
 			DX11_mapShader.insert(szUniqueName, pShader);
 			return pShader;

@@ -16,6 +16,7 @@ namespace sgf
 	inline D3D11_FILL_MODE			RHIToDX11_FillMode(ERHIFillMode a_eMode);
 	inline D3D11_CULL_MODE			RHIToDX11_CullMode(ERHICullMode a_eMode);
 	inline ERHIShaderConstantType	RHIFromDX11_FormatType(DXGI_FORMAT a_eFormat);
+	inline ERHIShaderConstantType	RHIFromDX11_VariableType(D3D_SHADER_VARIABLE_TYPE a_eType);
 	inline D3D11_BLEND				RHIToDX11_Blend(ERHIBlend a_eBlend);
 	inline D3D11_BLEND_OP			RHIToDX11_BlendOp(ERHIBlendFunc a_eFunc);
 	inline D3D11_COMPARISON_FUNC	RHIToDX11_ComparisonFunc(ERHIComparisonFunc a_eFunc);
@@ -73,6 +74,24 @@ namespace sgf
 			return ERHIShaderConstantType_Invalid;
 		}
 	}
+
+	//----------------------------------------
+	ERHIShaderConstantType 
+		RHIFromDX11_VariableType(D3D_SHADER_VARIABLE_TYPE a_eType)
+	{
+		switch (a_eType)
+		{
+		case D3D_SVT_BOOL:
+			return ERHIShaderConstantType_1b;
+		case D3D_SVT_INT:
+			return ERHIShaderConstantType_1i;
+		case D3D_SVT_FLOAT:
+			return ERHIShaderConstantType_1f;
+		default:
+			return ERHIShaderConstantType_Invalid;
+		}
+	}
+
 
 	//-------------------------------------------------------------------------
 	extern D3D11_BLEND DX11_arrBlend[ERHIBlend_Count];

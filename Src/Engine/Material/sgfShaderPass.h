@@ -27,7 +27,7 @@ namespace sgf
 		};
 	public:
 		inline int32							GetRenderQueueId() const { return m_nRenderQueue; }
-		inline const RHIShaderRef&				GetRHIShader(int32 a_nTech) const { return m_arrShaderTech[a_nTech]; }
+		inline const RHIEffectRef&				GetRHIShader(int32 a_nTech) const { return m_arrShaderTech[a_nTech]; }
 		inline const RHIRasterizerStateRef&		GetRasterizerState() const { return m_refRasterizerState; }
 		inline const RHIBlendStateRef&			GetRHIBlendState() const { return m_refBlendState; }
 		inline const RHIDepthStencilStateRef&	GetRHIDepthStencilState() const { return m_refIDepthStencilState; }
@@ -37,7 +37,7 @@ namespace sgf
 
 		inline ShaderPass&	operator=(const ShaderPass& a_rhs) { return *this; }
 		void							_LoadFromXml(rapidxml::xml_node<char>* a_pNode);
-		TArray<RHIShader::Macro>		_LoadTechMacros(rapidxml::xml_node<char>* a_pNode, const String& a_szTech);
+		TArray<RHIEffect::Macro>		_LoadTechMacros(rapidxml::xml_node<char>* a_pNode, const String& a_szTech);
 
 		void							_LoadRasterizerState(rapidxml::xml_node<char>* a_pNode);
 		void							_LoadBlendState(rapidxml::xml_node<char>* a_pNode);
@@ -49,6 +49,6 @@ namespace sgf
 		RHIRasterizerStateRef			m_refRasterizerState;
 		RHIBlendStateRef				m_refBlendState;
 		RHIDepthStencilStateRef			m_refIDepthStencilState;
-		TArray<RHIShaderRef>			m_arrShaderTech;
+		TArray<RHIEffectRef>			m_arrShaderTech;
 	};
 }

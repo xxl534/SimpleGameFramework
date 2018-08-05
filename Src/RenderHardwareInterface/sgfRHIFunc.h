@@ -51,7 +51,7 @@ namespace sgf
 	typedef void					(*_RHISetDepthStencilState)(const RHIDepthStencilStateRef& a_refState);
 
 	//shader
-	typedef RHIShaderRef			(*_RHICreateShader)(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro);
+	typedef RHIEffectRef			(*_RHICreateEffect)(const String& a_szVS, const String& a_szPS, const TArray<RHIEffect::Macro>& a_arrMacro);
 
 	extern _RHISetViewport				RHISetViewport;
 	extern _RHIClear					RHIClear;
@@ -83,5 +83,5 @@ namespace sgf
 	extern _RHIGetDepthStencilState		RHIGetDepthStencilState;
 	extern _RHISetDepthStencilState		RHISetDepthStencilState;
 
-	extern _RHICreateShader				RHICreateShader;
+	extern _RHICreateEffect				RHICreateEffect;
 }

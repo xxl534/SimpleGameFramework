@@ -20,7 +20,7 @@
 #include "sgfRHITexture.h"
 #include "sgfRHIShaderConstant.h"
 #include "sgfRHIShaderTexture.h"
-#include "sgfRHIShader.h"
+#include "sgfRHIEffect.h"
 #include "sgfRHIBlendState.h"
 #include "sgfRHIRasterizerState.h"
 #include "sgfRHIDepthStencilState.h"
