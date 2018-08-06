@@ -147,8 +147,8 @@ namespace sgf
 		inline Vector3f			GetAbs() const;
 		inline Vector3f&		Normalize();
 		inline Vector3f			GetNormalize() const;
-		inline float			Length();
-		inline float			LengthSqr();
+		inline float			Length() const; 
+		inline float			LengthSqr() const;
 		inline void				FindBestAxisVectors(Vector3f& a_vAxis1, Vector3f& a_vAxis2);
 		inline Vector3f&		Set(float a_fx, float a_fy, float a_fz);
 

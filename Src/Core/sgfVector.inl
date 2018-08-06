@@ -1,3 +1,4 @@
+#include "sgfMath.h"
 namespace sgf
 {
 	//-------------------------------------------------------------------------
@@ -221,7 +222,7 @@ namespace sgf
 		TVector3<T>::operator*(float a_f) const
 	{
 		TVector3<T> v(*this);
-		v *= a_rhs;
+		v *= a_f;
 		return v;
 	}
 
@@ -490,7 +491,7 @@ namespace sgf
 	}
 
 	//----------------------------------------
-	float Vector3f::Length()
+	float Vector3f::Length() const
 	{
 		double dLenSqr = (double)(x * x) + (y * y) + (z * z);
 		return sqrt(dLenSqr);
@@ -498,7 +499,7 @@ namespace sgf
 
 	//----------------------------------------
 	float 
-		Vector3f::LengthSqr()
+		Vector3f::LengthSqr() const
 	{
 		return x*x + y*y + z*z;;
 	}
