@@ -10,7 +10,7 @@
 	
 	purpose:	
 *********************************************************************/
-
+#include "sgfHardwareResource.h"
 namespace sgf
 {
 	class RHIShaderConstantDecl

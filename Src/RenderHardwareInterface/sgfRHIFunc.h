@@ -13,45 +13,49 @@
 
 namespace sgf
 {
-	typedef void					(*_RHISetViewport)(const RHIViewportDesc& a_desc);
-	typedef void					(*_RHIClear)(bool a_bCleanColor, const ColorByte4& a_col, bool a_bCleanDepth, float a_fDepth, bool a_bCleanStencil, uint32 a_uStencil);
-
 	//variable
-	typedef const float*					(*_RHIGetShaderFloat4)(ERHIShaderFloat4);
-	typedef void(*_RHISetShaderFloat4)		(ERHIShaderFloat4, const float*);
-	typedef void(*_RHISetShaderFloat4Array)	(ERHIShaderFloat4, const float*, int32);
-	typedef const float*					(*_RHIGetShaderFloat3)(ERHIShaderFloat3);
-	typedef void(*_RHISetShaderFloat3)		(ERHIShaderFloat3, const float*);
-	typedef void(*_RHISetShaderFloat3Array)	(ERHIShaderFloat3, const float*, int32);
-	typedef const float*					(*_RHIGetShaderFloat2)(ERHIShaderFloat2);
-	typedef void(*_RHISetShaderFloat2)		(ERHIShaderFloat2, const float*);
-	typedef void(*_RHISetShaderFloat2Array)	(ERHIShaderFloat2, const float*, int32);
-	typedef const float*					(*_RHIGetShaderFloat)(ERHIShaderFloat);
-	typedef void(*_RHISetShaderFloat)		(ERHIShaderFloat, const float);
-	typedef void(*_RHISetShaderFloatArray)	(ERHIShaderFloat, const float*, int32);
+	typedef RHIShaderConstantDecl*	(*_RHIGetShaderConstantDecl)(const String& szName);
+	typedef const void*				(*_RHIGetShaderConstantValue)(int32 nIdx);
+	typedef void					(*_RHISetShaderConstantValue)(int32 nIdx, const void* pData, int32 nStride, int32 nCount);
 
-	typedef const int32*					(*_RHIGetShaderInt4)(ERHIShaderInt4);
-	typedef void(*_RHISetShaderInt4)		(ERHIShaderInt4, const int32*);
-	typedef const int32*					(*_RHIGetShaderInt3)(ERHIShaderInt3);
-	typedef void(*_RHISetShaderInt3)		(ERHIShaderInt3, const int32*);
-	typedef const int32*					(*_RHIGetShaderInt2)(ERHIShaderInt2);
-	typedef void(*_RHISetShaderInt2)		(ERHIShaderInt2, const int32*);
-	typedef const int32*					(*_RHIGetShaderInt)(ERHIShaderInt);
-	typedef void(*_RHISetShaderInt)			(ERHIShaderInt, const int32);
+	typedef const float*			(*_RHIGetShaderFloat4)(ERHIShaderFloat4);
+	typedef void					(*_RHISetShaderFloat4)(ERHIShaderFloat4, const float*);
+	typedef void					(*_RHISetShaderFloat4Array)(ERHIShaderFloat4, const float*, int32);
+	typedef const float*			(*_RHIGetShaderFloat3)(ERHIShaderFloat3);
+	typedef void					(*_RHISetShaderFloat3)(ERHIShaderFloat3, const float*);
+	typedef void					(*_RHISetShaderFloat3Array)(ERHIShaderFloat3, const float*, int32);
+	typedef const float*			(*_RHIGetShaderFloat2)(ERHIShaderFloat2);
+	typedef void					(*_RHISetShaderFloat2)(ERHIShaderFloat2, const float*);
+	typedef void					(*_RHISetShaderFloat2Array)(ERHIShaderFloat2, const float*, int32);
+	typedef const float*			(*_RHIGetShaderFloat)(ERHIShaderFloat);
+	typedef void					(*_RHISetShaderFloat)(ERHIShaderFloat, const float);
+	typedef void					(*_RHISetShaderFloatArray)(ERHIShaderFloat, const float*, int32);
 
-	typedef const int32*					(*_RHIGetShaderBool4)(ERHIShaderBool4);
-	typedef void(*_RHISetShaderBool4)		(ERHIShaderBool4, const int32*);
-	typedef const int32*					(*_RHIGetShaderBool3)(ERHIShaderBool3);
-	typedef void(*_RHISetShaderBool3)		(ERHIShaderBool3, const int32*);
-	typedef const int32*					(*_RHIGetShaderBool2)(ERHIShaderBool2);
-	typedef void(*_RHISetShaderBool2)		(ERHIShaderBool2, const int32*);
-	typedef const int32*					(*_RHIGetShaderBool)(ERHIShaderBool);
-	typedef void(*_RHISetShaderBool)		(ERHIShaderBool, const int32);
+	typedef const int32*			(*_RHIGetShaderInt4)(ERHIShaderInt4);
+	typedef void					(*_RHISetShaderInt4)(ERHIShaderInt4, const int32*);
+	typedef const int32*			(*_RHIGetShaderInt3)(ERHIShaderInt3);
+	typedef void					(*_RHISetShaderInt3)(ERHIShaderInt3, const int32*);
+	typedef const int32*			(*_RHIGetShaderInt2)(ERHIShaderInt2);
+	typedef void					(*_RHISetShaderInt2)(ERHIShaderInt2, const int32*);
+	typedef const int32*			(*_RHIGetShaderInt)(ERHIShaderInt);
+	typedef void					(*_RHISetShaderInt)	(ERHIShaderInt, const int32);
 
-	typedef const Matrix&					(*_RHIGetShaderMatrix)(ERHIShaderMatrix);
-	typedef void(*_RHISetShaderMatrix)		(ERHIShaderMatrix, const Matrix&);
-	typedef const Matrix*					(*_RHIGetShaderMatrixArray)(ERHIShaderMatrix, int32*);
-	typedef void(*_RHISetShaderMatrixArray)	(ERHIShaderMatrix, const Matrix*, int32);
+	typedef const int32*			(*_RHIGetShaderBool4)(ERHIShaderBool4);
+	typedef void					(*_RHISetShaderBool4)(ERHIShaderBool4, const int32*);
+	typedef const int32*			(*_RHIGetShaderBool3)(ERHIShaderBool3);
+	typedef void					(*_RHISetShaderBool3)(ERHIShaderBool3, const int32*);
+	typedef const int32*			(*_RHIGetShaderBool2)(ERHIShaderBool2);
+	typedef void					(*_RHISetShaderBool2)(ERHIShaderBool2, const int32*);
+	typedef const int32*			(*_RHIGetShaderBool)(ERHIShaderBool);
+	typedef void					(*_RHISetShaderBool)(ERHIShaderBool, const int32);
+
+	typedef const Matrix4f&			(*_RHIGetShaderMatrix)(ERHIShaderMatrix);
+	typedef void					(*_RHISetShaderMatrix)(ERHIShaderMatrix, const Matrix4f&);
+	typedef const Matrix4f*			(*_RHIGetShaderMatrixArray)(ERHIShaderMatrix, int32*);
+	typedef void					(*_RHISetShaderMatrixArray)(ERHIShaderMatrix, const Matrix4f*, int32);
+
+	typedef void(*_RHISetViewport)	(const RHIViewportDesc& a_desc);
+	typedef void(*_RHIClear)		(bool a_bCleanColor, const ColorByte4& a_col, bool a_bCleanDepth, float a_fDepth, bool a_bCleanStencil, uint32 a_uStencil);
 
 	//vertex input
 	typedef RHIVertexInputRef		(*_RHICreateVertexInput)(const RHIVertexInputDesc& a_desc);
@@ -90,8 +94,10 @@ namespace sgf
 	//shader
 	typedef RHIEffectRef			(*_RHICreateEffect)(const String& a_szVS, const String& a_szPS, const TArray<RHIEffect::Macro>& a_arrMacro);
 
-	extern _RHISetViewport				RHISetViewport;
-	extern _RHIClear					RHIClear;
+
+	extern _RHIGetShaderConstantDecl	RHIGetShaderConstantDecl;
+	extern _RHIGetShaderConstantValue	RHIGetShaderConstantValue;
+	extern _RHISetShaderConstantValue	RHISetShaderConstantValue;
 
 	extern _RHIGetShaderFloat4			RHIGetShaderFloat4;
 	extern _RHISetShaderFloat4			RHISetShaderFloat4;
@@ -129,6 +135,9 @@ namespace sgf
 
 	extern _RHIGetShaderMatrixArray		RHIGetShaderMatrixArray;
 	extern _RHISetShaderMatrixArray		RHISetShaderMatrixArray;
+
+	extern _RHISetViewport				RHISetViewport;
+	extern _RHIClear					RHIClear;
 
 	extern _RHICreateVertexInput		RHICreateVertexInput;
 	extern _RHISetVertexInput			RHISetVertexInput;

@@ -115,4 +115,10 @@ namespace sgf
 	{
 		return sqrtf(f);
 	}
+
+	//------------------------------------------------------------------------
+	inline bool MathNearlyZero(float f, float tolerance = MATH_KINDA_SMALL_NUMBER)
+	{
+		return	f > -tolerance&&f < tolerance;
+	}
 }

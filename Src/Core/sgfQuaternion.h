@@ -14,6 +14,7 @@
 
 namespace sgf
 {
+	struct Matrix4f;
 	struct Quaternion : public TVector4<float>
 	{
 		Quaternion() {}

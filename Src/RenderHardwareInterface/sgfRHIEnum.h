@@ -340,4 +340,10 @@ namespace sgf
 		ERHIShaderBool_LightmapEnable,
 		ERHIShaderBool_Max,
 	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderConstantBuildin
+	{
+		ERHIShaderConstantBuildin_Max = ERHIShaderBool_Max,
+	};
 }

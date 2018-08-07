@@ -1,7 +1,6 @@
+#include "sgfQuaternion.h"
 namespace sgf
 {
-
-
 	Rotator Rotator::operator+(const Rotator& a_rhs) const
 	{
 		return Rotator(pitch + a_rhs.pitch, yaw + a_rhs.yaw, roll + a_rhs.roll);
@@ -142,18 +141,18 @@ namespace sgf
 
 	Rotator Rotator::FromMatrix(const Matrix4f& a_mat)
 	{
-		const Vector3f XAxis = a_mat.GetAxis(0);
-		const Vector3f YAxis = a_mat.GetAxis(1);
-		const Vector3f ZAxis = a_mat.GetAxis(2);
+		const Vector3f vXAxis = a_mat.GetAxis(0);
+		const Vector3f vYAxis = a_mat.GetAxis(1);
+		const Vector3f vZAxis = a_mat.GetAxis(2);
 
 		Rotator	a_rhs = Rotator(
-			MathRound(MathAtan2(XAxis.z, MathSqrt(Square(XAxis.x) + Square(XAxis.y))) * 32768.f / kPI),
-			MathRound(MathAtan2(XAxis.y, XAxis.x) * 32768.f / kPI),
+			MathRound(MathAtan2(vXAxis.z, MathSqrt(Square(vXAxis.x) + Square(vXAxis.y))) * 32768.f / kPI),
+			MathRound(MathAtan2(vXAxis.y, vXAxis.x) * 32768.f / kPI),
 			0
 		);
 
 		const Vector3f SYAxis = Matrix4f::RotationMatrix(a_rhs).GetAxis(1);
-		a_rhs.roll = MathRound(MathAtan2(ZAxis | SYAxis, YAxis | SYAxis) * 32768.f / kPI);
+		a_rhs.roll = MathRound(MathAtan2(vZAxis.dot(SYAxis), vYAxis.dot(SYAxis)) * 32768.f / kPI);
 		return a_rhs;
 	}
 

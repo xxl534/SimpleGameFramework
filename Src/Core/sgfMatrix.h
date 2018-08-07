@@ -2,15 +2,15 @@
 /********************************************************************
 	created:	2018/06/17
 	created:	17:6:2018   13:40
-	filename: 	E:\SimpleGameFramework\Src\Core\sgfMatrix.h
+	filename: 	E:\SimpleGameFramework\Src\Core\sgfMatrix.a_fHeight
 	file path:	E:\SimpleGameFramework\Src\Core
 	file base:	sgfMatrix
-	file ext:	h
+	file ext:	a_fHeight
 	author:		Xiexuelong
 	
 	purpose:	
 *********************************************************************/
-
+#include"sgfMath.h"
 namespace sgf
 {
 	template<typename T>
@@ -46,6 +46,9 @@ namespace sgf
 		bool			operator!=(const TMatrix44<T>& a_rhs) const;
 	};
 
+	struct Quaternion;
+	struct Rotator;
+	struct Vector3f;
 	struct Matrix4f : public TMatrix44<float>
 	{
 		static const Matrix4f	kIdentity;
@@ -65,32 +68,31 @@ namespace sgf
 			f[12] = m12;	f[13] = m13;	f[14] = m14;	f[15] = m15;
 		}
 
-		Matrix4f(const float* mat)
+		Matrix4f(const float* a_mat)
 		{
 			for (int32 i = 0; i < 16; i++)
 			{
-				f[i] = mat[i];
+				f[i] = a_mat[i];
 			}
 		}
 
-		inline Matrix4f&	operator*=(const Matrix4f& mat);
-		inline Matrix4f	operator*(const Matrix4f& mat) const;
-		inline bool		Equals(const Matrix4f& mat, float fTolerance = kKindaSmallNumber) const;
+		inline Matrix4f&	operator*=(const Matrix4f& a_mat);
+		inline Matrix4f	operator*(const Matrix4f& a_mat) const;
+		inline bool		Equals(const Matrix4f& a_mat, float a_fTolerance = kKindaSmallNumber) const;
 
 		inline void		SetIdentity();
-		inline Vector3f	TransformNormal(const Vector3f& vec) const;
-		inline Vector3f	TransformVector(const Vector3f& vec) const;
+		inline Vector3f	TransformNormal(const Vector3f& a_v) const;
+		inline Vector3f	TransformVector(const Vector3f& a_v) const;
 		inline void		TransformVector(float x1, float y1, float z1, float& x2, float& y2, float& z2) const;
-		inline Vector4	TransformVector4(const Vector4& vec) const;
 		inline float	Determinant() const;
-		inline Vector3f	GetAxis(int32 idx) const;
+		inline Vector3f	GetAxis(int32 a_nIdx) const;
 
 		inline Vector3f	GetTranslate() const;
-		inline void		SetTranslate(const Vector3f& vec);
+		inline void		SetTranslate(const Vector3f& a_v);
 		inline Vector3f	GetScale() const;
-		void			SetScale(const Vector3f& scale);
+		inline void		SetScale(const Vector3f& a_vScale);
 
-		inline bool		Decompose(Vector3f* outScale, Quaternion* outRotQuat, Vector3f* outTrans);
+		inline bool		Decompose(Vector3f* out_vScale, Quaternion* out_quat, Vector3f* out_vTrans);
 
 		inline Matrix4f	Transpose() const;
 		inline Matrix4f&	TransposeSelf();
@@ -98,33 +100,35 @@ namespace sgf
 		inline Matrix4f&	InverseSelf();
 
 		static inline const Matrix4f&	Identity();
-		static inline void		Multiply(Matrix4f& mOut, const Matrix4f& mA, const Matrix4f& mB);
-		static inline Matrix4f	LookAtLH(const Vector3f& vEye, const Vector3f& vAt, const Vector3f& vUp);
-		static inline Matrix4f	LookAtRH(const Vector3f& vEye, const Vector3f& vAt, const Vector3f& vUp);
-		static inline Matrix4f	PerspectiveFovLH(const float fFov, const float fAspect, const float zn, const float zf);
-		static inline Matrix4f	PerspectiveFovRH(const float fFov, const float fAspect, const float zn, const float zf);
-		static inline Matrix4f	PerspectiveLH(const float w, const float h, const float zn, const float zf);
-		static inline Matrix4f	PerspectiveRH(const float w, const float h, const float zn, const float zf);
-		static inline Matrix4f	OrthoLH(const float w, const float h, const float zn, const float zf);
-		static inline Matrix4f	OrthoRH(const float w, const float h, const float zn, const float zf);
-		static inline Matrix4f	OrthoOffCenterLH(const float l, const float r, const float b, const float t, const float zn, const float zf);
-		static inline Matrix4f	OrthoOffCenterRH(const float l, const float r, const float b, const float t, const float zn, const float zf);
+		static inline void		Multiply(Matrix4f& out_mat, const Matrix4f& a_matA, const Matrix4f& a_matB);
+		static inline Matrix4f	LookAtLH(const Vector3f& a_vEye, const Vector3f& a_vAt, const Vector3f& a_vUp);
+		static inline Matrix4f	LookAtRH(const Vector3f& a_vEye, const Vector3f& a_vAt, const Vector3f& a_vUp);
+		static inline Matrix4f	PerspectiveFovLH(const float a_fFov, const float a_fAspect, const float a_fZNear, const float a_fZFar);
+		static inline Matrix4f	PerspectiveFovRH(const float a_fFov, const float a_fAspect, const float a_fZNear, const float a_fZFar);
+		static inline Matrix4f	PerspectiveLH(const float a_fWidth, const float a_fHeight, const float a_fZNear, const float a_fZFar);
+		static inline Matrix4f	PerspectiveRH(const float a_fWidth, const float a_fHeight, const float a_fZNear, const float a_fZFar);
+		static inline Matrix4f	OrthoLH(const float a_fWidth, const float a_fHeight, const float a_fZNear, const float a_fZFar);
+		static inline Matrix4f	OrthoRH(const float a_fWidth, const float a_fHeight, const float a_fZNear, const float a_fZFar);
+		static inline Matrix4f	OrthoOffCenterLH(const float a_fLeft, const float a_fRight, const float a_fBottom, const float a_fTop, const float a_fZNear, const float a_fZFar);
+		static inline Matrix4f	OrthoOffCenterRH(const float a_fLeft, const float a_fRight, const float a_fBottom, const float a_fTop, const float a_fZNear, const float a_fZFar);
 
-		static inline Matrix4f	RotationXMatrix(float roll);
-		static inline Matrix4f	RotationYMatrix(float pitch);
-		static inline Matrix4f	RotationZMatrix(float yaw);
+		static inline Matrix4f	RotationXMatrix(float a_fRoll);
+		static inline Matrix4f	RotationYMatrix(float a_fPitch);
+		static inline Matrix4f	RotationZMatrix(float a_fYaw);
 
-		static inline Matrix4f	TranslationMatrix(const Vector3f& trans);
-		static inline Matrix4f	ScaleMatrix(const Vector3f& scale);
-		static inline Matrix4f	ScaleTranslationMatrix(const Vector3f& scale, const Vector3f& trans);
-		static inline Matrix4f	QuaternionTranslationMatrix(const Quaternion& quat, const Vector3f& trans);
+		static inline Matrix4f	TranslationMatrix(const Vector3f& a_vTrans);
+		static inline Matrix4f	ScaleMatrix(const Vector3f& a_vScale);
+		static inline Matrix4f	ScaleTranslationMatrix(const Vector3f& a_vScale, const Vector3f& a_vTrans);
+		static inline Matrix4f	QuaternionTranslationMatrix(const Quaternion& a_quat, const Vector3f& a_vTrans);
 
-		static Matrix4f			RotationMatrix(const Vector3f& eular);
-		static Matrix4f			RotationMatrix(const Rotator& rotator);
-		static Matrix4f			ScaleRotationMatrix(const Vector3f& scale, const Rotator& rotator);
-		static Matrix4f			ScaleRotationTranslationMatrix(const Vector3f& scale, const Rotator& rotator, const Vector3f& trans);
-		static Matrix4f			RotationNormalMatrix(Vector3f normalAxis, float fAngle);
+		static Matrix4f			RotationMatrix(const Vector3f& a_vEular);
+		static Matrix4f			RotationMatrix(const Rotator& a_rot);
+		static Matrix4f			ScaleRotationMatrix(const Vector3f& a_vScale, const Rotator& a_rot);
+		static Matrix4f			ScaleRotationTranslationMatrix(const Vector3f& a_vScale, const Rotator& a_rot, const Vector3f& a_vTrans);
 	};
+
+
+
 }
 
 #include "sgfMatrix.inl"
