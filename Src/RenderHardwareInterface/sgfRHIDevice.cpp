@@ -22,35 +22,40 @@ namespace sgf
 	void 
 		RHIDevice::Tick()
 	{
-
+		ASSERT(ms_pInstance);
+		ms_pInstance->_OnTick();
 	}
 
 	//----------------------------------------
 	void 
 		RHIDevice::Exit()
 	{
+		ASSERT(ms_pInstance);
+		ms_pInstance->_OnExit();
+		SAFE_DELETE(ms_pInstance);
 
+		_FreeBuildinConstantsValues();
 	}
 
 	//----------------------------------------
 	void 
 		RHIDevice::LostDevice()
 	{
-
+		Get()->_OnLostDevice();
 	}
 
 	//----------------------------------------
 	void 
 		RHIDevice::ResetDevice()
 	{
-
+		Get()->_OnResetDevice();
 	}
 
 	//----------------------------------------
 	void 
 		RHIDevice::Resize(int32 a_nWidth, int32 a_nHeight)
 	{
-
+		Get()->_OnResize(a_nWidth, a_nHeight);
 	}
 
 	//----------------------------------------

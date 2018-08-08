@@ -17,13 +17,14 @@ DemoGameworld::~DemoGameworld()
 void DemoGameworld::Initialize()
 {
 	m_pObject = new DemoObject();
+	sgf::RHIDevice::Init();
 }
 
 //----------------------------------------
 void DemoGameworld::Update()
 {
+	sgf::RHIDevice::Tick();
 	m_pObject->Draw();
-	
 }
 
 //----------------------------------------
