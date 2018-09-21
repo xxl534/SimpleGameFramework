@@ -24,6 +24,8 @@
 #include "sgfHashSet.h"
 #include "sgfFastList.h"
 #include "sgfVector.h"
+#include "sgfQuaternion.h"
+#include "sgfRotator.h"
 #include "sgfMatrix.h"
 #include "sgfTimer.h"
 #include "sgfRefCount.h"

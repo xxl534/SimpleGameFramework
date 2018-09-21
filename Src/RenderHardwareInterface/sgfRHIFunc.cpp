@@ -3,6 +3,46 @@
 
 namespace sgf
 {
+	_RHIGetShaderConstantDecl	RHIGetShaderConstantDecl = NULL;
+	_RHIGetShaderConstantValue	RHIGetShaderConstantValue = NULL;
+	_RHISetShaderConstantValue	RHISetShaderConstantValue = NULL;
+
+	_RHIGetShaderFloat4			RHIGetShaderFloat4 = NULL;
+	_RHISetShaderFloat4			RHISetShaderFloat4 = NULL;
+	_RHISetShaderFloat4Array	RHISetShaderFloat4Array = NULL;
+	_RHIGetShaderFloat3			RHIGetShaderFloat3 = NULL;
+	_RHISetShaderFloat3			RHISetShaderFloat3 = NULL;
+	_RHISetShaderFloat3Array	RHISetShaderFloat3Array = NULL;
+	_RHIGetShaderFloat2			RHIGetShaderFloat2 = NULL;
+	_RHISetShaderFloat2			RHISetShaderFloat2 = NULL;
+	_RHISetShaderFloat2Array	RHISetShaderFloat2Array = NULL;
+	_RHIGetShaderFloat			RHIGetShaderFloat = NULL;
+	_RHISetShaderFloat			RHISetShaderFloat = NULL;
+	_RHISetShaderFloatArray		RHISetShaderFloatArray = NULL;
+
+	_RHIGetShaderInt4			RHIGetShaderInt4 = NULL;
+	_RHISetShaderInt4			RHISetShaderInt4 = NULL;
+	_RHIGetShaderInt3			RHIGetShaderInt3 = NULL;
+	_RHISetShaderInt3			RHISetShaderInt3 = NULL;
+	_RHIGetShaderInt2			RHIGetShaderInt2 = NULL;
+	_RHISetShaderInt2			RHISetShaderInt2 = NULL;
+	_RHIGetShaderInt			RHIGetShaderInt = NULL;
+	_RHISetShaderInt			RHISetShaderInt = NULL;
+
+	_RHIGetShaderBool4			RHIGetShaderBool4 = NULL;
+	_RHISetShaderBool4			RHISetShaderBool4 = NULL;
+	_RHIGetShaderBool3			RHIGetShaderBool3 = NULL;
+	_RHISetShaderBool3			RHISetShaderBool3 = NULL;
+	_RHIGetShaderBool2			RHIGetShaderBool2 = NULL;
+	_RHISetShaderBool2			RHISetShaderBool2 = NULL;
+	_RHIGetShaderBool			RHIGetShaderBool = NULL;
+	_RHISetShaderBool			RHISetShaderBool = NULL;
+
+	_RHIGetShaderMatrix			RHIGetShaderMatrix = NULL;
+	_RHISetShaderMatrix			RHISetShaderMatrix = NULL;
+	_RHIGetShaderMatrixArray	RHIGetShaderMatrixArray = NULL;
+	_RHISetShaderMatrixArray	RHISetShaderMatrixArray = NULL;
+
 	_RHISetViewport				RHISetViewport = NULL;
 	_RHIClear					RHIClear = NULL;
 
@@ -33,5 +73,5 @@ namespace sgf
 	_RHIGetDepthStencilState	RHIGetDepthStencilState = NULL;
 	_RHISetDepthStencilState	RHISetDepthStencilState = NULL;
 
-	_RHICreateShader			RHICreateShader = NULL;
+	_RHICreateEffect			RHICreateEffect = NULL;
 }

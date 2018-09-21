@@ -125,6 +125,10 @@ namespace sgf
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
+			if (m_pGameWorld)
+			{
+				m_pGameWorld->Update();
+			}
 			ColorByte4 col(1.f, 0.5f, 0.f, 1.f);
 			RHIClear(true, col, false, 0.f, false, 0);
 			//else {
@@ -165,6 +169,11 @@ namespace sgf
 	{
 		m_nWidth = a_nWidth;
 		m_nHeight = a_nHeight;
+		m_pGameWorld = a_pWorld;
+		if( m_pGameWorld )
+		{
+			m_pGameWorld->Initialize();
+		}
 
 		m_pRenderWindow = new RenderWindowMain(m_nWidth, m_nHeight, m_fnProc, WINDOW_CLASS);
 

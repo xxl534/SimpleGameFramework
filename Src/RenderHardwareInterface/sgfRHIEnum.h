@@ -219,4 +219,131 @@ namespace sgf
 		ERHIColorWriteEnable_Alpha = 8,
 		ERHIColorWriteEnable_All = (((ERHIColorWriteEnable_Red | ERHIColorWriteEnable_Green) | ERHIColorWriteEnable_Blue) | ERHIColorWriteEnable_Alpha)
 	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderMatrix
+	{
+		ERHIShaderMatrix_Invalid = -1,
+		ERHIShaderMatrix_World,
+		ERHIShaderMatrix_Model,
+		ERHIShaderMatrix_View,
+		ERHIShaderMatrix_Projection,
+		ERHIShaderMatrix_ViewProjection,
+		ERHIShaderMatrix_TextureViewProjection,
+		ERHIShaderMatrix_WorldView,
+		ERHIShaderMatrix_WorldViewInv,
+		ERHIShaderMatrix_WorldViewProjection,
+		ERHIShaderMatrix_WorldViewProjectionInv,
+		ERHIShaderMatrix_SkeletonPalette,
+		ERHIShaderMatrix_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderFloat4
+	{
+		ERHIShaderFloat4_LightmapTile = ERHIShaderMatrix_Max,
+		ERHIShaderFloat4_LightmapFactor,
+		ERHIShaderFloat4_PointLightPosition,
+		ERHIShaderFloat4_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderFloat3
+	{
+		ERHIShaderFloat3_CameraEyeAt = ERHIShaderFloat4_Max,
+		ERHIShaderFloat3_CameraLookAt,
+		ERHIShaderFloat3_CameraLookUp,
+		ERHIShaderFloat3_PointLightColor,
+		ERHIShaderFloat3_AmbientColor,
+		ERHIShaderFloat3_DirectionalLight0Color,
+		ERHIShaderFloat3_DirectionalLight0Dir,
+		ERHIShaderFloat3_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderFloat2
+	{
+		ERHIShaderFloat2_Max = ERHIShaderFloat3_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderFloat
+	{
+		ERHIShaderFloat_Time = ERHIShaderFloat2_Max,
+		ERHIShaderFloat_RunningTime,
+		ERHIShaderFloat_RunningTimeNoRate,
+		ERHIShaderFloat_Elapsed,
+		ERHIShaderFloat_ElapsedNoRate,
+		ERHIShaderFloat_CameraFov,
+
+		ERHIShaderFloat_DesignWidth,
+		ERHIShaderFloat_DesignHeight,
+		ERHIShaderFloat_AppWidth,
+		ERHIShaderFloat_AppHeight,
+
+		ERHIShaderFloat_FogStart,
+		ERHIShaderFloat_FogEnd,
+		ERHIShaderFloat_FogRcpDiff,
+
+		ERHIShaderFloat_LightingProfile,
+
+		ERHIShaderFloat_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderInt4
+	{
+		ERHIShaderInt4_Max = ERHIShaderFloat_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderInt3
+	{
+		ERHIShaderInt3_Max = ERHIShaderInt4_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderInt2
+	{
+		ERHIShaderInt2_Max = ERHIShaderInt3_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderInt
+	{
+		ERHIShaderInt_Max = ERHIShaderInt2_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderBool4
+	{
+		ERHIShaderBool4_Max = ERHIShaderInt_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderBool3
+	{
+		ERHIShaderBool3_Max = ERHIShaderBool4_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderBool2
+	{
+		ERHIShaderBool2_Max = ERHIShaderBool3_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderBool
+	{
+		ERHIShaderBool_FogEnable = ERHIShaderBool2_Max,
+		ERHIShaderBool_SkinEnable,
+		ERHIShaderBool_LightmapEnable,
+		ERHIShaderBool_Max,
+	};
+
+	//-------------------------------------------------------------------------
+	enum ERHIShaderConstantBuildin
+	{
+		ERHIShaderConstantBuildin_Max = ERHIShaderBool_Max,
+	};
 }

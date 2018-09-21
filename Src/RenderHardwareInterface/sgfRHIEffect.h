@@ -2,7 +2,7 @@
 /********************************************************************
 	created:	2018/07/09
 	created:	9:7:2018   9:18
-	filename: 	E:\SimpleGameFramework\Src\RenderHardwareInterface\sgfRHIShader.h
+	filename: 	E:\SimpleGameFramework\Src\RenderHardwareInterface\sgfRHIEffect.h
 	file path:	E:\SimpleGameFramework\Src\RenderHardwareInterface
 	file base:	sgfRHIShader
 	file ext:	h
@@ -15,7 +15,7 @@
 
 namespace sgf
 {
-	class RHIShader : public HardwareResource
+	class RHIEffect : public HardwareResource
 	{
 	public:
 		struct Macro
@@ -28,5 +28,5 @@ namespace sgf
 		virtual RHIShaderConstantsRef	CreateShaderConstants() = 0;
 		virtual RHIShaderTexturesRef	CreateShaderTextures() = 0;
 	};
-	typedef TRefCountPtr<RHIShader> RHIShaderRef;
+	typedef TRefCountPtr<RHIEffect> RHIEffectRef;
 }

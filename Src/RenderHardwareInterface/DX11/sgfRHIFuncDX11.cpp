@@ -34,7 +34,7 @@ namespace sgf
 
 		RHICreateDepthStencilState = RHICreateDepthStencilStateDX11;
 
-		RHICreateShader = RHICreateShaderDX11;
+		RHICreateEffect = RHICreateEffectDX11;
 	}
 
 	//-------------------------------------------------------------------------

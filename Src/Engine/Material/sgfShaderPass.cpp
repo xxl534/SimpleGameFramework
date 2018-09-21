@@ -29,17 +29,17 @@ namespace sgf
 	}
 
 	//-------------------------------------------------------------------------
-	TArray<RHIShader::Macro> 
+	TArray<RHIEffect::Macro> 
 		ShaderPass::_LoadTechMacros(rapidxml::xml_node<char>* a_pNode, const String& a_szTech)
 	{
-		TArray<RHIShader::Macro> arrMacro;
+		TArray<RHIEffect::Macro> arrMacro;
 		rapidxml::xml_node<char>* pTechNode = a_pNode->first_node(a_szTech.c_str());
 		if (pTechNode)
 		{
 			rapidxml::xml_attribute<char>* pAttr = pTechNode->first_attribute();
 			while (pAttr)
 			{
-				RHIShader::Macro macro = { pAttr->name(), pAttr->value() };
+				RHIEffect::Macro macro = { pAttr->name(), pAttr->value() };
 				arrMacro.push_back(macro);
 				pAttr = pAttr->next_attribute();
 			}
@@ -152,10 +152,10 @@ namespace sgf
 	{
 		if (a_pNode)
 		{
-			TArray<RHIShader::Macro> arrDefaultMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechDefault);
-			TArray<RHIShader::Macro> arrFogMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechFog);
-			TArray<RHIShader::Macro> arrSkinningMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechSkinning);
-			TArray<RHIShader::Macro> arrLightmapMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechLightmap);
+			TArray<RHIEffect::Macro> arrDefaultMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechDefault);
+			TArray<RHIEffect::Macro> arrFogMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechFog);
+			TArray<RHIEffect::Macro> arrSkinningMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechSkinning);
+			TArray<RHIEffect::Macro> arrLightmapMacro = _LoadTechMacros(a_pNode, Serialization::k_ShaderEffectTechLightmap);
 
 			m_arrShaderTech.clear();
 			m_arrShaderTech.resize(ETech_Count);
@@ -164,12 +164,12 @@ namespace sgf
 			{
 				for (int32 i = 0; i < ETech_Count; ++i)
 				{
-					TArray<RHIShader::Macro>	arrMacro = arrDefaultMacro;
+					TArray<RHIEffect::Macro>	arrMacro = arrDefaultMacro;
 					if (i & ETech_Skinning) { arrMacro.insert(arrMacro.end(), arrSkinningMacro); }
 					if (i & ETech_Fog) { arrMacro.insert(arrMacro.end(), arrFogMacro); }
 					if (i & ETech_LightMap) { arrMacro.insert(arrMacro.end(), arrLightmapMacro); }
 
-					RHIShaderRef refShader = RHICreateShader(
+					RHIEffectRef refShader = RHICreateEffect(
 						GetXmlAttributeValue(pShaderNode, Serialization::k_ShaderEffectVS.c_str()),
 						GetXmlAttributeValue(pShaderNode, Serialization::k_ShaderEffectPS.c_str()),
 						arrMacro);

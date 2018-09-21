@@ -15,6 +15,8 @@ namespace sgf
 {
 	class GameWorld
 	{
-
+	public:
+		virtual void	Initialize() {}
+		virtual void	Update() {}
 	};
 }

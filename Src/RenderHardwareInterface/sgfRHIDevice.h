@@ -10,6 +10,7 @@
 	
 	purpose:	
 *********************************************************************/
+#include "sgfRHIShaderConstant.h"
 namespace sgf
 {
 	class RHIDevice
@@ -31,6 +32,12 @@ namespace sgf
 		virtual void				_OnLostDevice() = 0;
 		virtual void				_OnResetDevice() = 0;
 		virtual void				_OnResize(int32 a_nWidth, int32 a_nHeight) = 0;
+
+		static void									_InitBuildinConstantDecls();
+		static const TArray<RHIShaderConstantDecl>&	_GetBuildinConstantDecls();
+		static void									_InitBuildinConstantsFuncs();
+		static void									_InitBuildinConstantsValues();
+		static void									_FreeBuildinConstantsValues();
 	private:
 		static RHIDevice*			ms_pInstance;
 	};

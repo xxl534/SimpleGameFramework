@@ -47,5 +47,5 @@ namespace sgf
 	extern RHIDepthStencilStateRef	RHIGetDepthStencilStateDX11();
 	extern void						RHISetDepthStencilStateDX11(const RHIDepthStencilStateRef& a_refState);
 	//shader
-	extern RHIShaderRef				RHICreateShaderDX11(const String& a_szVS, const String& a_szPS, const TArray<RHIShader::Macro>& a_arrMacro);
+	extern RHIEffectRef				RHICreateEffectDX11(const String& a_szVS, const String& a_szPS, const TArray<RHIEffect::Macro>& a_arrMacro);
 }

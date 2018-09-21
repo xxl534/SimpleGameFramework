@@ -2,7 +2,12 @@
 #include "sgfRHIDX11Private.h"
 #include "sgfRHIDeviceDX11.h"
 #include "sgfRHIVertexInputDX11.h"
-
+#include "sgfRHIEffectDX11.h"
+#include "sgfRHIVertexBufferDX11.h"
+#include "sgfRHIIndexBufferDX11.h"
+#include "sgfRHIBlendStateDX11.h"
+#include "sgfRHIRasterizerStateDX11.h"
+#include "sgfRHIDepthStencilStateDX11.h"
 
 namespace sgf
 {
@@ -85,24 +90,49 @@ namespace sgf
 
 		InitializeRHIFunc();
 
+		//todo texture
+		RHIEffectDX11::Init();
+		RHIBlendStateDX11::Init();
+		RHIRasterizerStateDX11::Init();
+		RHIDepthStencilStateDX11::Init();
 		RHIVertexInputDX11::Init();
-		//todo implement
+		//todo shader constants
+		RHIVertexBufferDX11::Init();
+		RHIIndexBufferDX11::Init();
+
+		_InitBuildinConstantDecls();
+		_InitBuildinConstantsFuncs();
+		_InitBuildinConstantsValues();
 	}
 
 	//-------------------------------------------------------------------------
 	void 
 		RHIDeviceDX11::_OnExit()
 	{
+		//todo texture
+		RHIEffectDX11::Exit();
+		RHIBlendStateDX11::Exit();
+		RHIRasterizerStateDX11::Exit();
+		RHIDepthStencilStateDX11::Exit();
 		RHIVertexInputDX11::Exit();
-		//todo implement
+		//todo shader constants
+		RHIVertexBufferDX11::Exit();
+		RHIIndexBufferDX11::Exit();
 	}
 
 	//-------------------------------------------------------------------------
 	void 
 		RHIDeviceDX11::_OnTick()
 	{
+		//todo texture
+		RHIEffectDX11::Tick();
+		RHIBlendStateDX11::Tick();
+		RHIRasterizerStateDX11::Tick();
+		RHIDepthStencilStateDX11::Tick();
 		RHIVertexInputDX11::Tick();
-		//todo implement
+		//todo shader constants
+		RHIVertexBufferDX11::Tick();
+		RHIIndexBufferDX11::Tick();
 	}
 
 	//-------------------------------------------------------------------------
