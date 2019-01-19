@@ -46,7 +46,7 @@ namespace sgf
 	//----------------------------------------
 	template< class T > inline T MathClamp(const T a_value, const T a_min, const T a_max)
 	{
-		return a_value < a_min ? a_min : a_value < a_min ? a_value : a_max;
+		return a_value < a_min ? a_min : a_value <= a_max ? a_value : a_max;
 	}
 
 	//----------------------------------------
